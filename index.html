@@ -1239,34 +1239,9 @@
 <script>
 (function(){
   const bar = document.getElementById('stickyBar');
-  const barCta = bar ? bar.querySelector('a.btn-primary') : null;
   const mob = document.getElementById('mobileCta');
-  const mobLabel = mob ? mob.querySelector('a') : null;
   const dismiss = document.getElementById('mobileCtaDismiss');
   let dismissed = false;
-
-  // Dynamic sticky copy based on scroll position
-  const sections = [
-    { selector: 'section.case-panel', label: 'See what we did for Route →' },
-    { selector: '#faq', label: 'Still have questions? Book a call →' },
-  ];
-  let lastLabel = 'Book a 30-min call';
-
-  function updateStickyCopy() {
-    let next = 'Book a 30-min call';
-    for (const s of sections) {
-      const el = document.querySelector(s.selector);
-      if (el) {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.4) next = s.label;
-      }
-    }
-    if (next !== lastLabel) {
-      if (barCta) barCta.innerHTML = next.replace('→', '<span class="arrow arr">→</span>');
-      if (mobLabel) mobLabel.innerHTML = next.replace('→', '<span class="arr">→</span>');
-      lastLabel = next;
-    }
-  }
 
   function onScroll() {
     const vh = window.innerHeight;
@@ -1274,7 +1249,6 @@
     const show = window.scrollY > threshold;
     if (bar) bar.classList.toggle('show', show);
     if (!dismissed && mob) mob.classList.toggle('show', show);
-    updateStickyCopy();
   }
   if (dismiss) dismiss.addEventListener('click', () => { dismissed = true; mob.classList.remove('show'); });
   window.addEventListener('scroll', onScroll, { passive: true });
