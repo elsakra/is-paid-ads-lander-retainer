@@ -6,5 +6,6 @@ Static site in **this folder only** (this is the **git repo root** for [is-paid-
 - **Stack**: HTML + Tailwind CDN, `assets/`. Deploy: push **`main`** → Vercel. Do not commit **`.vercel/`** (gitignored) or anything under **`uploads/`** (gitignored; scratch assets only).
 - **Qualifier** (`index.html`): **ACV** (4 bands including `$100k–$500k` and `$500k+`), then **TAM**; routing to yes/maybe/no; **$500k+** can land on “yes” without TAM gating; **Kyle** on “yes” for **$100k+ and $500k+** bands. Low ACV → “no” with optional David link.
 - **Calendly**: David for most global CTAs; see `applyQualifierCalLinksForStep` in `index.html`.
+- **Slack notifications**: every Calendly click calls `notifyCalRedirect(rep, location)` in `index.html`, which `sendBeacon`s `/api/slack-notify`. That endpoint is a Vercel serverless function in `api/slack-notify.js` that forwards to the Slack Incoming Webhook stored in the `SLACK_WEBHOOK_URL` env var (set in Vercel → Project → Settings → Environment Variables for Production + Preview). The URL is NEVER placed in HTML/JS.
 
 If you use the **Cursor workspace** that contains this folder as a subpath, the fuller multi-lander note lives at the workspace `AGENTS.md` one level above (optional).

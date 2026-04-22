@@ -87,15 +87,7 @@
     max-width: 28rem;
     line-height: 1.5;
   }
-  .hero-logo-strips { scroll-margin-top: 5rem; }
-  @media (max-width: 1023px) {
-    .recent-2026-hero-scroller {
-      display: flex; flex-wrap: nowrap; gap: 1.5rem; overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 6px;
-    }
-    .recent-2026-hero-scroller img { flex: 0 0 auto; }
-  }
+  .hero-logo-strips { scroll-margin-top: 5rem; max-width: 1120px; margin-left: auto; margin-right: auto; }
   #qualifier { scroll-margin-top: 5rem; }
 
   .section-h {
@@ -290,6 +282,42 @@
   }
   .partner-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
+  /* Gainsight receipt (LinkedIn post + email screenshots) */
+  .gainsight-receipt { display: flex; flex-direction: column; gap: 14px; }
+  .gainsight-receipt-link {
+    display: block; border-radius: 10px; overflow: hidden;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(241,237,228,0.14);
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .gainsight-receipt-link:hover {
+    border-color: rgba(241,237,228,0.32);
+    transform: translateY(-1px);
+  }
+  .gainsight-receipt-link img {
+    display: block; width: 100%; height: auto;
+  }
+  .gainsight-receipt-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font: 500 13px/1.4 var(--font-mono, ui-monospace, monospace);
+    letter-spacing: 0.04em;
+    color: #EFEAE0;
+    text-decoration: underline; text-underline-offset: 4px;
+    text-decoration-color: rgba(241,237,228,0.35);
+  }
+  .gainsight-receipt-cta:hover { text-decoration-color: #EFEAE0; }
+
+  /* Founder bio bullets */
+  .founder-bullets { list-style: none; padding: 0; margin: 0; }
+  .founder-bullets li {
+    position: relative; padding-left: 1.2em; margin-top: 0.55em;
+  }
+  .founder-bullets li:first-child { margin-top: 0; }
+  .founder-bullets li::before {
+    content: ""; position: absolute; left: 0; top: 0.7em;
+    width: 0.5em; height: 1px; background: currentColor; opacity: 0.45;
+  }
+
   /* ============ Conversion add-ons ============ */
 
   /* Hero quote row */
@@ -445,61 +473,79 @@
 
   /* Logos in hero */
   .hero-logo-row {
-    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: center;
+    gap: 2.25rem 3rem; flex-wrap: wrap;
+    max-width: 1040px; margin: 0 auto;
   }
   .hero-logo-row .wm { font-size: 16px; opacity: 0.55; }
   .hero-logo-row img {
-    height: 24px; width: auto;
-    max-width: 160px;
+    height: 30px; width: auto;
+    max-width: 180px;
     object-fit: contain;
-    opacity: 0.65;
+    opacity: 0.72;
     filter: grayscale(1);
     transition: opacity .2s ease;
   }
+  @media (max-width: 767px) {
+    .hero-logo-row { gap: 1.5rem 2rem; }
+    .hero-logo-row img { height: 24px; }
+  }
+  /* Per-logo optical balancing */
+  .hero-logo-row img.is-upside { height: 28px; }
+  .hero-logo-row img.is-snappy { height: 26px; }
   /* SPINS mark is a raster with a white box; blend into bone so it doesn’t look like a sticker */
   .hero-logo-row img.is-spins {
+    height: 34px;
     filter: none;
     mix-blend-mode: multiply;
-    opacity: 0.75;
+    opacity: 0.8;
   }
-  .hero-logo-row img.is-spins:hover { opacity: 0.9; }
-  .hero-logo-row img:hover:not(.is-spins) { opacity: 0.9; }
+  @media (max-width: 767px) {
+    .hero-logo-row img.is-upside { height: 22px; }
+    .hero-logo-row img.is-snappy { height: 22px; }
+    .hero-logo-row img.is-spins { height: 28px; }
+  }
+  .hero-logo-row img.is-spins:hover { opacity: 0.95; }
+  .hero-logo-row img:hover:not(.is-spins) { opacity: 0.95; }
 
   /* 2026 meetings booked — YTD org marks */
   .recent-2026-row {
-    display: flex; flex-wrap: wrap; align-items: center;
-    gap: 1.5rem 2rem;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 1.75rem 2.75rem;
+    max-width: 1040px; margin: 0 auto;
   }
   @media (min-width: 768px) {
-    .recent-2026-row { gap: 1.75rem 2.5rem; }
+    .recent-2026-row { gap: 2rem 3rem; }
   }
   .recent-2026-row img {
-    height: 24px; width: auto; max-width: min(120px, 28vw);
-    object-fit: contain; object-position: left center;
+    height: 28px; width: auto; max-width: 160px;
+    object-fit: contain; object-position: center;
     opacity: 0.95;
     filter: none;
     transition: opacity .2s ease;
   }
+  @media (max-width: 767px) {
+    .recent-2026-row img { height: 24px; max-width: 130px; }
+  }
   .recent-2026-row img.is-raster-light {
+    height: 32px;
     mix-blend-mode: multiply; opacity: 0.9;
+  }
+  @media (max-width: 767px) {
+    .recent-2026-row img.is-raster-light { height: 26px; }
   }
   /* e.g. SVGs that ship as white on transparent */
   .recent-2026-row img.is-darkmark-on-bone {
+    height: 24px;
     filter: brightness(0);
     opacity: 0.9;
+  }
+  @media (max-width: 767px) {
+    .recent-2026-row img.is-darkmark-on-bone { height: 20px; }
   }
   .recent-2026-row img:hover { opacity: 1; }
   .recent-2026-row img.is-raster-light:hover { opacity: 0.95; }
   .recent-2026-row img.is-darkmark-on-bone:hover { opacity: 0.95; }
-  .hero-logo-strips .hero-logo-row img {
-    height: 22px; opacity: 0.72; filter: grayscale(1);
-  }
-  @media (min-width: 768px) {
-    .hero-logo-strips .hero-logo-row img { height: 26px; }
-  }
-  .hero-logo-strips .hero-logo-row img.is-spins {
-    filter: none; mix-blend-mode: multiply; opacity: 0.8;
-  }
 
   /* Larger touch */
   @media (max-width: 900px) {
@@ -547,6 +593,27 @@
     try { window.dataLayer.push({ event: 'cta_click', cta_location: location, ts: Date.now() }); } catch(e){}
     return true;
   }
+
+  // Fire-and-forget Slack notification via our own serverless proxy (keeps the
+  // webhook URL out of page source). Uses sendBeacon so the request survives
+  // the page unload that happens when the browser follows the Calendly link.
+  function notifyCalRedirect(rep, location) {
+    try {
+      var payload = JSON.stringify({ rep: rep || 'david', location: location || 'unknown' });
+      if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+        var blob = new Blob([payload], { type: 'application/json' });
+        navigator.sendBeacon('/api/slack-notify', blob);
+      } else if (typeof fetch === 'function') {
+        fetch('/api/slack-notify', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: payload,
+          keepalive: true,
+        }).catch(function(){});
+      }
+    } catch (_) { /* never block the click */ }
+    return true;
+  }
 </script>
 </head>
 
@@ -558,14 +625,14 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal home">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[24px] md:h-[28px] w-auto max-w-[min(200px,46vw)] object-contain object-left" width="200" height="32" />
     </a>
-    <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
+    <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','sticky_bar'); trackCTA('sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
       Book a 30-min call <span class="arrow arr">→</span>
     </a>
   </div>
 </div>
 
 <div id="mobileCta" role="region" aria-label="Book a call">
-  <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
+  <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','mobile_sticky'); trackCTA('mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
     Book a 30-min call <span class="arr">→</span>
   </a>
   <button id="mobileCtaDismiss" aria-label="Dismiss" class="ml-3 w-7 h-7 rounded-full flex items-center justify-center hover:bg-white/10">
@@ -579,183 +646,167 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] md:h-[32px] w-auto max-w-[min(240px,70vw)] object-contain object-left" width="240" height="36" />
     </a>
-    <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
+    <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','header'); trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
       Book a call
     </a>
   </div>
 </header>
 
-<!-- HERO — Conversion-optimized; logos + ICP check above the fold on laptop -->
+<!-- HERO — Single-column: promise + proof + CTA, then full-width logos, then ICP quiz -->
 <section class="max-w-[1320px] mx-auto px-6 md:px-10 pt-8 md:pt-12 pb-10 md:pb-16">
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-    <!-- LEFT: Promise + proof + CTA -->
-    <div class="order-1 lg:col-span-7">
-      <p class="eyebrow hero-eyebrow mb-3 md:mb-4 fade-up d1">Cold email agency · B2B</p>
-      <h1 class="hero-h fade-up d2">
-        Qualified sales meetings on <em>your calendar.</em>
-      </h1>
+  <!-- Hero copy: centered, single column -->
+  <div class="max-w-[780px] mx-auto text-center">
+    <p class="eyebrow hero-eyebrow mb-3 md:mb-4 fade-up d1">Cold email agency · B2B</p>
+    <h1 class="hero-h fade-up d2">
+      Qualified sales meetings on <em>your calendar.</em>
+    </h1>
 
-      <p class="mt-6 max-w-[560px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
-        We build custom outbound campaigns that book meetings with the buyers your SDRs can&rsquo;t reach.
-      </p>
+    <p class="mt-6 mx-auto max-w-[620px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
+      We book meetings with your dream customers.
+    </p>
 
-      <div class="quote-row mt-6 md:mt-8 fade-up d3" style="max-width: 640px;">
-        <div class="quote-face">
-          <img src="assets/face-route.avif" alt="McLeod Abbott" />
-        </div>
-        <div>
-          <div class="quote-text">&ldquo;Out-produced our 17-person SDR team in a single month. $42M of pipeline in three quarters.&rdquo;</div>
-          <div class="quote-attr">McLeod Abbott · Chief of Staff, Revenue · Route</div>
-        </div>
+    <div class="quote-row mt-6 md:mt-8 fade-up d3 mx-auto text-left" style="max-width: 620px;">
+      <div class="quote-face">
+        <img src="assets/face-route.avif" alt="McLeod Abbott" />
       </div>
-
-      <div class="mt-6 md:mt-8 fade-up d4 max-w-[520px]">
-        <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
-          Book a 30-min call <span class="arrow arr">→</span>
-        </a>
-        <p class="hero-cta-note text-[15px] text-ink/80 mt-4">
-          We&rsquo;ll tell you on the call if cold email will work for your ICP&mdash;or end the call early. We don&rsquo;t waste your time, or ours.
-        </p>
-      </div>
-      <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 fade-up d4">
-        <span class="avail-line"><span class="dot-g"></span>Next available: Thu, 2:00pm PT</span>
-        <span class="avail-line text-mute">30 min · Kyle, David, or Andrew · no SDR</span>
-      </div>
-      <p class="mt-3 text-[13.5px] text-mute fade-up d4">
-        <a href="#qualifier" class="font-medium text-ink/70 underline underline-offset-[4px] decoration-ink/25 hover:decoration-ink">Not sure? 30-sec ICP check →</a>
-      </p>
-    </div>
-
-    <!-- RIGHT: Qualifier — order-2 on mobile so it sits below quote+CTA after McLeod proof -->
-    <div class="order-2 lg:order-2 w-full max-w-lg mx-auto lg:mx-0 lg:max-w-none lg:col-span-5 fade-up d3" id="qualifier">
-      <div class="lg:sticky lg:top-6">
-        <div class="qual-card">
-          <span class="qbadge">ICP check · 30 sec</span>
-
-          <!-- Step 1: ACV -->
-          <div class="qual-step active" data-step="1">
-            <div class="qual-progress"><span class="done"></span><span></span></div>
-            <div class="qual-q">What&rsquo;s your average contract value?</div>
-            <button class="qual-opt" data-key="acv" data-val="low" data-next="2">
-              <span>Under $20k / year</span><span class="qarrow">→</span>
-            </button>
-            <button class="qual-opt" data-key="acv" data-val="mid" data-next="2">
-              <span>$20k &ndash; $100k / year</span><span class="qarrow">→</span>
-            </button>
-            <button class="qual-opt" data-key="acv" data-val="high" data-next="2">
-              <span>$100k &ndash; $500k / year</span><span class="qarrow">→</span>
-            </button>
-            <button class="qual-opt" data-key="acv" data-val="vhigh" data-next="2">
-              <span>$500k+ / year</span><span class="qarrow">→</span>
-            </button>
-            <div class="text-[12px] font-mono text-mute mt-4">We don&rsquo;t take engagements where the math doesn&rsquo;t work.</div>
-          </div>
-
-          <!-- Step 2: TAM (addressable / motion scale) -->
-          <div class="qual-step" data-step="2">
-            <div class="qual-progress"><span class="done"></span><span class="done"></span></div>
-            <div class="qual-q">What&rsquo;s the rough TAM for your ICP?</div>
-            <button class="qual-opt" data-key="tam" data-val="tam_niche" data-next="3">
-              <span>Narrow / niche (single segment or region)</span><span class="qarrow">→</span>
-            </button>
-            <button class="qual-opt" data-key="tam" data-val="tam_mid" data-next="3">
-              <span>Mid (multiple segments or national)</span><span class="qarrow">→</span>
-            </button>
-            <button class="qual-opt" data-key="tam" data-val="tam_large" data-next="3">
-              <span>Large (category-wide or global)</span><span class="qarrow">→</span>
-            </button>
-            <button class="qual-opt" data-key="tam" data-val="tam_unsure" data-next="3">
-              <span>Not sure yet</span><span class="qarrow">→</span>
-            </button>
-            <button class="text-[12px] font-mono text-mute mt-4 underline underline-offset-4" onclick="qualBack(1)">← Back</button>
-          </div>
-
-          <!-- Step 3 — result (yes path) -->
-          <div class="qual-step" data-step="3-yes">
-            <div class="qual-result-yes">
-              <div class="eyebrow eyebrow-on-dark mb-4">Looks like a fit</div>
-              <div class="font-display text-[44px] leading-[0.95] mb-5">Yes.<br/><em class="text-teal">We book meetings for profiles like yours.</em></div>
-              <p class="text-[14.5px] leading-[1.55] text-[#D9D4C7] mb-7" id="qual-why-yes">
-                Your ACV and TAM line up with the engagements where we produce our strongest results.
-              </p>
-              <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" data-rep="david" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+(this.getAttribute('data-rep')||'david'));" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
-                Book a 30-min call <span class="arrow arr">→</span>
-              </a>
-              <div class="mt-4 avail-line" style="color:#A9A79D;"><span class="dot-g"></span>Next available: Thu, 2:00pm PT</div>
-            </div>
-          </div>
-
-          <!-- Step 3 — result (maybe path) -->
-          <div class="qual-step" data-step="3-maybe">
-            <div class="qual-result-no">
-              <div class="eyebrow mb-4">Worth a conversation</div>
-              <div class="font-display text-[40px] leading-[0.95] mb-4 text-ink">Maybe.</div>
-              <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-6" id="qual-why-maybe">
-                We&rsquo;d want to hear more about your motion before committing. Some engagements in this profile work; some don&rsquo;t.
-              </p>
-              <a id="qualifierBookMaybe" href="https://calendly.com/david-intentsignal/30min" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_maybe_david');" class="btn-primary btn-large w-full justify-center">
-                Book a 30-min call <span class="arrow arr">→</span>
-              </a>
-              <p class="mt-5 text-[12.5px] font-mono text-mute leading-[1.5]">
-                We&rsquo;ll tell you on the call whether it&rsquo;s a fit, and end early if it isn&rsquo;t.
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 3 — result (no path) -->
-          <div class="qual-step" data-step="3-no">
-            <div class="qual-result-no">
-              <div class="eyebrow mb-4">Probably not a fit</div>
-              <div class="font-display text-[40px] leading-[0.95] mb-4 text-ink">Probably not.</div>
-              <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-5" id="qual-why-no">
-                At under $20k ACV, cold outbound in most B2B motions usually doesn&rsquo;t pay back. Our engagements start at a scope where the math makes sense for both sides.
-              </p>
-              <p class="text-[14px] leading-[1.55] text-ink/85 mb-5">
-                Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro&mdash;we&rsquo;ll be straight about fit.
-              </p>
-              <a id="qualifierBookNo" href="https://calendly.com/david-intentsignal/30min" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_no_david');" class="btn-primary btn-large w-full justify-center mb-4">
-                Book a 30-min call with David <span class="arrow arr">→</span>
-              </a>
-              <button onclick="qualReset()" class="text-[13px] font-mono text-ink underline underline-offset-4">Start over</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Trust microcopy under widget -->
-        <div class="mt-5 flex items-start gap-3 text-[12.5px] text-mute leading-[1.5] font-mono">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="mt-0.5 flex-shrink-0"><path d="M12 2L3 7v5c0 5 3.8 9.2 9 10 5.2-0.8 9-5 9-10V7l-9-5z" stroke="#6B6A65" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#6B6A65" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>We don&rsquo;t email or share this. It&rsquo;s just to tell you if we can help.</span>
-        </div>
+      <div>
+        <div class="quote-text">&ldquo;Out-produced our 17-person SDR team in a single month. $42M of pipeline in three quarters.&rdquo;</div>
+        <div class="quote-attr">McLeod Abbott · Chief of Staff, Revenue · Route</div>
       </div>
     </div>
 
-    <!-- Full-width: client marks + example meetings (one hero section; on laptop this sits under H1 + ICP) -->
-    <div class="order-3 w-full col-span-1 lg:col-span-12 pt-4 md:pt-6 border-t border-ink/10 mt-2 lg:mt-0 hero-logo-strips -mx-0">
-      <p class="eyebrow mb-3">Clients</p>
-      <div class="hero-logo-row">
-        <img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" />
-        <img src="assets/logos/upside.svg" alt="Upside" loading="lazy" />
-        <img src="assets/logos/route.svg" alt="Route" loading="lazy" />
-        <img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" />
-        <img src="assets/logos/snappy.svg" alt="Snappy" loading="lazy" />
+    <div class="mt-7 md:mt-9 fade-up d4 flex flex-col items-center">
+      <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','hero_primary'); trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
+        Book a 30-min call <span class="arrow arr">→</span>
+      </a>
+      <p class="hero-cta-note text-[15px] text-ink/80 mt-4 max-w-[520px]">
+        We&rsquo;ll tell you on the call if cold email will work for your ICP&mdash;or end the call early. We don&rsquo;t waste your time, or ours.
+      </p>
+      <p class="mt-4 text-[13px] font-mono text-mute fade-up d4">
+        30 min · Kyle, David, or Andrew · no SDR
+      </p>
+    </div>
+  </div>
+
+  <!-- Full-width logo strips directly under hero copy -->
+  <div class="hero-logo-strips mt-14 md:mt-20 pt-8 md:pt-10 border-t border-ink/10">
+    <p class="eyebrow text-center mb-5">Clients</p>
+    <div class="hero-logo-row">
+      <img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" />
+      <img src="assets/logos/upside.svg" alt="Upside" class="is-upside" loading="lazy" />
+      <img src="assets/logos/route.svg" alt="Route" loading="lazy" />
+      <img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" />
+      <img src="assets/logos/snappy.svg" alt="Snappy" class="is-snappy" loading="lazy" />
+    </div>
+    <p class="eyebrow text-center mt-12 md:mt-14 mb-5">Meetings booked at</p>
+    <div class="recent-2026-row">
+      <img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" />
+      <img src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" />
+      <img src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" />
+      <img src="assets/logos/recent-2026/disney-animation.png" alt="Walt Disney Animation Studios" class="is-raster-light" loading="lazy" />
+      <img src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" />
+      <img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" />
+      <img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" />
+      <img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" />
+      <img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" />
+      <img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" />
+      <img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" />
+      <img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" />
+      <img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- ICP quiz below all logos -->
+  <div class="mt-14 md:mt-20 max-w-[640px] mx-auto fade-up d3" id="qualifier">
+    <div class="qual-card">
+      <span class="qbadge">ICP check · 30 sec</span>
+
+      <!-- Step 1: ACV -->
+      <div class="qual-step active" data-step="1">
+        <div class="qual-progress"><span class="done"></span><span></span></div>
+        <div class="qual-q">What&rsquo;s your average contract value?</div>
+        <button class="qual-opt" data-key="acv" data-val="low" data-next="2">
+          <span>Under $20k / year</span><span class="qarrow">→</span>
+        </button>
+        <button class="qual-opt" data-key="acv" data-val="mid" data-next="2">
+          <span>$20k &ndash; $100k / year</span><span class="qarrow">→</span>
+        </button>
+        <button class="qual-opt" data-key="acv" data-val="high" data-next="2">
+          <span>$100k &ndash; $500k / year</span><span class="qarrow">→</span>
+        </button>
+        <button class="qual-opt" data-key="acv" data-val="vhigh" data-next="2">
+          <span>$500k+ / year</span><span class="qarrow">→</span>
+        </button>
+        <div class="text-[12px] font-mono text-mute mt-4">We don&rsquo;t take engagements where the math doesn&rsquo;t work.</div>
       </div>
-      <p class="eyebrow mt-8 md:mt-6 mb-3">Meetings booked at</p>
-      <div class="recent-2026-row recent-2026-hero-scroller">
-        <img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" />
-        <img src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" />
-        <img src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" />
-        <img src="assets/logos/recent-2026/disney-animation.png" alt="Walt Disney Animation Studios" class="is-raster-light" loading="lazy" />
-        <img src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" />
-        <img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" />
-        <img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" />
-        <img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" />
-        <img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" />
-        <img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" />
-        <img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" />
-        <img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" />
-        <img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" />
+
+      <!-- Step 2: TAM (addressable / motion scale) -->
+      <div class="qual-step" data-step="2">
+        <div class="qual-progress"><span class="done"></span><span class="done"></span></div>
+        <div class="qual-q">What&rsquo;s the rough TAM for your ICP?</div>
+        <button class="qual-opt" data-key="tam" data-val="tam_niche" data-next="3">
+          <span>Narrow / niche (single segment or region)</span><span class="qarrow">→</span>
+        </button>
+        <button class="qual-opt" data-key="tam" data-val="tam_mid" data-next="3">
+          <span>Mid (multiple segments or national)</span><span class="qarrow">→</span>
+        </button>
+        <button class="qual-opt" data-key="tam" data-val="tam_large" data-next="3">
+          <span>Large (category-wide or global)</span><span class="qarrow">→</span>
+        </button>
+        <button class="qual-opt" data-key="tam" data-val="tam_unsure" data-next="3">
+          <span>Not sure yet</span><span class="qarrow">→</span>
+        </button>
+        <button class="text-[12px] font-mono text-mute mt-4 underline underline-offset-4" onclick="qualBack(1)">← Back</button>
       </div>
-      <p class="text-[12px] font-mono text-mute mt-4">Logos for recognition only; not an endorsement. Not a complete list.</p>
+
+      <!-- Step 3 — result (yes path) -->
+      <div class="qual-step" data-step="3-yes">
+        <div class="qual-result-yes">
+          <div class="eyebrow eyebrow-on-dark mb-4">Looks like a fit</div>
+          <div class="font-display text-[44px] leading-[0.95] mb-5">Yes.<br/><em class="text-teal">We book meetings for profiles like yours.</em></div>
+          <p class="text-[14.5px] leading-[1.55] text-[#D9D4C7] mb-7" id="qual-why-yes">
+            Your ACV and TAM line up with the engagements where we produce our strongest results.
+          </p>
+          <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" data-rep="david" onclick="var r=this.getAttribute('data-rep')||'david'; notifyCalRedirect(r,'qualifier_yes'); if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+r);" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
+            Book a 30-min call <span class="arrow arr">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 3 — result (maybe path) -->
+      <div class="qual-step" data-step="3-maybe">
+        <div class="qual-result-no">
+          <div class="eyebrow mb-4">Worth a conversation</div>
+          <div class="font-display text-[40px] leading-[0.95] mb-4 text-ink">Maybe.</div>
+          <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-6" id="qual-why-maybe">
+            We&rsquo;d want to hear more about your motion before committing. Some engagements in this profile work; some don&rsquo;t.
+          </p>
+          <a id="qualifierBookMaybe" href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','qualifier_maybe'); if(typeof trackCTA==='function')trackCTA('qualifier_maybe_david');" class="btn-primary btn-large w-full justify-center">
+            Book a 30-min call <span class="arrow arr">→</span>
+          </a>
+          <p class="mt-5 text-[12.5px] font-mono text-mute leading-[1.5]">
+            We&rsquo;ll tell you on the call whether it&rsquo;s a fit, and end early if it isn&rsquo;t.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 — result (no path) -->
+      <div class="qual-step" data-step="3-no">
+        <div class="qual-result-no">
+          <div class="eyebrow mb-4">Probably not a fit</div>
+          <div class="font-display text-[40px] leading-[0.95] mb-4 text-ink">Probably not.</div>
+          <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-5" id="qual-why-no">
+            At under $20k ACV, cold outbound in most B2B motions usually doesn&rsquo;t pay back. Our engagements start at a scope where the math makes sense for both sides.
+          </p>
+          <p class="text-[14px] leading-[1.55] text-ink/85 mb-5">
+            Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro&mdash;we&rsquo;ll be straight about fit.
+          </p>
+          <a id="qualifierBookNo" href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','qualifier_no'); if(typeof trackCTA==='function')trackCTA('qualifier_no_david');" class="btn-primary btn-large w-full justify-center mb-4">
+            Book a 30-min call with David <span class="arrow arr">→</span>
+          </a>
+          <button onclick="qualReset()" class="text-[13px] font-mono text-ink underline underline-offset-4">Start over</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -766,48 +817,21 @@
     <div class="flex items-end justify-between flex-wrap gap-4 mb-10">
       <div>
         <div class="eyebrow">You&rsquo;re probably wondering</div>
-        <h2 class="font-display text-[44px] md:text-[56px] leading-[0.98] tracking-[-0.025em] mt-4 max-w-[760px]">Three things people ask before booking.</h2>
+        <h2 class="font-display text-[44px] md:text-[56px] leading-[0.98] tracking-[-0.025em] mt-4 max-w-[760px]">Two things people ask before booking.</h2>
       </div>
       <a href="#faq" class="text-[14px] font-medium underline underline-offset-[5px] decoration-[1.5px] decoration-ink/30 hover:decoration-ink">Full FAQ ↓</a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="obj-card">
         <div class="eyebrow mb-3">01</div>
         <div class="obj-q">We&rsquo;ve been burned by an agency before. What&rsquo;s different?</div>
-        <p class="obj-a">We build custom software per engagement. That&rsquo;s why our meetings happen where commodity agencies&rsquo; don&rsquo;t. Case studies below are receipts — not cherry-picked anecdotes.</p>
+        <p class="obj-a">We build custom software per engagement. That&rsquo;s why our meetings happen where commodity agencies&rsquo; don&rsquo;t.</p>
       </div>
       <div class="obj-card">
         <div class="eyebrow mb-3">02</div>
         <div class="obj-q">How soon will we see meetings?</div>
-        <p class="obj-a">First qualified meetings typically land in weeks 3&ndash;4. Consistent volume by month 3. A 90-day pilot, then month-to-month with mutual 30-day opt-out.</p>
-      </div>
-      <div class="obj-card">
-        <div class="eyebrow mb-3">03</div>
-        <div class="obj-q">What counts as a &ldquo;qualified meeting&rdquo;?</div>
-        <p class="obj-a">We define the bar with you upfront: right title, right company, a real 30-minute discovery. Anything that doesn&rsquo;t clear all three is held back — we rework the play.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PAIN -->
-<section class="hairline-t bg-bone2/40">
-  <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-      <div class="lg:col-span-5">
-        <div class="eyebrow">The problem</div>
-        <h2 class="section-h mt-5">
-          The LinkedIn playbook doesn&rsquo;t book meetings anymore.
-        </h2>
-      </div>
-      <div class="lg:col-span-7 lg:pt-4">
-        <div class="prose-lg max-w-[640px]">
-          <p>The agencies you see posting case studies on LinkedIn are all running the same motion. Same Clay enrichment. Same Lemlist sequences. Same &ldquo;I noticed you were hiring&rdquo; opener. Buyers saw it in 2023. They delete it in 2026.</p>
-          <p>Your SDRs are sending 200 emails a day. Most land in spam. The ones that don&rsquo;t get ignored.</p>
-          <p>You&rsquo;ve probably worked with an agency before. You know the cycle: two weeks of ramp-up, four weeks of &ldquo;let&rsquo;s test a new angle,&rdquo; then you cancel and write off the spend.</p>
-          <p class="font-medium text-ink">Hiring another SDR is $90k plus ramp plus management. And they still won&rsquo;t book the meetings you need.</p>
-        </div>
+        <p class="obj-a">It takes 3&ndash;4 weeks to set up and warm our email infrastructure. The first week of sending, we typically start setting meetings.</p>
       </div>
     </div>
   </div>
@@ -902,7 +926,7 @@
           </div>
           <div>
             <div class="label mb-2">What we did</div>
-            <p>Built an internal AI application with a human-in-the-loop workflow, running daily to identify key buying signals across the TAM and generate messaging based on them.</p>
+            <p>We built a bot that scans every local newspaper in the country for new restaurant location openings, then emails the franchise owner or most relevant marketing contact the moment a new location is announced.</p>
           </div>
           <div>
             <div class="label mb-2">Result</div>
@@ -948,6 +972,21 @@
           <div>
             <div class="label mb-2">What we did</div>
             <p>70 unique experimental campaigns over 11 weeks. Five of them produced. We scaled those.</p>
+            <p>One winning play identified exactly who each prospect reports to and wove that org context into the outreach. The emails were so sharp a prospect, Kai Nielsen, posted one publicly on LinkedIn calling it &ldquo;a masterclass in B2B cold outreach.&rdquo;</p>
+          </div>
+          <div>
+            <div class="label mb-2">Receipts</div>
+            <div class="gainsight-receipt">
+              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener" class="gainsight-receipt-link">
+                <img src="assets/case-studies/gainsight-kai-post.png" alt="Kai Nielsen LinkedIn post praising the Gainsight cold email" loading="lazy" />
+              </a>
+              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener" class="gainsight-receipt-link">
+                <img src="assets/case-studies/gainsight-kai-email.jpg" alt="The actual Gainsight cold email that referenced the prospect's reporting structure" loading="lazy" />
+              </a>
+              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener" class="gainsight-receipt-cta">
+                See Kai Nielsen&rsquo;s LinkedIn post <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
           <div>
             <div class="label mb-2">Result</div>
@@ -969,7 +1008,7 @@
       <p class="font-display text-[30px] md:text-[40px] leading-[1.1] text-bone max-w-[640px]">
         Your ICP might be next.
       </p>
-      <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+      <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','results_footer'); trackCTA('results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
@@ -986,7 +1025,7 @@
       </div>
       <div class="lg:col-span-7 lg:pt-4">
         <div class="prose-lg max-w-[640px]">
-          <p>Most cold email agencies are two people with a Lemlist account and a Clay subscription. Same tools as their competitors. Same sequences. Same results &mdash; which is why most of them can&rsquo;t book meetings with hard-to-reach buyers.</p>
+          <p>Most cold email agencies run the same templated campaigns for all their clients. Their emails look the same as everyone else&rsquo;s. Buyers auto-filter these out when they see them in their inboxes. And these emails are more likely to get flagged as spam.</p>
           <p>We build custom software for every engagement. That&rsquo;s the reason our campaigns land in primary inboxes when commodity agency work lands in spam. That&rsquo;s the reason Route&rsquo;s $42M of pipeline came from a checkout-screenshot bot we built &mdash; not from a sequence template every other agency is also running.</p>
         </div>
       </div>
@@ -1003,13 +1042,13 @@
       <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
         <div class="eyebrow">Upside</div>
         <p class="mt-5 text-[17px] leading-[1.65] text-ink/85">
-          For Upside, we built an internal AI application with a human-in-the-loop workflow running daily to identify buying signals and generate messaging for them.
+          For Upside, we built a bot that reads every local newspaper in the country daily, spots new restaurant openings, and emails the franchise owner or marketing lead before any competitor even knows the location exists.
         </p>
       </div>
       <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
         <div class="eyebrow">Gainsight</div>
         <p class="mt-5 text-[17px] leading-[1.65] text-ink/85">
-          For Gainsight, we ran 70 unique experimental campaigns in 11 weeks to find the 5 that actually booked meetings against a crowded market.
+          For Gainsight, we ran 70 experimental campaigns in 11 weeks to find the 5 that worked &mdash; including one that mapped each prospect&rsquo;s reporting structure and used it in the outreach. One recipient posted the email on LinkedIn as a &ldquo;masterclass in B2B cold outreach.&rdquo;
         </p>
       </div>
     </div>
@@ -1069,137 +1108,6 @@
   </div>
 </section>
 
-<!-- HOW WE RUN ENGAGEMENTS -->
-<section class="hairline-t">
-  <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-16 md:mb-24">
-      <div class="lg:col-span-6">
-        <div class="eyebrow">Engagement</div>
-        <h2 class="section-h mt-5">How we run engagements.</h2>
-      </div>
-      <div class="lg:col-span-6 lg:pt-6">
-        <p class="text-[20px] leading-[1.5] text-ink/80 max-w-[520px]">A 90-day pilot. Three phases.</p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-8 lg:gap-14">
-      <div class="hairline-t pt-8">
-        <div class="step-num">0<span class="op">1</span></div>
-        <div class="mt-6 flex items-center justify-between font-mono text-[12px] text-mute">
-          <span class="uppercase tracking-[.18em]">Build</span>
-          <span>Days 1&ndash;30</span>
-        </div>
-        <p class="mt-6 text-[15.5px] leading-[1.7] text-ink/85">
-          We study your closed-won, closed-lost, and ICP. We build a ranked target layer &mdash; typically 500 accounts with the buying committee mapped by name. We stand up your sending infrastructure: domains warmed, DNS configured, deliverability stack live. Handoff protocol defined so positive replies hit your calendar fast.
-        </p>
-      </div>
-      <div class="hairline-t pt-8">
-        <div class="step-num">0<span class="op">2</span></div>
-        <div class="mt-6 flex items-center justify-between font-mono text-[12px] text-mute">
-          <span class="uppercase tracking-[.18em]">Launch and learn</span>
-          <span>Days 31&ndash;60</span>
-        </div>
-        <p class="mt-6 text-[15.5px] leading-[1.7] text-ink/85">
-          Campaigns go live at low volume to protect deliverability, then scale as domains prove out. First qualified meetings typically land in weeks 3&ndash;4. Three signal hypotheses run in parallel so we can compare them on real response data. Weekly reviews.
-        </p>
-      </div>
-      <div class="hairline-t pt-8">
-        <div class="step-num">0<span class="op">3</span></div>
-        <div class="mt-6 flex items-center justify-between font-mono text-[12px] text-mute">
-          <span class="uppercase tracking-[.18em]">Scale and optimize</span>
-          <span>Days 61&ndash;90</span>
-        </div>
-        <p class="mt-6 text-[15.5px] leading-[1.7] text-ink/85">
-          Volume at sustained level. Winners scaling. Still testing new plays. End-of-quarter review: what worked, what scales, what we&rsquo;d propose next.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT COUNTS -->
-<section class="hairline-t bg-bone2/40">
-  <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-      <div class="lg:col-span-5">
-        <div class="eyebrow">Meeting quality</div>
-        <h2 class="section-h mt-5">What counts as a meeting.</h2>
-      </div>
-
-      <div class="lg:col-span-7 lg:pt-4">
-        <div class="prose-lg max-w-[640px]">
-          <p class="font-medium text-ink">Most outbound agencies report against &ldquo;total meetings booked.&rdquo; We don&rsquo;t think that&rsquo;s the right metric. A bad meeting isn&rsquo;t harmless &mdash; it eats your calendar and, over twelve months, can burn the account too.</p>
-          <p>For every engagement, we agree on criteria upfront:</p>
-        </div>
-
-        <dl class="mt-10 hairline-t max-w-[720px]">
-          <div class="grid grid-cols-[140px_1fr] md:grid-cols-[180px_1fr] gap-4 py-6 hairline-b">
-            <dt class="eyebrow pt-1">Title</dt>
-            <dd class="text-[17px] leading-[1.55]"><span class="font-medium">The actual buyer.</span> Not an analyst, not a coordinator.</dd>
-          </div>
-          <div class="grid grid-cols-[140px_1fr] md:grid-cols-[180px_1fr] gap-4 py-6 hairline-b">
-            <dt class="eyebrow pt-1">Company</dt>
-            <dd class="text-[17px] leading-[1.55]"><span class="font-medium">Fits the ICP we&rsquo;ve defined together</span> &mdash; size, geo, segment.</dd>
-          </div>
-          <div class="grid grid-cols-[140px_1fr] md:grid-cols-[180px_1fr] gap-4 py-6 hairline-b">
-            <dt class="eyebrow pt-1">Real 30 minutes</dt>
-            <dd class="text-[17px] leading-[1.55]"><span class="font-medium">A booked discovery,</span> not a polite chat.</dd>
-          </div>
-        </dl>
-
-        <p class="mt-8 text-[17px] leading-[1.6] text-ink/85 max-w-[640px]">
-          Anything that clears the criteria lands on your calendar. Anything that doesn&rsquo;t is held back, and we rework the play.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT'S INCLUDED -->
-<section class="hairline-t">
-  <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-      <div class="lg:col-span-5">
-        <div class="eyebrow">Scope</div>
-        <h2 class="section-h mt-5">What&rsquo;s included.</h2>
-      </div>
-
-      <div class="lg:col-span-7 lg:pt-4">
-        <p class="text-[18px] leading-[1.65] text-ink/85 max-w-[640px]">
-          We handle everything. Strategy, signal monitoring, copywriting, deliverability, reply routing, meeting coordination. You don&rsquo;t learn new tools. You don&rsquo;t keep a dashboard alive. What you see is a meeting on your calendar.
-        </p>
-
-        <ul class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-0 max-w-[720px]">
-          <li class="flex items-start gap-3 py-4 hairline-t">
-            <span class="font-mono text-[11px] text-mute pt-1.5 tabular-nums w-6">01</span>
-            <span class="text-[15.5px] leading-[1.55]">Custom-built campaigns against your ICP and buying signals</span>
-          </li>
-          <li class="flex items-start gap-3 py-4 hairline-t">
-            <span class="font-mono text-[11px] text-mute pt-1.5 tabular-nums w-6">02</span>
-            <span class="text-[15.5px] leading-[1.55]">Target layer build (500+ ranked accounts with buying committee mapped)</span>
-          </li>
-          <li class="flex items-start gap-3 py-4 hairline-t">
-            <span class="font-mono text-[11px] text-mute pt-1.5 tabular-nums w-6">03</span>
-            <span class="text-[15.5px] leading-[1.55]">Redundant sending infrastructure (40+ warmed domains, full deliverability stack)</span>
-          </li>
-          <li class="flex items-start gap-3 py-4 hairline-t">
-            <span class="font-mono text-[11px] text-mute pt-1.5 tabular-nums w-6">04</span>
-            <span class="text-[15.5px] leading-[1.55]">Daily signal monitoring and campaign optimization</span>
-          </li>
-          <li class="flex items-start gap-3 py-4 hairline-t">
-            <span class="font-mono text-[11px] text-mute pt-1.5 tabular-nums w-6">05</span>
-            <span class="text-[15.5px] leading-[1.55]">Copywriting, reply management, meeting routing</span>
-          </li>
-          <li class="flex items-start gap-3 py-4 hairline-t hairline-b">
-            <span class="font-mono text-[11px] text-mute pt-1.5 tabular-nums w-6">06</span>
-            <span class="text-[15.5px] leading-[1.55]">Weekly strategy call with Kyle, David, or Andrew &mdash; not an account manager</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FOUNDERS -->
 <section class="hairline-t bg-bone2/40">
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
@@ -1217,9 +1125,11 @@
         <div class="mt-7">
           <h3 class="font-display text-[40px] leading-none">Kyle Rasmussen</h3>
           <div class="eyebrow mt-3">Co-founder</div>
-          <p class="mt-5 text-[16px] leading-[1.65] text-ink/85 max-w-[460px]">
-            Top sales rep at Glassdoor, then led sales at Talview and Chat Metrics. Cold-emailed his way to a meeting with Starbucks&rsquo; Howard Schultz. A decade of refining cold email against C-suite buyers.
-          </p>
+          <ul class="founder-bullets mt-5 text-[16px] leading-[1.6] text-ink/85 max-w-[460px]">
+            <li>Top sales rep at Glassdoor.</li>
+            <li>Led sales at Talview and Chat Metrics.</li>
+            <li>Cold-emailed his way to a meeting with Starbucks&rsquo; Howard Schultz.</li>
+          </ul>
         </div>
       </div>
 
@@ -1231,9 +1141,11 @@
         <div class="mt-7">
           <h3 class="font-display text-[40px] leading-none">Andrew Elsakr</h3>
           <div class="eyebrow mt-3">Co-founder</div>
-          <p class="mt-5 text-[16px] leading-[1.65] text-ink/85 max-w-[460px]">
-            Co-founded Lyne.ai, the AI personalization platform acquired in 2023. Former AI lead at language-learning startups. His work on Lyne.ai was featured on the HubSpot blog.
-          </p>
+          <ul class="founder-bullets mt-5 text-[16px] leading-[1.6] text-ink/85 max-w-[460px]">
+            <li>Co-founded Lyne.ai &mdash; one of the first AI sales tools of the LLM era, acquired in 2023.</li>
+            <li>Former AI lead at language-learning startups.</li>
+            <li>Featured on the <a href="https://blog.hubspot.com/sales/ai-email-assistant" target="_blank" rel="noopener" class="underline underline-offset-[3px] decoration-ink/30 hover:decoration-ink">HubSpot blog</a> for his work on Lyne.ai.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1276,7 +1188,7 @@
           <details class="faq">
             <summary>How soon will we see meetings?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              First meetings typically land in weeks 3&ndash;4. Consistent volume by month 3.
+              It takes 3&ndash;4 weeks to set up and warm our email infrastructure. The first week of sending, we typically start setting meetings.
             </div>
           </details>
           <details class="faq">
@@ -1297,12 +1209,6 @@
               Kyle, David, or Andrew directly, supported by one operator. No junior account managers.
             </div>
           </details>
-          <details class="faq">
-            <summary>What counts as a qualified meeting?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer">
-              We define the criteria together upfront &mdash; title, company fit, a real 30-minute booked discovery. Anything that doesn&rsquo;t clear all three is held back.
-            </div>
-          </details>
         </div>
       </div>
     </div>
@@ -1319,7 +1225,7 @@
       30 minutes. We&rsquo;ll tell you whether cold email can produce meetings for your ICP. If we don&rsquo;t think we can hit your numbers, we&rsquo;ll tell you that too &mdash; and we&rsquo;ll point you toward what would work instead.
     </p>
     <div class="mt-14 flex justify-center">
-      <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+      <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','final_cta'); trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
@@ -1350,7 +1256,7 @@
       ✓ On its way. Check your inbox in ~2 minutes.
     </p>
     <p class="mt-5 text-[12px] font-mono text-mute">
-      Or <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('exit_book')" class="underline underline-offset-[4px]">book the 30-min call with David</a> &mdash; 30 seconds, no form fatigue.
+      Or <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','exit_book'); trackCTA('exit_book')" class="underline underline-offset-[4px]">book the 30-min call with David</a> &mdash; 30 seconds, no form fatigue.
     </p>
   </div>
 </div>
