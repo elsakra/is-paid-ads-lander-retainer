@@ -453,11 +453,20 @@
   .hero-logo-row .wm { font-size: 16px; opacity: 0.55; }
   .hero-logo-row img {
     height: 24px; width: auto;
+    max-width: 140px;
+    object-fit: contain;
     opacity: 0.65;
     filter: grayscale(1);
     transition: opacity .2s ease;
   }
-  .hero-logo-row img:hover { opacity: 0.9; }
+  /* SPINS mark is a raster with a white box; blend into bone so it doesn’t look like a sticker */
+  .hero-logo-row img.is-spins {
+    filter: none;
+    mix-blend-mode: multiply;
+    opacity: 0.75;
+  }
+  .hero-logo-row img.is-spins:hover { opacity: 0.9; }
+  .hero-logo-row img:hover:not(.is-spins) { opacity: 0.9; }
 
   /* Larger touch */
   @media (max-width: 900px) {
@@ -604,11 +613,11 @@
       <div class="mt-10 fade-up d4">
         <div class="eyebrow mb-4">Recent clients</div>
         <div class="hero-logo-row">
-          <img src="assets/logo-gainsight.avif" alt="Gainsight" loading="lazy" />
-          <img src="assets/logo-upside.avif" alt="Upside" loading="lazy" />
-          <img src="assets/logo-route.avif" alt="Route" loading="lazy" />
-          <img src="assets/logo-spins.avif" alt="SPINS" loading="lazy" />
-          <img src="assets/snappy.avif" alt="Snappy" loading="lazy" />
+          <img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" />
+          <img src="assets/logos/upside.svg" alt="Upside" loading="lazy" />
+          <img src="assets/logos/route.svg" alt="Route" loading="lazy" />
+          <img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" />
+          <img src="assets/logos/snappy.svg" alt="Snappy" loading="lazy" />
         </div>
       </div>
     </div>
@@ -787,7 +796,7 @@
             <div class="case-portrait" style="width:88px; max-width:88px;">
               <img src="assets/face-route.avif" alt="McLeod Abbott" loading="lazy" />
             </div>
-            <img src="assets/logo-route.avif" alt="Route" class="client-logo" loading="lazy" />
+            <img src="assets/logos/route.svg" alt="Route" class="client-logo" loading="lazy" />
           </div>
           <div class="label mb-5">01 · Case study</div>
           <h3 class="pull-h text-bone">
@@ -834,7 +843,7 @@
             <div class="case-portrait" style="width:88px; max-width:88px;">
               <img src="assets/face-upside.avif" alt="Nick Worswick" loading="lazy" />
             </div>
-            <img src="assets/logo-upside.avif" alt="Upside" class="client-logo" loading="lazy" />
+            <img src="assets/logos/upside.svg" alt="Upside" class="client-logo" loading="lazy" />
           </div>
           <div class="label mb-5">02 · Case study</div>
           <h3 class="pull-h text-bone">
@@ -876,7 +885,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
         <div class="lg:col-span-7">
           <div class="flex items-center gap-5 mb-6">
-            <img src="assets/logo-gainsight.avif" alt="Gainsight" class="client-logo" loading="lazy" />
+            <img src="assets/logos/gainsight.svg" alt="Gainsight" class="client-logo" loading="lazy" />
           </div>
           <div class="label mb-5">03 · Case study</div>
           <h3 class="pull-h text-bone">
