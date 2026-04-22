@@ -219,7 +219,7 @@
   }
   .step-num .op { color: rgba(15,15,15,0.25); }
 
-  /* Founder placeholder */
+  /* Founder headshots */
   .founder-card {
     background: #1A1A1A;
     color: #EFEAE0;
@@ -229,12 +229,13 @@
     position: relative;
     overflow: hidden;
   }
-  .founder-card .initials {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-size: clamp(80px, 10vw, 140px);
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: rgba(239,234,224,0.22);
+  .founder-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
   }
 
   /* Case study portrait */
@@ -1167,13 +1168,7 @@
       <!-- Kyle -->
       <div>
         <div class="founder-card">
-          <!-- Swap src with /img/kyle.jpg when real headshot is ready -->
-          <div class="absolute inset-0 flex items-end justify-between p-7">
-            <div class="initials">KR</div>
-            <div class="text-right font-mono text-[11px] uppercase tracking-[.18em] text-bone/60 pb-1">
-              Kyle<br/>Rasmussen
-            </div>
-          </div>
+          <img src="assets/founders/kyle.jpg" alt="Kyle Rasmussen" width="420" height="525" loading="lazy" />
         </div>
         <div class="mt-7">
           <h3 class="font-display text-[40px] leading-none">Kyle Rasmussen</h3>
@@ -1187,13 +1182,7 @@
       <!-- Andrew -->
       <div>
         <div class="founder-card">
-          <!-- Swap src with /img/andrew.jpg when real headshot is ready -->
-          <div class="absolute inset-0 flex items-end justify-between p-7">
-            <div class="initials">AE</div>
-            <div class="text-right font-mono text-[11px] uppercase tracking-[.18em] text-bone/60 pb-1">
-              Andrew<br/>Elsakr
-            </div>
-          </div>
+          <img src="assets/founders/andrew.jpg" alt="Andrew Elsakr" width="420" height="525" loading="lazy" />
         </div>
         <div class="mt-7">
           <h3 class="font-display text-[40px] leading-none">Andrew Elsakr</h3>
