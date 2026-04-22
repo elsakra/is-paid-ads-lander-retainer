@@ -72,16 +72,31 @@
   }
   .eyebrow-on-dark { color: #A9A79D; }
 
-  /* Massive editorial hero */
+  /* Hero headline — large but sized for cold traffic (proof + CTA must fit in first screen) */
   .hero-h {
     font-family: 'Instrument Serif', Georgia, serif;
     font-weight: 400;
     line-height: 1.02;
     letter-spacing: -0.035em;
-    font-size: clamp(52px, 9.5vw, 120px);
+    font-size: clamp(40px, 6.5vw, 84px);
     padding-bottom: 0.08em;
   }
   .hero-h em { font-style: italic; }
+  .hero-eyebrow { letter-spacing: 0.18em; }
+  .hero-cta-note {
+    max-width: 28rem;
+    line-height: 1.5;
+  }
+  .hero-logo-strips { scroll-margin-top: 5rem; }
+  @media (max-width: 1023px) {
+    .recent-2026-hero-scroller {
+      display: flex; flex-wrap: nowrap; gap: 1.5rem; overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+    }
+    .recent-2026-hero-scroller img { flex: 0 0 auto; }
+  }
+  #qualifier { scroll-margin-top: 5rem; }
 
   .section-h {
     font-family: 'Instrument Serif', Georgia, serif;
@@ -476,6 +491,15 @@
   .recent-2026-row img:hover { opacity: 1; }
   .recent-2026-row img.is-raster-light:hover { opacity: 0.95; }
   .recent-2026-row img.is-darkmark-on-bone:hover { opacity: 0.95; }
+  .hero-logo-strips .hero-logo-row img {
+    height: 22px; opacity: 0.72; filter: grayscale(1);
+  }
+  @media (min-width: 768px) {
+    .hero-logo-strips .hero-logo-row img { height: 26px; }
+  }
+  .hero-logo-strips .hero-logo-row img.is-spins {
+    filter: none; mix-blend-mode: multiply; opacity: 0.8;
+  }
 
   /* Larger touch */
   @media (max-width: 900px) {
@@ -561,21 +585,21 @@
   </div>
 </header>
 
-<!-- HERO — Conversion-optimized -->
-<section class="max-w-[1320px] mx-auto px-6 md:px-10 pt-10 md:pt-14 pb-16 md:pb-24">
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+<!-- HERO — Conversion-optimized; logos + ICP check above the fold on laptop -->
+<section class="max-w-[1320px] mx-auto px-6 md:px-10 pt-8 md:pt-12 pb-10 md:pb-16">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
     <!-- LEFT: Promise + proof + CTA -->
-    <div class="lg:col-span-7">
+    <div class="order-1 lg:col-span-7">
+      <p class="eyebrow hero-eyebrow mb-3 md:mb-4 fade-up d1">Cold email agency · B2B</p>
       <h1 class="hero-h fade-up d2">
         Qualified sales meetings on <em>your calendar.</em>
       </h1>
 
-      <p class="mt-10 md:mt-12 max-w-[620px] text-[19px] leading-[1.55] text-ink/85 fade-up d3">
-        We build custom outbound campaigns that book meetings with the buyers your SDRs can&rsquo;t reach. Same team behind <span class="font-semibold text-ink">$42M of pipeline for Route</span>, <span class="font-semibold text-ink">6.5% of US restaurants for Upside</span>, and <span class="font-semibold text-ink">90 SALs in 2 months for Gainsight</span>.
+      <p class="mt-6 max-w-[560px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
+        We build custom outbound campaigns that book meetings with the buyers your SDRs can&rsquo;t reach.
       </p>
 
-      <!-- Quote -->
-      <div class="quote-row mt-10 fade-up d3" style="max-width: 640px;">
+      <div class="quote-row mt-6 md:mt-8 fade-up d3" style="max-width: 640px;">
         <div class="quote-face">
           <img src="assets/face-route.avif" alt="McLeod Abbott" />
         </div>
@@ -585,51 +609,32 @@
         </div>
       </div>
 
-      <!-- CTA row -->
-      <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-5 fade-up d4">
-        <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('hero_primary')" class="btn-primary btn-large">
+      <div class="mt-6 md:mt-8 fade-up d4 max-w-[520px]">
+        <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
           Book a 30-min call <span class="arrow arr">→</span>
         </a>
-        <a href="#qualifier" class="text-[14.5px] font-medium underline underline-offset-[5px] decoration-[1.5px] decoration-ink/30 hover:decoration-ink transition">
-          Not sure if it&rsquo;ll work for your ICP? →
-        </a>
+        <p class="hero-cta-note text-[15px] text-ink/80 mt-4">
+          We&rsquo;ll tell you on the call if cold email will work for your ICP&mdash;or end the call early. We don&rsquo;t waste your time, or ours.
+        </p>
       </div>
-      <!-- Availability -->
-      <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 fade-up d4">
+      <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 fade-up d4">
         <span class="avail-line"><span class="dot-g"></span>Next available: Thu, 2:00pm PT</span>
         <span class="avail-line text-mute">30 min · Kyle, David, or Andrew · no SDR</span>
       </div>
-
-      <!-- Disqualify promise — prominent -->
-      <div class="mt-8 p-5 border border-ink/15 rounded-md bg-bone2/50 max-w-[640px] fade-up d4">
-        <div class="eyebrow mb-2">How the call works</div>
-        <p class="text-[15px] leading-[1.55] text-ink">
-          We&rsquo;ll look at your ICP and tell you, on the call, whether cold email will book meetings for it. <span class="font-semibold">If it won&rsquo;t, we&rsquo;ll tell you and end the call early.</span> We take a small number of clients and don&rsquo;t waste our own time, either.
-        </p>
-      </div>
-
-      <!-- Hero logo row -->
-      <div class="mt-10 fade-up d4">
-        <div class="eyebrow mb-4">Recent clients</div>
-        <div class="hero-logo-row">
-          <img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" />
-          <img src="assets/logos/upside.svg" alt="Upside" loading="lazy" />
-          <img src="assets/logos/route.svg" alt="Route" loading="lazy" />
-          <img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" />
-          <img src="assets/logos/snappy.svg" alt="Snappy" loading="lazy" />
-        </div>
-      </div>
+      <p class="mt-3 text-[13.5px] text-mute fade-up d4">
+        <a href="#qualifier" class="font-medium text-ink/70 underline underline-offset-[4px] decoration-ink/25 hover:decoration-ink">Not sure? 30-sec ICP check →</a>
+      </p>
     </div>
 
-    <!-- RIGHT: Qualifier widget -->
-    <div class="lg:col-span-5 fade-up d3" id="qualifier">
+    <!-- RIGHT: Qualifier — order-2 on mobile so it sits below quote+CTA after McLeod proof -->
+    <div class="order-2 lg:order-2 w-full max-w-lg mx-auto lg:mx-0 lg:max-w-none lg:col-span-5 fade-up d3" id="qualifier">
       <div class="lg:sticky lg:top-6">
         <div class="qual-card">
           <span class="qbadge">ICP check · 30 sec</span>
 
-          <!-- Step 1 -->
+          <!-- Step 1: ACV -->
           <div class="qual-step active" data-step="1">
-            <div class="qual-progress"><span class="done"></span><span></span><span></span></div>
+            <div class="qual-progress"><span class="done"></span><span></span></div>
             <div class="qual-q">What&rsquo;s your average contract value?</div>
             <button class="qual-opt" data-key="acv" data-val="low" data-next="2">
               <span>Under $20k / year</span><span class="qarrow">→</span>
@@ -638,26 +643,29 @@
               <span>$20k &ndash; $100k / year</span><span class="qarrow">→</span>
             </button>
             <button class="qual-opt" data-key="acv" data-val="high" data-next="2">
-              <span>$100k+ / year</span><span class="qarrow">→</span>
+              <span>$100k &ndash; $500k / year</span><span class="qarrow">→</span>
+            </button>
+            <button class="qual-opt" data-key="acv" data-val="vhigh" data-next="2">
+              <span>$500k+ / year</span><span class="qarrow">→</span>
             </button>
             <div class="text-[12px] font-mono text-mute mt-4">We don&rsquo;t take engagements where the math doesn&rsquo;t work.</div>
           </div>
 
-          <!-- Step 2 -->
+          <!-- Step 2: TAM (addressable / motion scale) -->
           <div class="qual-step" data-step="2">
-            <div class="qual-progress"><span class="done"></span><span class="done"></span><span></span></div>
-            <div class="qual-q">What best describes the accounts you sell into?</div>
-            <button class="qual-opt" data-key="industry" data-val="b2b_complex" data-next="3">
-              <span>B2B &mdash; multi-stakeholder, long-cycle</span><span class="qarrow">→</span>
+            <div class="qual-progress"><span class="done"></span><span class="done"></span></div>
+            <div class="qual-q">What&rsquo;s the rough TAM for your ICP?</div>
+            <button class="qual-opt" data-key="tam" data-val="tam_niche" data-next="3">
+              <span>Narrow / niche (single segment or region)</span><span class="qarrow">→</span>
             </button>
-            <button class="qual-opt" data-key="industry" data-val="b2b_core" data-next="3">
-              <span>B2B &mdash; mid-market, typical deal motion</span><span class="qarrow">→</span>
+            <button class="qual-opt" data-key="tam" data-val="tam_mid" data-next="3">
+              <span>Mid (multiple segments or national)</span><span class="qarrow">→</span>
             </button>
-            <button class="qual-opt" data-key="industry" data-val="b2b_smb" data-next="3">
-              <span>B2B &mdash; SMB, high velocity, or TBD</span><span class="qarrow">→</span>
+            <button class="qual-opt" data-key="tam" data-val="tam_large" data-next="3">
+              <span>Large (category-wide or global)</span><span class="qarrow">→</span>
             </button>
-            <button class="qual-opt" data-key="industry" data-val="not_b2b" data-next="3">
-              <span>Not B2B (consumer, marketplaces, other)</span><span class="qarrow">→</span>
+            <button class="qual-opt" data-key="tam" data-val="tam_unsure" data-next="3">
+              <span>Not sure yet</span><span class="qarrow">→</span>
             </button>
             <button class="text-[12px] font-mono text-mute mt-4 underline underline-offset-4" onclick="qualBack(1)">← Back</button>
           </div>
@@ -668,7 +676,7 @@
               <div class="eyebrow eyebrow-on-dark mb-4">Looks like a fit</div>
               <div class="font-display text-[44px] leading-[0.95] mb-5">Yes.<br/><em class="text-teal">We book meetings for profiles like yours.</em></div>
               <p class="text-[14.5px] leading-[1.55] text-[#D9D4C7] mb-7" id="qual-why-yes">
-                Your ACV and GTM / deal shape line up with the engagements where we produce our strongest results.
+                Your ACV and TAM line up with the engagements where we produce our strongest results.
               </p>
               <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" data-rep="david" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+(this.getAttribute('data-rep')||'david'));" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
                 Book a 30-min call <span class="arrow arr">→</span>
@@ -720,34 +728,34 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Example org marks (trust) -->
-<section class="hairline-t">
-  <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-14 md:py-20">
-    <div>
-        <h2 class="font-display text-[32px] md:text-[40px] leading-[1.05] tracking-[-0.02em] text-ink max-w-[720px]">
-          Qualified meetings with teams at
-        </h2>
-        <p class="mt-4 text-[15px] leading-[1.6] text-ink/80 max-w-[640px]">
-          Examples of discovery calls we&rsquo;ve placed for clients &mdash; buying teams at the companies below (not a complete list). Logos for recognition only; not an endorsement by them.
-        </p>
-        <div class="recent-2026-row mt-8 md:mt-10">
-          <img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" />
-          <img src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" />
-          <img src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" />
-          <img src="assets/logos/recent-2026/disney-animation.png" alt="Walt Disney Animation Studios" class="is-raster-light" loading="lazy" />
-          <img src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" />
-          <img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" />
-          <img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" />
-          <img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" />
-          <img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" />
-          <img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" />
-          <img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" />
-          <img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" />
-          <img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" />
-        </div>
+    <!-- Full-width: client marks + example meetings (one hero section; on laptop this sits under H1 + ICP) -->
+    <div class="order-3 w-full col-span-1 lg:col-span-12 pt-4 md:pt-6 border-t border-ink/10 mt-2 lg:mt-0 hero-logo-strips -mx-0">
+      <p class="eyebrow mb-3">Clients</p>
+      <div class="hero-logo-row">
+        <img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" />
+        <img src="assets/logos/upside.svg" alt="Upside" loading="lazy" />
+        <img src="assets/logos/route.svg" alt="Route" loading="lazy" />
+        <img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" />
+        <img src="assets/logos/snappy.svg" alt="Snappy" loading="lazy" />
+      </div>
+      <p class="eyebrow mt-8 md:mt-6 mb-3">Meetings booked at</p>
+      <div class="recent-2026-row recent-2026-hero-scroller">
+        <img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" />
+        <img src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" />
+        <img src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" />
+        <img src="assets/logos/recent-2026/disney-animation.png" alt="Walt Disney Animation Studios" class="is-raster-light" loading="lazy" />
+        <img src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" />
+        <img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" />
+        <img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" />
+        <img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" />
+        <img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" />
+        <img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" />
+        <img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" />
+        <img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" />
+        <img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" />
+      </div>
+      <p class="text-[12px] font-mono text-mute mt-4">Logos for recognition only; not an endorsement. Not a complete list.</p>
     </div>
   </div>
 </section>
@@ -1409,7 +1417,7 @@
     const maybe = document.getElementById('qualifierBookMaybe');
     const no = document.getElementById('qualifierBookNo');
     if (nextStep === '3-yes' && yes) {
-      const kyle = acv === 'high';
+      const kyle = acv === 'vhigh' || acv === 'high';
       yes.href = kyle ? CAL_KYLE : CAL_DAVID;
       yes.setAttribute('data-rep', kyle ? 'kyle' : 'david');
     }
@@ -1434,14 +1442,14 @@
       if (typeof trackCTA === 'function') trackCTA('qualifier_' + k + '_' + v);
 
       if (next === '3') {
-        // Evaluate
+        // Evaluate: ACV (low|mid|high|vhigh) × TAM
         const acv = answers.acv;
-        const industry = answers.industry;
+        const tam = answers.tam;
         const yesEl  = document.getElementById('qual-why-yes');
         const maybeEl = document.getElementById('qual-why-maybe');
         const noEl   = document.getElementById('qual-why-no');
+        const goodTam = (tam === 'tam_mid' || tam === 'tam_large');
 
-        // Low ACV → no, regardless of industry
         if (acv === 'low') {
           if (noEl) noEl.textContent = 'At under $20k ACV, cold outbound in most B2B motions rarely pays back. Our engagements start where the math works for both sides — typically $20k+ ACV with a real GTM into good accounts.';
           applyQualifierCalLinksForStep('3-no');
@@ -1449,22 +1457,32 @@
           return;
         }
 
-        // Mid/high ACV + strong B2B GTM → yes
-        if ((acv === 'high' || acv === 'mid') && (industry === 'b2b_complex' || industry === 'b2b_core')) {
-          const why = acv === 'high'
-            ? '$100k+ ACV in a clear B2B GTM (complex or mid-market) is the profile behind the $42M for Route and 6.5% of US restaurants for Upside.'
-            : '$20k–$100k ACV in a clear B2B GTM is a profile we work successfully. Most of our recent engagements fit this shape.';
-          if (yesEl) yesEl.textContent = why;
+        if (acv === 'vhigh') {
+          if (yesEl) {
+            yesEl.textContent = '$500k+ ACV is the profile we treat as a priority conversation. TAM and motion still matter on the call&mdash;but you should book.';
+          }
           applyQualifierCalLinksForStep('3-yes');
           showStep('3-yes');
           return;
         }
 
-        // Mid/high + SMB/velocity or not B2B → maybe
+        if ((acv === 'mid' || acv === 'high') && goodTam) {
+          if (yesEl) {
+            yesEl.textContent = acv === 'high'
+              ? 'Strong ACV and a broad enough TAM is the mix behind the $42M for Route, 6.5% of US restaurants for Upside, and 90 SALs in 2 months for Gainsight. You should be on a call with us.'
+              : '$20k–$100k ACV with a real market to work&mdash;that is a profile we run successfully. Most of our recent engagements look like this.';
+          }
+          applyQualifierCalLinksForStep('3-yes');
+          showStep('3-yes');
+          return;
+        }
+
         if (maybeEl) {
-          maybeEl.textContent = industry === 'not_b2b'
-            ? 'Your deal size can work, but we need to be direct: cold email is built for B2B pipeline in most of what we do. We can tell you on a call if there is a fit for your model.'
-            : 'Your ACV works. The open question is whether outbound economics match your ICP, velocity, and deal shape &mdash; we can land that in one short conversation.';
+          if (tam === 'tam_niche') {
+            maybeEl.textContent = 'Your ACV can work, but a very narrow TAM has to clear a higher bar for outbound economics&mdash;we can tell you in a few minutes on a call if the math is there.';
+          } else {
+            maybeEl.textContent = 'Your ACV is in range. TAM and motion need a pass to see if cold outbound is the right lever&mdash;one short call is enough to know.';
+          }
         }
         applyQualifierCalLinksForStep('3-maybe');
         showStep('3-maybe');
