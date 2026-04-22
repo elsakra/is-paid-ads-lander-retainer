@@ -438,39 +438,6 @@
     font-size: 14.5px; line-height: 1.6; color: #2A2A2A;
   }
 
-  /* Exit intent modal */
-  #exitBackdrop {
-    position: fixed; inset: 0;
-    background: rgba(15,15,15,0.48);
-    backdrop-filter: blur(4px);
-    z-index: 80;
-    display: none;
-    align-items: center; justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity .2s ease;
-  }
-  #exitBackdrop.show { display: flex; opacity: 1; }
-  #exitModal {
-    background: #F1EDE4; color: #0F0F0F;
-    border-radius: 12px;
-    max-width: 560px; width: 100%;
-    padding: 40px;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform .25s cubic-bezier(.2,.7,.2,1);
-  }
-  #exitBackdrop.show #exitModal { transform: none; }
-  #exitClose {
-    position: absolute; top: 16px; right: 16px;
-    width: 36px; height: 36px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius: 999px;
-    background: transparent;
-    cursor: pointer;
-  }
-  #exitClose:hover { background: rgba(15,15,15,0.08); }
-
   /* Logos in hero */
   .hero-logo-row {
     display: flex; align-items: center; justify-content: center;
@@ -1243,32 +1210,6 @@
   </div>
 </section>
 
-<!-- EXIT INTENT MODAL -->
-<div id="exitBackdrop" role="dialog" aria-modal="true" aria-labelledby="exitTitle">
-  <div id="exitModal">
-    <button id="exitClose" aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l12 12M14 2L2 14" stroke="#0F0F0F" stroke-width="1.6" stroke-linecap="round"/></svg>
-    </button>
-    <div class="eyebrow mb-4">One more thing</div>
-    <h3 id="exitTitle" class="font-display text-[36px] md:text-[44px] leading-[0.98] tracking-[-0.025em] mb-5">
-      Not ready for a call?
-    </h3>
-    <p class="text-[16px] leading-[1.55] text-ink/85 mb-7 max-w-[480px]">
-      We&rsquo;ll send you our <span class="font-semibold">2-page ICP teardown</span> &mdash; the exact process we use to decide whether cold email will book meetings for a given buyer. No spam, no nurture sequence.
-    </p>
-    <form id="exitForm" class="flex flex-col sm:flex-row gap-3">
-      <input type="email" required placeholder="you@company.com" class="flex-1 px-4 py-3.5 rounded-md border border-ink/20 bg-white text-[15px] focus:outline-none focus:border-ink transition" />
-      <button type="submit" class="btn-primary btn-large justify-center">Send me the teardown <span class="arrow arr">→</span></button>
-    </form>
-    <p id="exitSuccess" class="mt-4 text-[13.5px] font-mono text-[#26A641] hidden">
-      ✓ On its way. Check your inbox in ~2 minutes.
-    </p>
-    <p class="mt-5 text-[12px] font-mono text-mute">
-      Or <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','exit_book'); trackCTA('exit_book')" class="underline underline-offset-[4px]">book the 30-min call with David</a> &mdash; 30 seconds, no form fatigue.
-    </p>
-  </div>
-</div>
-
 <footer class="bg-ink text-bone/70 border-t border-white/10">
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-8 flex items-center justify-between text-[13px]">
     <div>&copy; 2026 IntentSignal Systems, LLC</div>
@@ -1405,48 +1346,6 @@
       }
     });
   });
-
-  // ======== Exit intent ========
-  const exitBackdrop = document.getElementById('exitBackdrop');
-  const exitClose = document.getElementById('exitClose');
-  const exitForm = document.getElementById('exitForm');
-  const exitSuccess = document.getElementById('exitSuccess');
-  let exitShown = sessionStorage.getItem('exitShown') === '1';
-
-  function showExit() {
-    if (exitShown || !exitBackdrop) return;
-    exitShown = true;
-    sessionStorage.setItem('exitShown', '1');
-    exitBackdrop.classList.add('show');
-    if (typeof trackCTA === 'function') trackCTA('exit_intent_shown');
-  }
-  function hideExit() { if (exitBackdrop) exitBackdrop.classList.remove('show'); }
-
-  // Desktop: mouse leaves viewport top
-  document.addEventListener('mouseleave', (e) => {
-    if (e.clientY <= 0 && window.innerWidth > 768) showExit();
-  });
-  // Mobile / all: after 45s of scrolling, if they haven't clicked a CTA
-  let scrollDepth = 0;
-  window.addEventListener('scroll', () => {
-    scrollDepth = Math.max(scrollDepth, window.scrollY / document.body.scrollHeight);
-  }, { passive: true });
-  setTimeout(() => { if (scrollDepth > 0.35 && !exitShown) showExit(); }, 45000);
-
-  if (exitClose) exitClose.addEventListener('click', hideExit);
-  if (exitBackdrop) exitBackdrop.addEventListener('click', (e) => { if (e.target === exitBackdrop) hideExit(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideExit(); });
-
-  if (exitForm) {
-    exitForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = exitForm.querySelector('input[type=email]').value;
-      if (typeof trackCTA === 'function') trackCTA('exit_email_submit');
-      // In production, POST to your endpoint. Here we simulate.
-      exitForm.style.display = 'none';
-      if (exitSuccess) exitSuccess.classList.remove('hidden');
-    });
-  }
 
   // GH fallback grid
   const grid = document.getElementById('ghGrid');
