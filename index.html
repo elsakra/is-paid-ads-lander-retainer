@@ -645,18 +645,18 @@
           <!-- Step 2 -->
           <div class="qual-step" data-step="2">
             <div class="qual-progress"><span class="done"></span><span class="done"></span><span></span></div>
-            <div class="qual-q">Who&rsquo;s the buyer you need to reach?</div>
-            <button class="qual-opt" data-key="buyer" data-val="ic" data-next="3">
-              <span>Individual contributor</span><span class="qarrow">→</span>
+            <div class="qual-q">What best describes the accounts you sell into?</div>
+            <button class="qual-opt" data-key="industry" data-val="b2b_complex" data-next="3">
+              <span>B2B &mdash; multi-stakeholder, long-cycle</span><span class="qarrow">→</span>
             </button>
-            <button class="qual-opt" data-key="buyer" data-val="mgr" data-next="3">
-              <span>Manager / Director</span><span class="qarrow">→</span>
+            <button class="qual-opt" data-key="industry" data-val="b2b_core" data-next="3">
+              <span>B2B &mdash; mid-market, typical deal motion</span><span class="qarrow">→</span>
             </button>
-            <button class="qual-opt" data-key="buyer" data-val="vp" data-next="3">
-              <span>VP / Head of</span><span class="qarrow">→</span>
+            <button class="qual-opt" data-key="industry" data-val="b2b_smb" data-next="3">
+              <span>B2B &mdash; SMB, high velocity, or TBD</span><span class="qarrow">→</span>
             </button>
-            <button class="qual-opt" data-key="buyer" data-val="c" data-next="3">
-              <span>C-level / Founder</span><span class="qarrow">→</span>
+            <button class="qual-opt" data-key="industry" data-val="not_b2b" data-next="3">
+              <span>Not B2B (consumer, marketplaces, other)</span><span class="qarrow">→</span>
             </button>
             <button class="text-[12px] font-mono text-mute mt-4 underline underline-offset-4" onclick="qualBack(1)">← Back</button>
           </div>
@@ -667,7 +667,7 @@
               <div class="eyebrow eyebrow-on-dark mb-4">Looks like a fit</div>
               <div class="font-display text-[44px] leading-[0.95] mb-5">Yes.<br/><em class="text-teal">We book meetings for profiles like yours.</em></div>
               <p class="text-[14.5px] leading-[1.55] text-[#D9D4C7] mb-7" id="qual-why-yes">
-                Your ACV and buyer profile match the engagements where we produce our strongest results.
+                Your ACV and GTM / deal shape line up with the engagements where we produce our strongest results.
               </p>
               <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" data-rep="david" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+(this.getAttribute('data-rep')||'david'));" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
                 Book a 30-min call <span class="arrow arr">→</span>
@@ -699,7 +699,7 @@
               <div class="eyebrow mb-4">Probably not a fit</div>
               <div class="font-display text-[40px] leading-[0.95] mb-4 text-ink">Probably not.</div>
               <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-5" id="qual-why-no">
-                At under $20k ACV, outbound to senior buyers usually doesn&rsquo;t pay back. Our engagements start at a scope where the math makes sense for both sides.
+                At under $20k ACV, cold outbound in most B2B motions usually doesn&rsquo;t pay back. Our engagements start at a scope where the math makes sense for both sides.
               </p>
               <p class="text-[14px] leading-[1.55] text-ink/85 mb-5">
                 Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro&mdash;we&rsquo;ll be straight about fit.
@@ -1434,33 +1434,35 @@
       if (next === '3') {
         // Evaluate
         const acv = answers.acv;
-        const buyer = answers.buyer;
+        const industry = answers.industry;
         const yesEl  = document.getElementById('qual-why-yes');
         const maybeEl = document.getElementById('qual-why-maybe');
         const noEl   = document.getElementById('qual-why-no');
 
-        // Low ACV → no, regardless of buyer
+        // Low ACV → no, regardless of industry
         if (acv === 'low') {
-          if (noEl) noEl.textContent = 'At under $20k ACV, cold outbound to senior buyers rarely pays back. Our engagements start where the math works for both sides — typically $20k+ ACV into decision-makers.';
+          if (noEl) noEl.textContent = 'At under $20k ACV, cold outbound in most B2B motions rarely pays back. Our engagements start where the math works for both sides — typically $20k+ ACV with a real GTM into good accounts.';
           applyQualifierCalLinksForStep('3-no');
           showStep('3-no');
           return;
         }
 
-        // High ACV + VP/C → strong yes
-        if ((acv === 'high' || acv === 'mid') && (buyer === 'vp' || buyer === 'c')) {
+        // Mid/high ACV + strong B2B GTM → yes
+        if ((acv === 'high' || acv === 'mid') && (industry === 'b2b_complex' || industry === 'b2b_core')) {
           const why = acv === 'high'
-            ? '$100k+ ACV into VP / C-level buyers is our sweet spot. This is the profile behind the $42M for Route and 6.5% of US restaurants for Upside.'
-            : '$20k–$100k ACV into senior buyers is a profile we work successfully. Most of our 2025 engagements fit this shape.';
+            ? '$100k+ ACV in a clear B2B GTM (complex or mid-market) is the profile behind the $42M for Route and 6.5% of US restaurants for Upside.'
+            : '$20k–$100k ACV in a clear B2B GTM is a profile we work successfully. Most of our recent engagements fit this shape.';
           if (yesEl) yesEl.textContent = why;
           applyQualifierCalLinksForStep('3-yes');
           showStep('3-yes');
           return;
         }
 
-        // Mid/high ACV + IC/Manager → maybe (buyer is usually the question)
+        // Mid/high + SMB/velocity or not B2B → maybe
         if (maybeEl) {
-          maybeEl.textContent = 'Your ACV works. The question is whether your buyer is the economic decision-maker or someone you need to route through. We can figure that out quickly on a call.';
+          maybeEl.textContent = industry === 'not_b2b'
+            ? 'Your deal size can work, but we need to be direct: cold email is built for B2B pipeline in most of what we do. We can tell you on a call if there is a fit for your model.'
+            : 'Your ACV works. The open question is whether outbound economics match your ICP, velocity, and deal shape &mdash; we can land that in one short conversation.';
         }
         applyQualifierCalLinksForStep('3-maybe');
         showStep('3-maybe');
