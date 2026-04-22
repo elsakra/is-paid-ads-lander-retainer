@@ -434,86 +434,118 @@
     font-size: 14.5px; line-height: 1.6; color: #2A2A2A;
   }
 
-  /* Logos in hero */
+  /* Logos in hero — same fixed slot (box) per mark; object-fit inside slot */
   .hero-logo-row {
-    display: flex; align-items: center; justify-content: center;
-    gap: 2.25rem 3rem; flex-wrap: wrap;
-    max-width: 1040px; margin: 0 auto;
+    --logo-slot-w: 124px;
+    --logo-slot-h: 40px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    justify-items: stretch;
+    gap: 0.5rem 0.75rem;
+    max-width: 100%;
+    width: min(100%, 720px);
+    margin: 0 auto;
   }
-  .hero-logo-row .wm { font-size: 16px; opacity: 0.55; }
-  .hero-logo-row img {
-    height: 30px; width: auto;
-    max-width: 180px;
+  .hero-logo-row .logo-slot {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    max-width: var(--logo-slot-w);
+    height: var(--logo-slot-h);
+    margin: 0 auto;
+  }
+  .hero-logo-row .logo-slot img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
     opacity: 0.72;
     filter: grayscale(1);
     transition: opacity .2s ease;
   }
   @media (max-width: 767px) {
-    .hero-logo-row { gap: 1.5rem 2rem; }
-    .hero-logo-row img { height: 24px; }
+    .hero-logo-row {
+      --logo-slot-w: 108px;
+      --logo-slot-h: 34px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
-  /* Per-logo optical balancing */
-  .hero-logo-row img.is-upside { height: 28px; }
-  /* Snappy: full-color (grayscale was hiding the mark in some browsers); SVG root was also fixed for valid XML */
-  .hero-logo-row img.is-snappy {
-    height: 26px;
+  .hero-logo-row .logo-slot img.is-snappy {
     filter: none;
     opacity: 0.88;
   }
-  /* SPINS mark is a raster with a white box; blend into bone so it doesn’t look like a sticker */
-  .hero-logo-row img.is-spins {
-    height: 34px;
+  .hero-logo-row .logo-slot img.is-spins {
     filter: none;
     mix-blend-mode: multiply;
     opacity: 0.8;
   }
-  @media (max-width: 767px) {
-    .hero-logo-row img.is-upside { height: 22px; }
-    .hero-logo-row img.is-snappy { height: 22px; }
-    .hero-logo-row img.is-spins { height: 28px; }
-  }
-  .hero-logo-row img.is-spins:hover { opacity: 0.95; }
-  .hero-logo-row img:hover:not(.is-spins) { opacity: 0.95; }
+  .hero-logo-row .logo-slot img.is-spins:hover { opacity: 0.95; }
+  .hero-logo-row .logo-slot img:hover:not(.is-spins) { opacity: 0.95; }
 
-  /* 2026 meetings booked — YTD org marks */
+  /* 2026 meetings — identical slot sizing to Clients; 6-up on desktop */
   .recent-2026-row {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-    gap: 1.75rem 2.75rem;
-    max-width: 1040px; margin: 0 auto;
+    --logo-slot-w: 124px;
+    --logo-slot-h: 40px;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: center;
+    justify-items: stretch;
+    gap: 0.65rem 0.5rem;
+    max-width: 100%;
+    width: min(100%, 900px);
+    margin: 0 auto;
   }
-  @media (min-width: 768px) {
-    .recent-2026-row { gap: 2rem 3rem; }
+  @media (max-width: 1023px) {
+    .recent-2026-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
-  .recent-2026-row img {
-    height: 28px; width: auto; max-width: 160px;
-    object-fit: contain; object-position: center;
+  @media (max-width: 767px) {
+    .recent-2026-row {
+      --logo-slot-w: 108px;
+      --logo-slot-h: 34px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .recent-2026-row .logo-slot {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    max-width: var(--logo-slot-w);
+    height: var(--logo-slot-h);
+    margin: 0 auto;
+  }
+  .recent-2026-row .logo-slot img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     opacity: 0.95;
     filter: none;
     transition: opacity .2s ease;
   }
-  @media (max-width: 767px) {
-    .recent-2026-row img { height: 24px; max-width: 130px; }
+  .recent-2026-row .logo-slot img.is-raster-light {
+    mix-blend-mode: multiply;
+    opacity: 0.9;
   }
-  .recent-2026-row img.is-raster-light {
-    height: 32px;
-    mix-blend-mode: multiply; opacity: 0.9;
-  }
-  @media (max-width: 767px) {
-    .recent-2026-row img.is-raster-light { height: 26px; }
-  }
-  /* e.g. SVGs that ship as white on transparent */
-  .recent-2026-row img.is-darkmark-on-bone {
-    height: 24px;
+  .recent-2026-row .logo-slot img.is-darkmark-on-bone {
     filter: brightness(0);
     opacity: 0.9;
   }
-  @media (max-width: 767px) {
-    .recent-2026-row img.is-darkmark-on-bone { height: 20px; }
-  }
-  .recent-2026-row img:hover { opacity: 1; }
-  .recent-2026-row img.is-raster-light:hover { opacity: 0.95; }
-  .recent-2026-row img.is-darkmark-on-bone:hover { opacity: 0.95; }
+  .recent-2026-row .logo-slot img:hover { opacity: 1; }
+  .recent-2026-row .logo-slot img.is-raster-light:hover { opacity: 0.95; }
+  .recent-2026-row .logo-slot img.is-darkmark-on-bone:hover { opacity: 0.95; }
 
   /* Larger touch */
   @media (max-width: 900px) {
@@ -654,27 +686,27 @@
   <div class="hero-logo-strips mt-8 md:mt-10 pt-6 md:pt-8 border-t border-ink/10">
     <p class="eyebrow text-center mb-5">Clients</p>
     <div class="hero-logo-row">
-      <img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" />
-      <img src="assets/logos/upside.svg" alt="Upside" class="is-upside" loading="lazy" />
-      <img src="assets/logos/route.svg" alt="Route" loading="lazy" />
-      <img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" />
-      <img src="assets/logos/snappy.svg" alt="Snappy" class="is-snappy" loading="lazy" />
+      <div class="logo-slot"><img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/upside.svg" alt="Upside" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/route.svg" alt="Route" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/snappy.svg" alt="Snappy" class="is-snappy" loading="lazy" /></div>
     </div>
     <p class="eyebrow text-center mt-12 md:mt-14 mb-5">Meetings booked at</p>
     <div class="recent-2026-row">
-      <img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" />
-      <img src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" />
-      <img src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" />
-      <img src="assets/logos/recent-2026/disney-animation.png" alt="Walt Disney Animation Studios" class="is-raster-light" loading="lazy" />
-      <img src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" />
-      <img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" />
-      <img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" />
-      <img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" />
-      <img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" />
-      <img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" />
-      <img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" />
-      <img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" />
-      <img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" />
+      <div class="logo-slot"><img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/disney-animation.png" alt="Walt Disney Animation Studios" class="is-raster-light" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" /></div>
     </div>
   </div>
 
