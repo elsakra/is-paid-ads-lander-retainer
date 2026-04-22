@@ -492,7 +492,12 @@
   }
   /* Per-logo optical balancing */
   .hero-logo-row img.is-upside { height: 28px; }
-  .hero-logo-row img.is-snappy { height: 26px; }
+  /* Snappy: full-color (grayscale was hiding the mark in some browsers); SVG root was also fixed for valid XML */
+  .hero-logo-row img.is-snappy {
+    height: 26px;
+    filter: none;
+    opacity: 0.88;
+  }
   /* SPINS mark is a raster with a white box; blend into bone so it doesn’t look like a sticker */
   .hero-logo-row img.is-spins {
     height: 34px;
@@ -684,6 +689,9 @@
       </p>
       <p class="mt-4 text-[13px] font-mono text-mute fade-up d4">
         30 min · Kyle, David, or Andrew · no SDR
+      </p>
+      <p class="mt-3 text-[13.5px] text-mute fade-up d4">
+        <a href="#qualifier" class="font-medium text-ink/70 underline underline-offset-[4px] decoration-ink/25 hover:decoration-ink">Not sure? 30-sec ICP check →</a>
       </p>
     </div>
   </div>
