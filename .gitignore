@@ -1,3 +1,6 @@
 .DS_Store
 .vercel
 *.log
+
+# Dropped or scratch assets; not referenced by the static pages
+uploads/
