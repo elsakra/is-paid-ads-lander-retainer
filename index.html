@@ -625,14 +625,14 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal home">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[24px] md:h-[28px] w-auto max-w-[min(200px,46vw)] object-contain object-left" width="200" height="32" />
     </a>
-    <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','sticky_bar'); trackCTA('sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
+    <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','sticky_bar'); trackCTA('sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
       Book a 30-min call <span class="arrow arr">→</span>
     </a>
   </div>
 </div>
 
 <div id="mobileCta" role="region" aria-label="Book a call">
-  <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','mobile_sticky'); trackCTA('mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
+  <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','mobile_sticky'); trackCTA('mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
     Book a 30-min call <span class="arr">→</span>
   </a>
   <button id="mobileCtaDismiss" aria-label="Dismiss" class="ml-3 w-7 h-7 rounded-full flex items-center justify-center hover:bg-white/10">
@@ -646,7 +646,7 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] md:h-[32px] w-auto max-w-[min(240px,70vw)] object-contain object-left" width="240" height="36" />
     </a>
-    <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','header'); trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
+    <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','header'); trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
       Book a call
     </a>
   </div>
@@ -676,7 +676,7 @@
     </div>
 
     <div class="mt-6 md:mt-8 fade-up d4 flex flex-col items-center">
-      <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','hero_primary'); trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
+      <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','hero_primary'); trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
@@ -761,7 +761,7 @@
           <p class="text-[14.5px] leading-[1.55] text-[#D9D4C7] mb-7" id="qual-why-yes">
             Your ACV and TAM line up with the engagements where we produce our strongest results.
           </p>
-          <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" data-rep="david" onclick="var r=this.getAttribute('data-rep')||'david'; notifyCalRedirect(r,'qualifier_yes'); if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+r);" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
+          <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" data-rep="david" onclick="var r=this.getAttribute('data-rep')||'david'; notifyCalRedirect(r,'qualifier_yes'); if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+r);" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
             Book a 30-min call <span class="arrow arr">→</span>
           </a>
         </div>
@@ -775,7 +775,7 @@
           <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-6" id="qual-why-maybe">
             We&rsquo;d want to hear more about your motion before committing. Some engagements in this profile work; some don&rsquo;t.
           </p>
-          <a id="qualifierBookMaybe" href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','qualifier_maybe'); if(typeof trackCTA==='function')trackCTA('qualifier_maybe_david');" class="btn-primary btn-large w-full justify-center">
+          <a id="qualifierBookMaybe" href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','qualifier_maybe'); if(typeof trackCTA==='function')trackCTA('qualifier_maybe_david');" class="btn-primary btn-large w-full justify-center">
             Book a 30-min call <span class="arrow arr">→</span>
           </a>
           <p class="mt-5 text-[12.5px] font-mono text-mute leading-[1.5]">
@@ -795,7 +795,7 @@
           <p class="text-[14px] leading-[1.55] text-ink/85 mb-5">
             Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro&mdash;we&rsquo;ll be straight about fit.
           </p>
-          <a id="qualifierBookNo" href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','qualifier_no'); if(typeof trackCTA==='function')trackCTA('qualifier_no_david');" class="btn-primary btn-large w-full justify-center mb-4">
+          <a id="qualifierBookNo" href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','qualifier_no'); if(typeof trackCTA==='function')trackCTA('qualifier_no_david');" class="btn-primary btn-large w-full justify-center mb-4">
             Book a 30-min call with David <span class="arrow arr">→</span>
           </a>
           <button onclick="qualReset()" class="text-[13px] font-mono text-ink underline underline-offset-4">Start over</button>
@@ -1002,7 +1002,7 @@
       <p class="font-display text-[30px] md:text-[40px] leading-[1.1] text-bone max-w-[640px]">
         Your ICP might be next.
       </p>
-      <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','results_footer'); trackCTA('results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+      <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','results_footer'); trackCTA('results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
@@ -1199,7 +1199,7 @@
       30 minutes. We&rsquo;ll tell you whether cold email can produce meetings for your ICP. If we don&rsquo;t think we can hit your numbers, we&rsquo;ll tell you that too &mdash; and we&rsquo;ll point you toward what would work instead.
     </p>
     <div class="mt-14 flex justify-center">
-      <a href="https://calendly.com/david-intentsignal/30min" onclick="notifyCalRedirect('david','final_cta'); trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+      <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','final_cta'); trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
