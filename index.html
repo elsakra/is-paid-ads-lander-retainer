@@ -276,26 +276,6 @@
 
   /* ============ Conversion add-ons ============ */
 
-  /* Quick-win badges */
-  .badge-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 12px 6px 10px;
-    background: #0F0F0F; color: #F1EDE4;
-    border-radius: 999px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-  }
-  .badge-pill .live-dot {
-    width: 7px; height: 7px; border-radius: 999px; background: #9BD4D4;
-    box-shadow: 0 0 0 0 rgba(155,212,212,0.7);
-    animation: pulse 2.2s infinite;
-  }
-  @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(155,212,212,0.7); }
-    70%  { box-shadow: 0 0 0 8px rgba(155,212,212,0); }
-    100% { box-shadow: 0 0 0 0 rgba(155,212,212,0); }
-  }
-
   /* Hero quote row */
   .quote-row {
     display: flex; align-items: flex-start; gap: 18px;
@@ -582,12 +562,6 @@
 
 <!-- HERO — Conversion-optimized -->
 <section class="max-w-[1320px] mx-auto px-6 md:px-10 pt-10 md:pt-14 pb-16 md:pb-24">
-  <!-- Badge row -->
-  <div class="flex flex-wrap items-center gap-3 mb-8 fade-up d1">
-    <span class="badge-pill"><span class="live-dot"></span>Accepting 2 clients · Q2 2026</span>
-    <span class="eyebrow">Cold email agency for B2B SaaS</span>
-  </div>
-
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
     <!-- LEFT: Promise + proof + CTA -->
     <div class="lg:col-span-7">
