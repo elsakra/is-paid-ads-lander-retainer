@@ -546,14 +546,14 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal home">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[24px] md:h-[28px] w-auto max-w-[min(200px,46vw)] object-contain object-left" width="200" height="32" />
     </a>
-    <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
+    <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
       Book a 30-min call <span class="arrow arr">→</span>
     </a>
   </div>
 </div>
 
 <div id="mobileCta" role="region" aria-label="Book a call">
-  <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
+  <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
     Book a 30-min call <span class="arr">→</span>
   </a>
   <button id="mobileCtaDismiss" aria-label="Dismiss" class="ml-3 w-7 h-7 rounded-full flex items-center justify-center hover:bg-white/10">
@@ -567,7 +567,7 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] md:h-[32px] w-auto max-w-[min(240px,70vw)] object-contain object-left" width="240" height="36" />
     </a>
-    <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
+    <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
       Book a call
     </a>
   </div>
@@ -605,18 +605,19 @@
 
       <!-- CTA row -->
       <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-5 fade-up d4">
-        <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('hero_primary')" class="btn-primary btn-large">
+        <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('hero_primary')" class="btn-primary btn-large">
           Book a 30-min call <span class="arrow arr">→</span>
         </a>
         <a href="#qualifier" class="text-[14.5px] font-medium underline underline-offset-[5px] decoration-[1.5px] decoration-ink/30 hover:decoration-ink transition">
           Not sure if it&rsquo;ll work for your ICP? →
         </a>
       </div>
+      <p class="mt-3 text-[13.5px] text-mute font-mono fade-up d4">$100k+ customer ACV? <a href="https://calendly.com/meetktr/outbound-strategy-session" onclick="trackCTA('hero_kyle')" class="underline decoration-ink/30 hover:decoration-ink">Book with Kyle</a></p>
 
       <!-- Availability -->
       <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 fade-up d4">
         <span class="avail-line"><span class="dot-g"></span>Next available: Thu, 2:00pm PT</span>
-        <span class="avail-line text-mute">30 min · Kyle or Andrew (founders) · no SDR</span>
+        <span class="avail-line text-mute">30 min · Kyle, David, or Andrew · no SDR</span>
       </div>
 
       <!-- Disqualify promise — prominent -->
@@ -689,7 +690,7 @@
               <p class="text-[14.5px] leading-[1.55] text-[#D9D4C7] mb-7" id="qual-why-yes">
                 Your ACV and buyer profile match the engagements where we produce our strongest results.
               </p>
-              <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('qualifier_yes')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
+              <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" data-rep="david" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+(this.getAttribute('data-rep')||'david'));" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
                 Book a 30-min call <span class="arrow arr">→</span>
               </a>
               <div class="mt-4 avail-line" style="color:#A9A79D;"><span class="dot-g"></span>Next available: Thu, 2:00pm PT</div>
@@ -704,7 +705,7 @@
               <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-6" id="qual-why-maybe">
                 We&rsquo;d want to hear more about your motion before committing. Some engagements in this profile work; some don&rsquo;t.
               </p>
-              <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('qualifier_maybe')" class="btn-primary btn-large w-full justify-center">
+              <a id="qualifierBookMaybe" href="https://calendly.com/david-intentsignal/30min" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_maybe_david');" class="btn-primary btn-large w-full justify-center">
                 Book a 30-min call <span class="arrow arr">→</span>
               </a>
               <p class="mt-5 text-[12.5px] font-mono text-mute leading-[1.5]">
@@ -721,9 +722,12 @@
               <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-5" id="qual-why-no">
                 At under $20k ACV, outbound to senior buyers usually doesn&rsquo;t pay back. Our engagements start at a scope where the math makes sense for both sides.
               </p>
-              <p class="text-[14px] leading-[1.55] text-ink/85 mb-7">
-                Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back.
+              <p class="text-[14px] leading-[1.55] text-ink/85 mb-5">
+                Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro&mdash;we&rsquo;ll be straight about fit.
               </p>
+              <a id="qualifierBookNo" href="https://calendly.com/david-intentsignal/30min" onclick="if(typeof trackCTA==='function')trackCTA('qualifier_no_david');" class="btn-primary btn-large w-full justify-center mb-4">
+                Book a 30-min call with David <span class="arrow arr">→</span>
+              </a>
               <button onclick="qualReset()" class="text-[13px] font-mono text-ink underline underline-offset-4">Start over</button>
             </div>
           </div>
@@ -982,7 +986,7 @@
       <p class="font-display text-[30px] md:text-[40px] leading-[1.1] text-bone max-w-[640px]">
         Your ICP might be next.
       </p>
-      <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+      <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
@@ -1209,7 +1213,7 @@
           </li>
           <li class="flex items-start gap-3 py-4 hairline-t hairline-b">
             <span class="font-mono text-[11px] text-mute pt-1.5 tabular-nums w-6">06</span>
-            <span class="text-[15.5px] leading-[1.55]">Weekly strategy call with Kyle or Andrew &mdash; not an account manager</span>
+            <span class="text-[15.5px] leading-[1.55]">Weekly strategy call with Kyle, David, or Andrew &mdash; not an account manager</span>
           </li>
         </ul>
       </div>
@@ -1311,7 +1315,7 @@
           <details class="faq">
             <summary>Who runs my account?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              Kyle or Andrew directly, supported by one operator. No junior account managers.
+              Kyle, David, or Andrew directly, supported by one operator. No junior account managers.
             </div>
           </details>
           <details class="faq">
@@ -1336,10 +1340,13 @@
       30 minutes. We&rsquo;ll tell you whether cold email can produce meetings for your ICP. If we don&rsquo;t think we can hit your numbers, we&rsquo;ll tell you that too &mdash; and we&rsquo;ll point you toward what would work instead.
     </p>
     <div class="mt-14 flex justify-center">
-      <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+      <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
+    <p class="mt-6 text-[13px] font-mono text-[#A9A79D]">
+      $100k+ customer ACV? <a href="https://calendly.com/meetktr/outbound-strategy-session" onclick="trackCTA('final_cta_kyle')" class="underline underline-offset-[3px] text-[#D9D4C7] hover:text-bone">Book with Kyle</a>
+    </p>
     <p class="mt-16 text-[12.5px] font-mono text-[#A9A79D]">
       IntentSignal Systems, LLC &middot; 32 North Gould Street, Sheridan, WY 82801
     </p>
@@ -1367,7 +1374,8 @@
       ✓ On its way. Check your inbox in ~2 minutes.
     </p>
     <p class="mt-5 text-[12px] font-mono text-mute">
-      Or <a href="https://calendly.com/intentsignal/30min" onclick="trackCTA('exit_book')" class="underline underline-offset-[4px]">book the 30-min call</a> — 30 seconds, no form fatigue.
+      Or <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('exit_book')" class="underline underline-offset-[4px]">book the 30-min call with David</a> &mdash; 30 seconds, no form fatigue.
+      <span class="block mt-2">$100k+ ACV? <a href="https://calendly.com/meetktr/outbound-strategy-session" onclick="trackCTA('exit_book_kyle')" class="underline underline-offset-[4px]">Book with Kyle</a></span>
     </p>
   </div>
 </div>
@@ -1426,6 +1434,25 @@
   // ======== Qualifier widget ========
   const answers = {};
   const steps = document.querySelectorAll('.qual-step');
+  const CAL_DAVID = 'https://calendly.com/david-intentsignal/30min';
+  const CAL_KYLE = 'https://calendly.com/meetktr/outbound-strategy-session';
+  function applyQualifierCalLinksForStep(nextStep) {
+    const acv = answers.acv;
+    const yes = document.getElementById('qualifierBookYes');
+    const maybe = document.getElementById('qualifierBookMaybe');
+    const no = document.getElementById('qualifierBookNo');
+    if (nextStep === '3-yes' && yes) {
+      const kyle = acv === 'high';
+      yes.href = kyle ? CAL_KYLE : CAL_DAVID;
+      yes.setAttribute('data-rep', kyle ? 'kyle' : 'david');
+    }
+    if (nextStep === '3-maybe' && maybe) {
+      maybe.href = CAL_DAVID;
+    }
+    if (nextStep === '3-no' && no) {
+      no.href = CAL_DAVID;
+    }
+  }
 
   function showStep(key) {
     steps.forEach(s => s.classList.toggle('active', s.dataset.step === key));
@@ -1450,6 +1477,7 @@
         // Low ACV → no, regardless of buyer
         if (acv === 'low') {
           if (noEl) noEl.textContent = 'At under $20k ACV, cold outbound to senior buyers rarely pays back. Our engagements start where the math works for both sides — typically $20k+ ACV into decision-makers.';
+          applyQualifierCalLinksForStep('3-no');
           showStep('3-no');
           return;
         }
@@ -1460,6 +1488,7 @@
             ? '$100k+ ACV into VP / C-level buyers is our sweet spot. This is the profile behind the $42M for Route and 6.5% of US restaurants for Upside.'
             : '$20k–$100k ACV into senior buyers is a profile we work successfully. Most of our 2025 engagements fit this shape.';
           if (yesEl) yesEl.textContent = why;
+          applyQualifierCalLinksForStep('3-yes');
           showStep('3-yes');
           return;
         }
@@ -1468,6 +1497,7 @@
         if (maybeEl) {
           maybeEl.textContent = 'Your ACV works. The question is whether your buyer is the economic decision-maker or someone you need to route through. We can figure that out quickly on a call.';
         }
+        applyQualifierCalLinksForStep('3-maybe');
         showStep('3-maybe');
       } else {
         showStep(next);
