@@ -480,14 +480,21 @@
   .recent-2026-row img {
     height: 24px; width: auto; max-width: min(120px, 28vw);
     object-fit: contain; object-position: left center;
-    opacity: 0.65; filter: grayscale(1);
+    opacity: 0.95;
+    filter: none;
     transition: opacity .2s ease;
   }
   .recent-2026-row img.is-raster-light {
-    filter: none; mix-blend-mode: multiply; opacity: 0.75;
+    mix-blend-mode: multiply; opacity: 0.9;
   }
-  .recent-2026-row img:hover { opacity: 0.9; }
-  .recent-2026-row img.is-raster-light:hover { opacity: 0.9; }
+  /* e.g. SVGs that ship as white on transparent */
+  .recent-2026-row img.is-darkmark-on-bone {
+    filter: brightness(0);
+    opacity: 0.9;
+  }
+  .recent-2026-row img:hover { opacity: 1; }
+  .recent-2026-row img.is-raster-light:hover { opacity: 0.95; }
+  .recent-2026-row img.is-darkmark-on-bone:hover { opacity: 0.95; }
 
   /* Larger touch */
   @media (max-width: 900px) {
@@ -612,8 +619,6 @@
           Not sure if it&rsquo;ll work for your ICP? →
         </a>
       </div>
-      <p class="mt-3 text-[13.5px] text-mute font-mono fade-up d4">$100k+ customer ACV? <a href="https://calendly.com/meetktr/outbound-strategy-session" onclick="trackCTA('hero_kyle')" class="underline decoration-ink/30 hover:decoration-ink">Book with Kyle</a></p>
-
       <!-- Availability -->
       <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 fade-up d4">
         <span class="avail-line"><span class="dot-g"></span>Next available: Thu, 2:00pm PT</span>
@@ -746,17 +751,12 @@
 <!-- 2026 — Meetings booked (trust) -->
 <section class="hairline-t">
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-14 md:py-20">
-    <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 md:gap-12 items-start">
-      <div>
-        <div class="eyebrow">2026 · Year to date</div>
-        <p class="mt-3 font-mono text-[12px] text-mute leading-[1.5]">12 organizations</p>
-      </div>
-      <div>
+    <div>
         <h2 class="font-display text-[32px] md:text-[40px] leading-[1.05] tracking-[-0.02em] text-ink max-w-[720px]">
           Qualified meetings with teams at
         </h2>
-        <p class="mt-4 text-[15px] leading-[1.6] text-mute max-w-[640px]">
-          Discovery calls we&rsquo;ve placed for clients in 2026 — with buying teams at the companies below. Logos for recognition only; not an endorsement by them.
+        <p class="mt-4 text-[15px] leading-[1.6] text-ink/80 max-w-[640px]">
+          Examples of discovery calls we&rsquo;ve placed for clients &mdash; buying teams at the companies below (not a complete list). Logos for recognition only; not an endorsement by them.
         </p>
         <div class="recent-2026-row mt-8 md:mt-10">
           <img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" />
@@ -766,13 +766,12 @@
           <img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" />
           <img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" />
           <img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" />
-          <img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" loading="lazy" />
+          <img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" />
           <img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" />
           <img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" />
           <img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" />
           <img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" />
         </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1329,10 +1328,10 @@
 <!-- FINAL CTA -->
 <section class="hairline-t bg-ink text-bone">
   <div class="max-w-[1000px] mx-auto px-6 md:px-10 py-28 md:py-44 text-center">
-    <h2 class="font-display text-[64px] md:text-[112px] leading-[0.95] tracking-[-0.035em]">
+    <h2 class="font-display text-[64px] md:text-[112px] leading-[0.95] tracking-[-0.035em] text-bone">
       Let&rsquo;s fill your <em>calendar.</em>
     </h2>
-    <p class="mt-10 text-[18px] md:text-[19px] leading-[1.65] text-[#D9D4C7] max-w-[680px] mx-auto">
+    <p class="mt-10 text-[18px] md:text-[19px] leading-[1.65] text-bone/95 max-w-[680px] mx-auto">
       30 minutes. We&rsquo;ll tell you whether cold email can produce meetings for your ICP. If we don&rsquo;t think we can hit your numbers, we&rsquo;ll tell you that too &mdash; and we&rsquo;ll point you toward what would work instead.
     </p>
     <div class="mt-14 flex justify-center">
@@ -1340,10 +1339,7 @@
         Book a 30-min call <span class="arrow arr">→</span>
       </a>
     </div>
-    <p class="mt-6 text-[13px] font-mono text-[#A9A79D]">
-      $100k+ customer ACV? <a href="https://calendly.com/meetktr/outbound-strategy-session" onclick="trackCTA('final_cta_kyle')" class="underline underline-offset-[3px] text-[#D9D4C7] hover:text-bone">Book with Kyle</a>
-    </p>
-    <p class="mt-16 text-[12.5px] font-mono text-[#A9A79D]">
+    <p class="mt-16 text-[12.5px] font-mono text-bone/55">
       IntentSignal Systems, LLC &middot; 32 North Gould Street, Sheridan, WY 82801
     </p>
   </div>
@@ -1371,7 +1367,6 @@
     </p>
     <p class="mt-5 text-[12px] font-mono text-mute">
       Or <a href="https://calendly.com/david-intentsignal/30min" onclick="trackCTA('exit_book')" class="underline underline-offset-[4px]">book the 30-min call with David</a> &mdash; 30 seconds, no form fatigue.
-      <span class="block mt-2">$100k+ ACV? <a href="https://calendly.com/meetktr/outbound-strategy-session" onclick="trackCTA('exit_book_kyle')" class="underline underline-offset-[4px]">Book with Kyle</a></span>
     </p>
   </div>
 </div>
