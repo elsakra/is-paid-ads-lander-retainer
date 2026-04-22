@@ -433,12 +433,12 @@
     --logo-slot-w: 124px;
     --logo-slot-h: 40px;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: center;
     justify-items: stretch;
-    gap: 0.5rem 0.75rem;
+    gap: 0.65rem 0.5rem;
     max-width: 100%;
-    width: min(100%, 720px);
+    width: min(100%, 900px);
     margin: 0 auto;
   }
   .hero-logo-row .logo-slot {
@@ -482,37 +482,45 @@
   }
   .hero-logo-row .logo-slot img.is-spins:hover { opacity: 0.95; }
   .hero-logo-row .logo-slot img:hover:not(.is-spins) { opacity: 0.95; }
+  /* Alignops PNG is light-on-dark; on bone it needs a dark slot */
+  .hero-logo-row .logo-slot.logo-slot--dark {
+    background: #0F0F0F;
+    border-radius: 6px;
+  }
+  .hero-logo-row .logo-slot.logo-slot--dark img {
+    filter: none;
+    opacity: 0.92;
+    max-width: 90%;
+    max-height: 72%;
+  }
+  .hero-logo-row .logo-slot.logo-slot--dark img:hover { opacity: 1; }
 
-  /* 2026 meetings — identical slot sizing to Clients; 6-up on desktop */
+  /* 2026 meetings — same slot size; flex-wrap keeps rows balanced (no orphan column) */
   .recent-2026-row {
     --logo-slot-w: 124px;
     --logo-slot-h: 40px;
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-items: stretch;
+    justify-content: center;
     gap: 0.65rem 0.5rem;
     max-width: 100%;
     width: min(100%, 900px);
     margin: 0 auto;
   }
-  @media (max-width: 1023px) {
-    .recent-2026-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  }
   @media (max-width: 767px) {
     .recent-2026-row {
       --logo-slot-w: 108px;
       --logo-slot-h: 34px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   .recent-2026-row .logo-slot {
     position: relative;
-    width: 100%;
+    flex: 0 0 var(--logo-slot-w);
+    width: var(--logo-slot-w);
     min-width: 0;
     max-width: var(--logo-slot-w);
     height: var(--logo-slot-h);
-    margin: 0 auto;
   }
   .recent-2026-row .logo-slot img {
     position: absolute;
@@ -685,6 +693,9 @@
       <div class="logo-slot"><img src="assets/logos/route.svg" alt="Route" loading="lazy" /></div>
       <div class="logo-slot"><img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" /></div>
       <div class="logo-slot"><img src="assets/logos/snappy.svg" alt="Snappy" class="is-snappy" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/adquick.svg" alt="AdQuick" loading="lazy" /></div>
+      <div class="logo-slot logo-slot--dark"><img src="assets/logos/recent-2026/alignops.png" alt="Alignops" loading="lazy" /></div>
+      <div class="logo-slot"><img src="assets/logos/recent-2026/clozd.svg" alt="Clozd" loading="lazy" /></div>
     </div>
     <p class="eyebrow text-center mt-12 md:mt-14 mb-5">Meetings booked at</p>
     <div class="recent-2026-row">
@@ -701,9 +712,6 @@
       <div class="logo-slot"><img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" /></div>
       <div class="logo-slot"><img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" /></div>
       <div class="logo-slot"><img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/adquick.svg" alt="AdQuick" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/alignops.png" alt="Alignops" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/clozd.svg" alt="Clozd" loading="lazy" /></div>
     </div>
   </div>
 
