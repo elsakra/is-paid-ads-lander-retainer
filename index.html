@@ -22,6 +22,8 @@
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32" />
+<link rel="preload" as="image" href="assets/logos/intentsignal-lockup.avif" type="image/avif" />
+<link rel="preload" as="image" href="assets/logos/recent-2026/aarp.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -711,7 +713,7 @@
 <header id="top" class="relative z-40">
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 pt-7 md:pt-9 flex items-center justify-between">
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal">
-      <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] md:h-[32px] w-auto max-w-[min(240px,70vw)] object-contain object-left" width="240" height="36" />
+      <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] md:h-[32px] w-auto max-w-[min(240px,70vw)] object-contain object-left" width="240" height="36" fetchpriority="high" decoding="async" />
     </a>
     <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','header'); trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
       Book a call
@@ -734,7 +736,7 @@
 
     <div class="quote-row mt-6 md:mt-8 fade-up d3 mx-auto text-left" style="max-width: 620px;">
       <div class="quote-face">
-        <img src="assets/face-route.avif" alt="McLeod Abbott" />
+        <img src="assets/face-route.avif" alt="McLeod Abbott" loading="eager" decoding="async" />
       </div>
       <div>
         <div class="quote-text">&ldquo;Out-produced our 17-person SDR team in a single month. $42M of pipeline in three quarters.&rdquo;</div>
@@ -754,18 +756,18 @@
     <div class="logo-strip--primary">
       <p class="eyebrow text-center mb-6 md:mb-7 !normal-case tracking-wide">Trusted By</p>
       <div class="hero-logo-row">
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/upside.svg" alt="Upside" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/route.svg" alt="Route" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/spins.png" alt="SPINS" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-xxxl" src="assets/logos/snappy.svg" alt="Snappy" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/adquick.svg" alt="AdQuick" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono mark-on-light opt-smish" src="assets/logos/recent-2026/alignops.png" alt="Alignops" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/clozd.svg" alt="Clozd" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-xxxxl" src="assets/logos/clients/bluecore.svg" alt="Bluecore" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/orchestry.svg" alt="Orchestry" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/otter.svg" alt="Otter.ai" loading="lazy" /></div>
-        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/tapcheck.png" alt="Tapcheck" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/gainsight.svg" alt="Gainsight" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/upside.svg" alt="Upside" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/route.svg" alt="Route" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/spins.png" alt="SPINS" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-xxxl" src="assets/logos/snappy.svg" alt="Snappy" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/adquick.svg" alt="AdQuick" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono mark-on-light opt-smish" src="assets/logos/recent-2026/alignops.png" alt="Alignops" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/clozd.svg" alt="Clozd" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-xxxxl" src="assets/logos/clients/bluecore.svg" alt="Bluecore" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/orchestry.svg" alt="Orchestry" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/otter.svg" alt="Otter.ai" loading="eager" decoding="async" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/tapcheck.png" alt="Tapcheck" loading="eager" decoding="async" /></div>
       </div>
     </div>
 
@@ -774,30 +776,30 @@
       <div class="logo-marquee" aria-label="Organizations we have booked meetings with">
         <div class="logo-marquee__track">
           <div class="logo-marquee__set">
-            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/aarp.png" alt="AARP" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-150" src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono mark--disney-script opt-w-120" src="assets/logos/recent-2026/disney-wordmark.svg" alt="Disney" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-145" src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-110" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="McDonald&rsquo;s" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-102" src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-140" src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/aarp.png" alt="AARP" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay.png" alt="Clay" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-150" src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono mark--disney-script opt-w-120" src="assets/logos/recent-2026/disney-wordmark.svg" alt="Disney" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-145" src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-110" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="McDonald&rsquo;s" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-102" src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-140" src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="eager" decoding="async" /></div>
           </div>
           <div class="logo-marquee__set" aria-hidden="true">
-            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/aarp.png" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay.png" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-150" src="assets/logos/recent-2026/databricks.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono mark--disney-script opt-w-120" src="assets/logos/recent-2026/disney-wordmark.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-145" src="assets/logos/recent-2026/headspace.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/intuit.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-110" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-102" src="assets/logos/recent-2026/monday.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/squarespace.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-140" src="assets/logos/recent-2026/webflow.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/yelp.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/aarp.png" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay.png" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-150" src="assets/logos/recent-2026/databricks.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono mark--disney-script opt-w-120" src="assets/logos/recent-2026/disney-wordmark.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-145" src="assets/logos/recent-2026/headspace.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/intuit.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-110" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-102" src="assets/logos/recent-2026/monday.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/squarespace.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-140" src="assets/logos/recent-2026/webflow.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-128" src="assets/logos/recent-2026/yelp.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
           </div>
         </div>
       </div>
