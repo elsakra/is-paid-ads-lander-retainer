@@ -460,6 +460,42 @@
   .opt-lg { --mark-scale: 1.08; }
   .opt-xl { --mark-scale: 1.14; }
   .opt-xxl { --mark-scale: 1.24; }
+  /* Meetings marquee: optical x-height (perceived even weight) */
+  .opt-w-70 { --mark-scale: 0.70; }
+  .opt-w-74 { --mark-scale: 0.74; }
+  .opt-w-78 { --mark-scale: 0.78; }
+  .opt-w-82 { --mark-scale: 0.82; }
+  .opt-w-86 { --mark-scale: 0.86; }
+  .opt-w-90 { --mark-scale: 0.90; }
+  .opt-w-92 { --mark-scale: 0.92; }
+  .opt-w-94 { --mark-scale: 0.94; }
+  .opt-w-100 { --mark-scale: 1; }
+  .opt-w-105 { --mark-scale: 1.05; }
+  .opt-w-108 { --mark-scale: 1.08; }
+  .opt-w-110 { --mark-scale: 1.1; }
+  .opt-w-115 { --mark-scale: 1.15; }
+  /* Logos whose artwork is all-white: flatten to a dark mark (still reads on bone) */
+  .mark-mono.mark--from-white {
+    filter: brightness(0) grayscale(1);
+  }
+  /* Text wordmarks: SVG <text> in <img> is unreliable; use real text, same system */
+  .mark-embed {
+    --mark-scale: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    padding: 0;
+    transform: translate(-50%, -50%) scale(var(--mark-scale));
+    font: 600 0.7rem/1.2 "Inter", system-ui, -apple-system, sans-serif;
+    letter-spacing: 0.02em;
+    color: rgba(15, 15, 15, 0.65);
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mark-embed:hover { color: rgba(15, 15, 15, 0.8); }
+  .mark-embed--mcd { font-size: 0.62rem; letter-spacing: -0.04em; }
+  .mark-embed--ds { font-size: 0.72rem; letter-spacing: 0.01em; }
 
   /* — Clients: hero band (larger, more air) */
   .logo-strip--primary {
@@ -523,7 +559,7 @@
   .logo-marquee__track {
     display: flex;
     width: max-content;
-    animation: logoMarquee 90s linear infinite;
+    animation: logoMarquee 32s linear infinite;
     will-change: transform;
   }
   @keyframes logoMarquee {
@@ -727,34 +763,34 @@
       <div class="logo-marquee" aria-label="Organizations we have booked meetings with">
         <div class="logo-marquee__track">
           <div class="logo-marquee__set">
-            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/aarp.png" alt="AARP" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/disney-wordmark.svg" alt="Disney" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="McDonald&rsquo;s" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-74" src="assets/logos/recent-2026/aarp.png" alt="AARP" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-90" src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-110" src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" /></div>
+            <div class="logo-slot" role="img" aria-label="Disney"><span class="mark-embed mark-embed--ds opt-w-100">Disney</span></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-90" src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-86" src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" /></div>
+            <div class="logo-slot" role="img" aria-label="McDonald&rsquo;s"><span class="mark-embed mark-embed--mcd opt-w-100">McDonald&rsquo;s</span></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-88" src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono mark--from-white opt-w-92" src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-82" src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-78" src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-108" src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-90" src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" /></div>
           </div>
           <div class="logo-marquee__set" aria-hidden="true">
-            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/aarp.png" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/clay.png" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/databricks.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/disney-wordmark.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/headspace.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/intuit.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/monday.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/rocket-lawyer.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/squarespace.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/turo.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/webflow.svg" alt="" loading="lazy" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/yelp.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-74" src="assets/logos/recent-2026/aarp.png" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-90" src="assets/logos/recent-2026/clay.png" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-110" src="assets/logos/recent-2026/databricks.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><span class="mark-embed mark-embed--ds opt-w-100">Disney</span></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-90" src="assets/logos/recent-2026/headspace.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-86" src="assets/logos/recent-2026/intuit.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><span class="mark-embed mark-embed--mcd opt-w-100">McDonald&rsquo;s</span></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-88" src="assets/logos/recent-2026/monday.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono mark--from-white opt-w-92" src="assets/logos/recent-2026/rocket-lawyer.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-82" src="assets/logos/recent-2026/squarespace.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-78" src="assets/logos/recent-2026/turo.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-108" src="assets/logos/recent-2026/webflow.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-90" src="assets/logos/recent-2026/yelp.svg" alt="" loading="lazy" /></div>
           </div>
         </div>
       </div>
