@@ -428,126 +428,145 @@
     font-size: 14.5px; line-height: 1.6; color: #2A2A2A;
   }
 
-  /* Logos in hero — same fixed slot (box) per mark; object-fit inside slot */
+  /* Logo walls — single editorial treatment: mono + ~65% weight, optically nudged per mark */
+  .mark-mono {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: 50% 52%;
+    --mark-scale: 1;
+    filter: grayscale(1);
+    opacity: 0.65;
+    transform: translate(-50%, -50%) scale(var(--mark-scale));
+    transition: opacity .2s ease;
+  }
+  .mark-mono:hover { opacity: 0.8; }
+  .mark-mono.mark-on-light {
+    filter: invert(1) grayscale(1);
+  }
+  .mark-mono.mark-on-light:hover { opacity: 0.78; }
+  .logo-slot { position: relative; min-width: 0; }
+  .logo-slot img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
+  .opt-sm { --mark-scale: 0.86; }
+  .opt-smish { --mark-scale: 0.92; }
+  .opt-md { --mark-scale: 1; }
+  .opt-lg { --mark-scale: 1.08; }
+  .opt-xl { --mark-scale: 1.14; }
+
+  /* — Clients: hero band (larger, more air) */
+  .logo-strip--primary {
+    padding-bottom: 0.25rem;
+  }
+  .logo-strip--primary .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: #5a5850;
+  }
   .hero-logo-row {
-    --logo-slot-w: 124px;
-    --logo-slot-h: 40px;
+    --logo-slot-w: 140px;
+    --logo-slot-h: 36px;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: center;
     justify-items: stretch;
-    gap: 0.65rem 0.5rem;
+    row-gap: 0.9rem;
+    column-gap: 0.6rem;
     max-width: 100%;
-    width: min(100%, 900px);
+    width: min(100%, 960px);
     margin: 0 auto;
   }
   .hero-logo-row .logo-slot {
-    position: relative;
     width: 100%;
-    min-width: 0;
     max-width: var(--logo-slot-w);
     height: var(--logo-slot-h);
     margin: 0 auto;
-  }
-  .hero-logo-row .logo-slot img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    opacity: 0.72;
-    filter: grayscale(1);
-    transition: opacity .2s ease;
   }
   @media (max-width: 767px) {
     .hero-logo-row {
-      --logo-slot-w: 108px;
-      --logo-slot-h: 34px;
+      --logo-slot-w: 120px;
+      --logo-slot-h: 32px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  .hero-logo-row .logo-slot img.is-snappy {
-    filter: none;
-    opacity: 0.88;
+  .logo-strip-legal {
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(15, 15, 15, 0.5);
+    max-width: 22rem;
+    margin: 1.1rem auto 0;
   }
-  .hero-logo-row .logo-slot img.is-spins {
-    filter: none;
-    mix-blend-mode: multiply;
-    opacity: 0.8;
-  }
-  .hero-logo-row .logo-slot img.is-spins:hover { opacity: 0.95; }
-  .hero-logo-row .logo-slot img:hover:not(.is-spins) { opacity: 0.95; }
-  /* Alignops PNG is light-on-dark; on bone it needs a dark slot */
-  .hero-logo-row .logo-slot.logo-slot--dark {
-    background: #0F0F0F;
-    border-radius: 6px;
-  }
-  .hero-logo-row .logo-slot.logo-slot--dark img {
-    filter: none;
-    opacity: 0.92;
-    max-width: 90%;
-    max-height: 72%;
-  }
-  .hero-logo-row .logo-slot.logo-slot--dark img:hover { opacity: 1; }
 
-  /* 2026 meetings — same slot size; flex-wrap keeps rows balanced (no orphan column) */
+  /* — Meetings: secondary band (smaller, quieter) */
+  .logo-strip--secondary {
+    border-top: 1px solid rgba(15, 15, 15, 0.08);
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+  }
+  .logo-strip--secondary .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #8A8880;
+    margin-bottom: 1rem;
+  }
   .recent-2026-row {
-    --logo-slot-w: 124px;
-    --logo-slot-h: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.65rem 0.5rem;
-    max-width: 100%;
-    width: min(100%, 900px);
+    --logo-slot-w: 104px;
+    --logo-slot-h: 28px;
+  }
+  .logo-marquee {
+    overflow: hidden;
+    width: 100%;
+    max-width: 1040px;
     margin: 0 auto;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   }
-  @media (max-width: 767px) {
-    .recent-2026-row {
-      --logo-slot-w: 108px;
-      --logo-slot-h: 34px;
-    }
+  .logo-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: logoMarquee 90s linear infinite;
+    will-change: transform;
   }
-  .recent-2026-row .logo-slot {
-    position: relative;
+  @keyframes logoMarquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .logo-marquee__set {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    column-gap: 0.55rem;
+    padding-right: 0.55rem;
+  }
+  .logo-marquee__set .logo-slot {
     flex: 0 0 var(--logo-slot-w);
     width: var(--logo-slot-w);
-    min-width: 0;
     max-width: var(--logo-slot-w);
     height: var(--logo-slot-h);
   }
-  .recent-2026-row .logo-slot img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    opacity: 0.95;
-    filter: none;
-    transition: opacity .2s ease;
+  @media (max-width: 767px) {
+    .recent-2026-row { --logo-slot-w: 92px; --logo-slot-h: 25px; }
   }
-  .recent-2026-row .logo-slot img.is-raster-light {
-    mix-blend-mode: multiply;
-    opacity: 0.9;
+  @media (prefers-reduced-motion: reduce) {
+    .logo-marquee__track { animation: none; }
+    .logo-marquee { -webkit-mask-image: none; mask-image: none; }
+    .logo-marquee__set + .logo-marquee__set { display: none; }
+    .logo-marquee__track {
+      flex-wrap: wrap;
+      width: 100% !important;
+      max-width: 900px;
+      justify-content: center;
+      row-gap: 0.7rem;
+    }
+    .logo-marquee__set { flex-wrap: wrap; width: 100%; justify-content: center; }
   }
-  .recent-2026-row .logo-slot img.is-darkmark-on-bone {
-    filter: brightness(0);
-    opacity: 0.9;
-  }
-  .recent-2026-row .logo-slot img:hover { opacity: 1; }
-  .recent-2026-row .logo-slot img.is-raster-light:hover { opacity: 0.95; }
-  .recent-2026-row .logo-slot img.is-darkmark-on-bone:hover { opacity: 0.95; }
 
   /* Larger touch */
   @media (max-width: 900px) {
@@ -685,38 +704,62 @@
   </div>
 
   <!-- Full-width logo strips directly under hero copy -->
-  <div class="hero-logo-strips mt-8 md:mt-10 pt-6 md:pt-8 border-t border-ink/10">
-    <p class="eyebrow text-center mb-5">Clients</p>
-    <div class="hero-logo-row">
-      <div class="logo-slot"><img src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/upside.svg" alt="Upside" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/route.svg" alt="Route" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/spins.png" alt="SPINS" class="is-spins" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/snappy.svg" alt="Snappy" class="is-snappy" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/adquick.svg" alt="AdQuick" loading="lazy" /></div>
-      <div class="logo-slot logo-slot--dark"><img src="assets/logos/recent-2026/alignops.png" alt="Alignops" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/clozd.svg" alt="Clozd" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/clients/bluecore.svg" alt="Bluecore" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/clients/orchestry.svg" alt="Orchestry" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/clients/otter.svg" alt="Otter.ai" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/clients/tapcheck.png" alt="Tapcheck" loading="lazy" /></div>
+  <div class="hero-logo-strips mt-8 md:mt-10 pt-6 md:pt-10 border-t border-ink/10">
+    <div class="logo-strip--primary">
+      <p class="eyebrow text-center mb-6 md:mb-7">Clients</p>
+      <div class="hero-logo-row">
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/gainsight.svg" alt="Gainsight" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/upside.svg" alt="Upside" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/route.svg" alt="Route" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/spins.png" alt="SPINS" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/snappy.svg" alt="Snappy" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/adquick.svg" alt="AdQuick" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono mark-on-light opt-smish" src="assets/logos/recent-2026/alignops.png" alt="Alignops" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/clozd.svg" alt="Clozd" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-xl" src="assets/logos/clients/bluecore.svg" alt="Bluecore" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/orchestry.svg" alt="Orchestry" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/otter.svg" alt="Otter.ai" loading="lazy" /></div>
+        <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/clients/tapcheck.png" alt="Tapcheck" loading="lazy" /></div>
+      </div>
+      <p class="logo-strip-legal">A partial list &mdash; we keep engagements small.</p>
     </div>
-    <p class="text-center text-[13px] md:text-[14px] text-ink/50 mt-5 md:mt-6">and many more</p>
-    <p class="eyebrow text-center mt-12 md:mt-14 mb-5">Meetings booked at</p>
-    <div class="recent-2026-row">
-      <div class="logo-slot"><img src="assets/logos/recent-2026/aarp.png" alt="AARP" class="is-raster-light" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/disney-animation.png" alt="Walt Disney Animation Studios" class="is-raster-light" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/mcdonalds.svg" alt="McDonald&rsquo;s" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" class="is-darkmark-on-bone" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" /></div>
-      <div class="logo-slot"><img src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" /></div>
+
+    <div class="logo-strip--secondary recent-2026-row">
+      <p class="eyebrow text-center">Meetings booked at</p>
+      <div class="logo-marquee" aria-label="Organizations we have booked meetings with">
+        <div class="logo-marquee__track">
+          <div class="logo-marquee__set">
+            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/aarp.png" alt="AARP" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/clay.png" alt="Clay" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/disney-wordmark.svg" alt="Disney" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/intuit.svg" alt="Intuit" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="McDonald&rsquo;s" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/monday.svg" alt="monday.com" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/rocket-lawyer.svg" alt="Rocket Lawyer" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/squarespace.svg" alt="Squarespace" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/turo.svg" alt="Turo" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/webflow.svg" alt="Webflow" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/yelp.svg" alt="Yelp" loading="lazy" /></div>
+          </div>
+          <div class="logo-marquee__set" aria-hidden="true">
+            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/aarp.png" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/clay.png" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/databricks.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/disney-wordmark.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/headspace.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/intuit.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/mcdonalds-wordmark.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/monday.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/rocket-lawyer.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-sm" src="assets/logos/recent-2026/squarespace.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-md" src="assets/logos/recent-2026/turo.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-lg" src="assets/logos/recent-2026/webflow.svg" alt="" loading="lazy" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-smish" src="assets/logos/recent-2026/yelp.svg" alt="" loading="lazy" /></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
