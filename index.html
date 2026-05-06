@@ -721,42 +721,45 @@
   </div>
 </header>
 
-<!-- HERO — Single-column: promise + proof + CTA, then full-width logos, then ICP quiz -->
+<!-- HERO — lg+: copy + CTA left, VSL right (narrows 9:16 height); logos full width below -->
 <section class="max-w-[1320px] mx-auto px-6 md:px-10 pt-8 md:pt-12 pb-10 md:pb-16">
-  <!-- Hero copy: centered, single column -->
-  <div class="max-w-[780px] mx-auto text-center">
-    <p class="eyebrow hero-eyebrow mb-3 md:mb-4 fade-up d1">Cold email agency · B2B</p>
-    <h1 class="hero-h fade-up d2">
-      Qualified sales meetings on <em>your calendar.</em>
-    </h1>
+  <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14 items-start">
+    <div class="lg:col-span-7 text-center lg:text-left max-w-[780px] mx-auto lg:mx-0 lg:max-w-none">
+      <p class="eyebrow hero-eyebrow mb-3 md:mb-4 fade-up d1">Cold email agency · B2B</p>
+      <h1 class="hero-h fade-up d2">
+        Qualified sales meetings on <em>your calendar.</em>
+      </h1>
 
-    <p class="mt-6 mx-auto max-w-[620px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
-      We book meetings with your dream customers.
-    </p>
+      <p class="mt-6 mx-auto lg:mx-0 max-w-[620px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
+        We book meetings with your dream customers.
+      </p>
 
-    <div class="quote-row mt-6 md:mt-8 fade-up d3 mx-auto text-left" style="max-width: 620px;">
-      <div class="quote-face">
-        <img src="assets/face-route.avif" alt="McLeod Abbott" loading="eager" decoding="async" />
-      </div>
-      <div>
-        <div class="quote-text">&ldquo;Out-produced our 17-person SDR team in a single month. $42M of pipeline in three quarters.&rdquo;</div>
-        <div class="quote-attr">McLeod Abbott · Chief of Staff, Revenue · Route</div>
-      </div>
-    </div>
-
-    <div class="w-full max-w-[min(100%,420px)] sm:max-w-[480px] mx-auto mt-6 md:mt-8 fade-up d4">
-      <p class="eyebrow text-center mb-3 md:mb-4">4-minute overview</p>
-      <div class="rounded-xl overflow-hidden border border-ink/10 shadow-[0_8px_30px_rgba(15,15,15,0.08)]">
-        <div style="padding:177.78% 0 0 0;position:relative;">
-          <iframe src="https://player.vimeo.com/video/1189633438?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="IntentSignal overview"></iframe>
+      <div class="quote-row mt-6 md:mt-8 fade-up d3 mx-auto lg:mx-0 text-left" style="max-width: 620px;">
+        <div class="quote-face">
+          <img src="assets/face-route.avif" alt="McLeod Abbott" loading="eager" decoding="async" />
+        </div>
+        <div>
+          <div class="quote-text">&ldquo;Out-produced our 17-person SDR team in a single month. $42M of pipeline in three quarters.&rdquo;</div>
+          <div class="quote-attr">McLeod Abbott · Chief of Staff, Revenue · Route</div>
         </div>
       </div>
+
+      <div class="mt-6 md:mt-8 fade-up d4 flex flex-col items-center lg:items-start">
+        <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','hero_primary'); trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
+          Book a 30-min call <span class="arrow arr">→</span>
+        </a>
+      </div>
     </div>
 
-    <div class="mt-6 md:mt-8 fade-up d4 flex flex-col items-center">
-      <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','hero_primary'); trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
-        Book a 30-min call <span class="arrow arr">→</span>
-      </a>
+    <div class="lg:col-span-5 mt-8 lg:mt-0 w-full flex justify-center lg:justify-end fade-up d4 lg:sticky lg:top-24 xl:top-28 self-start">
+      <div class="w-full max-w-[min(100%,320px)] sm:max-w-[360px] lg:max-w-[280px] xl:max-w-[300px]">
+        <p class="eyebrow text-center lg:text-right mb-3 md:mb-4">4-minute overview</p>
+        <div class="rounded-xl overflow-hidden border border-ink/10 shadow-[0_8px_30px_rgba(15,15,15,0.08)]">
+          <div style="padding:177.78% 0 0 0;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1189633438?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="IntentSignal overview"></iframe>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
