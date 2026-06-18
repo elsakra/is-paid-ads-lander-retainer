@@ -11,10 +11,10 @@
 </script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>IntentSignal — Qualified sales meetings on your calendar.</title>
+<title>IntentSignal: Qualified sales meetings on your calendar.</title>
 <meta name="description" content="$42M of pipeline for Route. Meetings at 6.5% of US restaurants for Upside. 90 SALs in 2 months for Gainsight. Book a 30-minute call." />
 
-<meta property="og:title" content="IntentSignal — Qualified sales meetings on your calendar." />
+<meta property="og:title" content="IntentSignal: Qualified sales meetings on your calendar." />
 <meta property="og:description" content="We fill your team's calendar with qualified sales meetings. For B2B teams that need pipeline." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://pipeline.intentsignal.ai" />
@@ -637,6 +637,58 @@
     .client-logo { height: 52px; }
     .client-logo.client-logo--case { height: 38px; max-height: 38px; }
   }
+
+  /* ============ Daily feedback loop ============ */
+  .loop-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: #6B6A65;
+    margin-bottom: 10px;
+  }
+  .loop-grid {
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    gap: 4px;
+    max-width: 560px;
+  }
+  .loop-cell {
+    aspect-ratio: 1 / 1;
+    border-radius: 2px;
+    background: rgba(15,15,15,0.06);
+  }
+  .loop-cell--faint { background: rgba(15,15,15,0.22); }
+  .loop-cell--on { background: #26A641; }
+  .loop-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; color: #2A2A2A;
+    border: 1px solid rgba(15,15,15,0.14);
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: #FFFFFF;
+  }
+  .loop-chip .dot-g { width: 7px; height: 7px; background: #26A641; border-radius: 999px; display: inline-block; flex: 0 0 auto; }
+
+  /* ============ Comparison ============ */
+  .cmp-row { border-top: 1px solid rgba(15,15,15,0.10); }
+  .cmp-mark { flex: 0 0 auto; }
+  .cmp-dot-g { width: 7px; height: 7px; background: #26A641; border-radius: 999px; display: inline-block; }
+  details.cmp-more > summary {
+    list-style: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 22px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #0F0F0F;
+    border: 1px solid rgba(15,15,15,0.18);
+    border-radius: 999px; padding: 10px 18px;
+    transition: background .15s ease;
+  }
+  details.cmp-more > summary:hover { background: rgba(15,15,15,0.04); }
+  details.cmp-more > summary::-webkit-details-marker { display: none; }
+  details.cmp-more[open] > summary { display: none; }
 </style>
 
 <!--
@@ -725,13 +777,12 @@
 <section class="max-w-[1320px] mx-auto px-6 md:px-10 pt-8 md:pt-12 pb-10 md:pb-16">
   <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14 items-start">
     <div class="lg:col-span-7 text-center lg:text-left max-w-[780px] mx-auto lg:mx-0 lg:max-w-none">
-      <p class="eyebrow hero-eyebrow mb-3 md:mb-4 fade-up d1">Cold email agency · B2B</p>
       <h1 class="hero-h fade-up d2">
         Qualified sales meetings on <em>your calendar.</em>
       </h1>
 
       <p class="mt-6 mx-auto lg:mx-0 max-w-[620px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
-        We book meetings with your dream customers.
+        We are the done-for-you outbound team for US B2B software companies. We monitor your market for the accounts already showing a reason to buy, write to each one personally, and book the meeting for your sales reps.
       </p>
 
       <div class="quote-row mt-6 md:mt-8 fade-up d3 mx-auto lg:mx-0 text-left" style="max-width: 620px;">
@@ -753,7 +804,7 @@
 
     <div class="lg:col-span-5 mt-8 lg:mt-0 w-full flex justify-center lg:justify-end fade-up d4 lg:sticky lg:top-24 xl:top-28 self-start">
       <div class="w-full max-w-[min(100%,320px)] sm:max-w-[360px] lg:max-w-[280px] xl:max-w-[300px]">
-        <p class="eyebrow text-center lg:text-right mb-3 md:mb-4">4-minute overview</p>
+        <p class="eyebrow text-center lg:text-right mb-3 md:mb-4">Watch the 90-second overview</p>
         <div class="rounded-xl overflow-hidden border border-ink/10 shadow-[0_8px_30px_rgba(15,15,15,0.08)]">
           <div style="padding:177.78% 0 0 0;position:relative;">
             <iframe src="https://player.vimeo.com/video/1189633438?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="IntentSignal overview"></iframe>
@@ -899,7 +950,7 @@
             At under $20k ACV, cold outbound in most B2B motions usually doesn&rsquo;t pay back. Our engagements start at a scope where the math makes sense for both sides.
           </p>
           <p class="text-[14px] leading-[1.55] text-ink/85 mb-5">
-            Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro&mdash;we&rsquo;ll be straight about fit.
+            Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro. We&rsquo;ll be straight about fit.
           </p>
           <a id="qualifierBookNo" href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','qualifier_no'); if(typeof trackCTA==='function')trackCTA('qualifier_no_david');" class="btn-primary btn-large w-full justify-center mb-4">
             Book a 30-min call with David <span class="arrow arr">→</span>
@@ -916,8 +967,7 @@
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-16 md:py-24">
     <div class="flex items-end justify-between flex-wrap gap-4 mb-10">
       <div>
-        <div class="eyebrow">You&rsquo;re probably wondering</div>
-        <h2 class="font-display text-[44px] md:text-[56px] leading-[0.98] tracking-[-0.025em] mt-4 max-w-[760px]">Two things people ask before booking.</h2>
+        <h2 class="font-display text-[44px] md:text-[56px] leading-[0.98] tracking-[-0.025em] max-w-[760px]">Two things people ask before booking.</h2>
       </div>
       <a href="#faq" class="text-[14px] font-medium underline underline-offset-[5px] decoration-[1.5px] decoration-ink/30 hover:decoration-ink">Full FAQ ↓</a>
     </div>
@@ -926,12 +976,12 @@
       <div class="obj-card">
         <div class="eyebrow mb-3">01</div>
         <div class="obj-q">We&rsquo;ve been burned by an agency before. What&rsquo;s different?</div>
-        <p class="obj-a">We build custom software per engagement. That&rsquo;s why our meetings happen where commodity agencies&rsquo; don&rsquo;t.</p>
+        <p class="obj-a">We run a new test every single day and we hand-work every account. Most agencies load a campaign, check it monthly, and hope. That is why our meetings come from the primary inbox while commodity agencies sit in spam.</p>
       </div>
       <div class="obj-card">
         <div class="eyebrow mb-3">02</div>
         <div class="obj-q">How soon will we see meetings?</div>
-        <p class="obj-a">It takes 3&ndash;4 weeks to set up and warm our email infrastructure. The first week of sending, we typically start setting meetings.</p>
+        <p class="obj-a">First meetings usually land in weeks 3 to 4 as infrastructure warms. We ramp from there.</p>
       </div>
     </div>
   </div>
@@ -942,8 +992,7 @@
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-28 md:py-44">
     <div class="flex items-end justify-between flex-wrap gap-6 mb-20 md:mb-28">
       <div>
-        <div class="eyebrow eyebrow-on-dark">Case studies</div>
-        <h2 class="section-h mt-5 text-bone">Results.</h2>
+        <h2 class="section-h text-bone">Results.</h2>
       </div>
       <div class="font-mono text-[12px] text-[#A9A79D] max-w-[340px]">
         Three engagements. Numbers reflect client-reported outcomes.
@@ -961,7 +1010,7 @@
             </div>
             <img src="assets/logos/route.svg" alt="Route" class="client-logo client-logo--case" loading="lazy" />
           </div>
-          <div class="label mb-5">01 · Case study</div>
+          <div class="label mb-5">Case 01</div>
           <h3 class="pull-h text-bone">
             $42M of pipeline <em>in 3 quarters.</em>
           </h3>
@@ -984,7 +1033,7 @@
           </div>
           <div>
             <div class="label mb-2">Result</div>
-            <p>117 opportunities created in a single month &mdash; more than Route&rsquo;s 17-person SDR team produced in the same window. $3.5M in MRR ($42M in ARR) of pipeline generated over three quarters.</p>
+            <p>117 opportunities created in a single month, more than Route&rsquo;s 17-person SDR team produced in the same window. $3.5M in MRR ($42M in ARR) of pipeline generated over three quarters.</p>
           </div>
           <div>
             <div class="label mb-2">Key partner</div>
@@ -1008,7 +1057,7 @@
             </div>
             <img src="assets/logos/upside.svg" alt="Upside" class="client-logo" loading="lazy" />
           </div>
-          <div class="label mb-5">02 · Case study</div>
+          <div class="label mb-5">Case 02</div>
           <h3 class="pull-h text-bone">
             Meetings at <em>6.5%</em> of all US restaurants in one quarter.
           </h3>
@@ -1053,7 +1102,7 @@
             </div>
             <img src="assets/logos/gainsight.svg" alt="Gainsight" class="client-logo" loading="lazy" />
           </div>
-          <div class="label mb-5">03 · Case study</div>
+          <div class="label mb-5">Case 03</div>
           <h3 class="pull-h text-bone">
             90 SALs in 2 months against <em>a market everyone said was locked up.</em>
           </h3>
@@ -1067,7 +1116,7 @@
         <div class="lg:col-span-5 space-y-7 text-[15.5px] leading-[1.7] text-[#D9D4C7] lg:pt-4">
           <div>
             <div class="label mb-2">Situation</div>
-            <p>Gainsight was selling into a small, crowded market. The SDR team was hitting a wall &mdash; every high-value account seemed to be locked into long-term contracts with Gainsight or a competitor.</p>
+            <p>Gainsight was selling into a small, crowded market. The SDR team was hitting a wall. Every high-value account seemed to be locked into long-term contracts with Gainsight or a competitor.</p>
           </div>
           <div>
             <div class="label mb-2">What we did</div>
@@ -1120,86 +1169,190 @@
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
       <div class="lg:col-span-5">
-        <div class="eyebrow">Why it works</div>
-        <h2 class="section-h mt-5">Why our campaigns book meetings where others don&rsquo;t.</h2>
+        <h2 class="section-h">Why our campaigns book meetings where others don&rsquo;t.</h2>
       </div>
       <div class="lg:col-span-7 lg:pt-4">
         <div class="prose-lg max-w-[640px]">
-          <p>Most cold email agencies run the same templated campaigns for all their clients. Their emails look the same as everyone else&rsquo;s. Buyers auto-filter these out when they see them in their inboxes. And these emails are more likely to get flagged as spam.</p>
-          <p>We build custom software for every engagement. That&rsquo;s the reason our campaigns land in primary inboxes when commodity agency work lands in spam. That&rsquo;s the reason Route&rsquo;s $42M of pipeline came from a checkout-screenshot bot we built &mdash; not from a sequence template every other agency is also running.</p>
+          <p>You get a hundred outbound emails a week. You have probably replied to two in your career. Same template, same pitch, blasted to a thousand people at once, straight to spam or straight to delete. So does every executive you want to reach. That is why most outbound is dying. It is a numbers game run on cheap infrastructure, and the people you actually want to talk to never even see it.</p>
+          <p>We do the opposite. Picture your founder at a conference with your entire market in the room. They would not give all thousand people the same pitch. They would find the one thing worth saying to each person: this company just hired a VP of Sales, that one just raised a round, this one is posting ten sales roles. Some of those conversations become customers. Some become partners. Some just become friends. And there are plenty of people in that room your founder would never walk up to at all.</p>
+          <p>That is what we built. We trained AI to navigate your entire market the way your founder would work that room. It watches every account for a real reason to reach out, then writes to each prospect one to one about the thing that actually matters to them. We only reach out when there is something to reach out about. So we get the attention of executives who never would have thought to come to you, and we book the meeting for your sales reps.</p>
+          <p>Two things make this work that most agencies skip. First, deliverability. It does not matter how good the email is if it never reaches the primary inbox, so we build the sending infrastructure first and match it to each prospect&rsquo;s email provider. Second, research. Before we write a word, we dig into the account the way your best rep would, so every email reads like it came from someone who understands their business, because it did.</p>
         </div>
       </div>
     </div>
 
-    <!-- three proof blocks -->
-    <div class="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-10 lg:gap-x-16">
-      <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
-        <div class="eyebrow">Route</div>
-        <p class="mt-5 text-[17px] leading-[1.65] text-ink/85">
-          For Route, we built a bot that visited every target account&rsquo;s site, added a product to the cart, and took a checkout screenshot. Those checkout screenshots became the anchor for one of the winning plays.
-        </p>
-      </div>
-      <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
-        <div class="eyebrow">Upside</div>
-        <p class="mt-5 text-[17px] leading-[1.65] text-ink/85">
-          For Upside, we built a bot that reads every local newspaper in the country daily, spots new restaurant openings, and emails the franchise owner or marketing lead before any competitor even knows the location exists.
-        </p>
-      </div>
-      <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
-        <div class="eyebrow">Gainsight</div>
-        <p class="mt-5 text-[17px] leading-[1.65] text-ink/85">
-          For Gainsight, we ran 70 experimental campaigns in 11 weeks to find the 5 that worked &mdash; including one that mapped each prospect&rsquo;s reporting structure and used it in the outreach. One recipient posted the email on LinkedIn as a &ldquo;masterclass in B2B cold outreach.&rdquo;
-        </p>
+    <!-- What you actually get -->
+    <div class="mt-16 md:mt-24">
+      <h3 class="font-display text-[32px] md:text-[44px] leading-[1.0] tracking-[-0.025em] mb-10 md:mb-14">What you actually get.</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-10 lg:gap-x-16">
+        <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
+          <div class="font-display text-[25px] leading-[1.1] mb-3">More meetings, and better ones.</div>
+          <p class="text-[16.5px] leading-[1.6] text-ink/85">Qualified meetings with the buyers you actually want, booked straight onto your reps&rsquo; calendars.</p>
+        </div>
+        <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
+          <div class="font-display text-[25px] leading-[1.1] mb-3">More likely to work for you.</div>
+          <p class="text-[16.5px] leading-[1.6] text-ink/85">We are ex-SDRs and AEs from top tech companies, and we have delivered for clients like Gainsight and Route.</p>
+        </div>
+        <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
+          <div class="font-display text-[25px] leading-[1.1] mb-3">Faster, and it never goes dark.</div>
+          <p class="text-[16.5px] leading-[1.6] text-ink/85">We work your campaign every day and rotate sending infrastructure before it degrades, so the meetings keep coming.</p>
+        </div>
+        <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
+          <div class="font-display text-[25px] leading-[1.1] mb-3">You do almost nothing.</div>
+          <p class="text-[16.5px] leading-[1.6] text-ink/85">No credit card, no long forms. We research your market, book the meetings, and brief your reps before each one.</p>
+        </div>
       </div>
     </div>
 
-    <!-- GITHUB PANEL -->
-    <div class="mt-20 md:mt-28">
-      <div class="gh-panel p-6 md:p-8">
-        <div class="flex items-center justify-between text-[12px] font-mono mb-6">
-          <div class="flex items-center gap-2">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C9D1D9" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.17c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.4.98 0 1.97.14 2.89.4 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.73.81 1.17 1.84 1.17 3.1 0 4.42-2.7 5.39-5.27 5.68.41.35.78 1.05.78 2.12v3.15c0 .31.21.67.8.56 4.57-1.52 7.85-5.83 7.85-10.91C23.5 5.73 18.27.5 12 .5Z"/></svg>
-            <span class="text-[#C9D1D9]">Intentsignal</span>
-            <span class="text-[#6E7681]">/ <span class="text-[#58A6FF]">client-work</span></span>
+    <!-- DAILY FEEDBACK LOOP -->
+    <div class="mt-20 md:mt-28 pt-16 md:pt-24 border-t border-ink/10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+        <div class="lg:col-span-5">
+          <h2 class="section-h">Most agencies set it and forget it. We change something every day.</h2>
+        </div>
+        <div class="lg:col-span-7 lg:pt-4">
+          <div class="prose-lg max-w-[640px]">
+            <p>We use AI at every step, with a human in the loop implementing it and improving it every day. We do not just build a custom campaign per client. We run a new test every single day. Every day we check whether a campaign is winning. If it is not, we diagnose the reason down to one of four things: we did not send enough volume, deliverability was poor, the targeting was off, or the copy and campaign were weak. Then we change one variable, test, and iterate. One variable at a time, every single day. That is a daily feedback loop, and it is why we get results over time. Sometimes fast. Sometimes we keep the loop running for a while. But it runs every day.</p>
+            <p>Most agencies do not have a daily feedback loop. A lot of them check monthly, and they are not even using it as a feedback loop. They load the campaign, see how it goes, and if it did not work, oh well. They are playing a numbers game. We hand-onboard every client and hand-work every single one.</p>
           </div>
-          <span class="text-[#6E7681]">2026 YTD</span>
-        </div>
-
-        <div class="mb-6">
-          <div>
-            <div class="font-mono text-[11px] uppercase tracking-[.18em] text-[#8B949E]">Contributions</div>
-            <div class="mt-2 font-display text-[64px] md:text-[80px] leading-none text-white">1,986</div>
-            <div class="text-[13px] text-[#8B949E] mt-2 font-mono">commits across client repos</div>
-          </div>
-        </div>
-
-        <div class="flex justify-between text-[10px] font-mono text-[#6E7681] px-1 mb-2">
-          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
-        </div>
-
-        <div class="relative">
-          <div id="ghGrid" class="gh-grid" aria-hidden="true"></div>
-          <img src="https://ghchart.rshah.org/26a641/Intentsignal" alt="GitHub contribution graph for @Intentsignal"
-               loading="lazy" onerror="this.style.display='none'"
-               class="absolute inset-0 w-full h-full object-contain hidden" />
-        </div>
-
-        <div class="mt-6 flex items-center justify-between text-[11px] font-mono text-[#8B949E]">
-          <span>Less</span>
-          <div class="flex items-center gap-1">
-            <span class="gh-cell w-3 h-3 block"></span>
-            <span class="gh-cell gh-l1 w-3 h-3 block"></span>
-            <span class="gh-cell gh-l2 w-3 h-3 block"></span>
-            <span class="gh-cell gh-l3 w-3 h-3 block"></span>
-            <span class="gh-cell gh-l4 w-3 h-3 block"></span>
-          </div>
-          <span>More</span>
         </div>
       </div>
 
-      <p class="mt-6 text-[16px] leading-[1.55] text-ink/75 max-w-[560px]">
-        1,986 commits this year. This is the work behind the meetings on your calendar.
+      <!-- The signature visual: each square is a day -->
+      <div class="mt-14 md:mt-20 max-w-[600px]">
+        <div>
+          <div class="loop-label">Typical agency</div>
+          <div class="loop-grid" id="loopTypical" aria-hidden="true"></div>
+        </div>
+        <div class="mt-9">
+          <div class="loop-label" style="color:#1f7a36;">IntentSignal</div>
+          <div class="loop-grid" id="loopUs" aria-hidden="true"></div>
+        </div>
+        <p class="mt-6 text-[13px] font-mono text-mute leading-[1.6]">
+          Each square is a day. Filled means we tested, swapped, or rewrote something in your campaign.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-2.5">
+        <span class="loop-chip"><span class="dot-g"></span>Swapped 3 inboxes before they bounced</span>
+        <span class="loop-chip"><span class="dot-g"></span>Tested 14 new subject lines</span>
+        <span class="loop-chip"><span class="dot-g"></span>Added 220 freshly verified contacts</span>
+        <span class="loop-chip"><span class="dot-g"></span>Killed an angle that stopped converting</span>
+      </div>
+
+      <p class="mt-12 text-[16px] leading-[1.55] text-ink/75 max-w-[620px]">
+        1,986 changes to client campaigns this year. This is the work behind the meetings on your calendar.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="hairline-t">
+  <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
+    <h2 class="section-h max-w-[920px]">Here is what most agencies do. Here is what we do.</h2>
+
+    <div class="mt-12 md:mt-16 max-w-[1040px]">
+      <!-- column headers (desktop) -->
+      <div class="hidden md:grid grid-cols-2 gap-x-8 pb-4 mb-1 border-b border-ink/20">
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-mute">What most agencies do</div>
+        <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-ink">What we do</div>
+      </div>
+
+      <!-- first 8 rows -->
+      <div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t handle the booking process for you</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Book the meeting for your sales reps</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Make you give them a credit card for costs</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Never ask you for a credit card for costs</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Never meet with you</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Hand-onboard you and work with you directly</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Send the same email templates for all clients</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Every email we send is 1:1 unique to that prospect, based on real research of the pain that prospect has</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Use only one sending platform</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Use multiple sending platforms for diversification</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Cheap out on email sending infrastructure</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Invest in an overcapacity of email sending infrastructure</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t diversify email sending infrastructure</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Diversify infrastructure across multiple providers</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t have a daily feedback loop</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Run a new test every single day</span></div>
+        </div>
+      </div>
+
+      <!-- remaining 13 rows -->
+      <details class="cmp-more">
+        <summary>Show the full comparison <span aria-hidden="true">↓</span></summary>
+        <div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Get results for a minority of clients</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Get results for the vast majority of clients</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t have the track record or the caliber of clients we do</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Have a solid track record of delivering for top-tier B2B SaaS companies</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t give you a dashboard to see the full funnel</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Give you a dashboard for the full funnel</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t have strong technical expertise</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Have deep technical expertise (our co-founder has a prior AI Sales SaaS exit)</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t have experience as SDRs or AEs at big tech companies</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Our co-founder has experience as a top-producing SDR and AE at companies like Glassdoor</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Cheap out on verification and have high bounce rates</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Use premium verification to keep bounce rates low</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Manage blocklists poorly and email your active customers and open opps</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Manage blocklists carefully so we don&rsquo;t email active customers</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t take the time to remove ESGs like Mimecast</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Remove prospects on Mimecast to keep bounce rates low</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Wait until infrastructure is toast before replacing it, resulting in service interruptions</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Rotate infrastructure before it degrades, so you never get a service interruption</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t send meeting briefings, so your reps have no context</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Brief your reps before every meeting</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Make you do a ton of the work with lengthy onboarding forms</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Put the work on us to research your business well</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t spend on AI, so their targeting, qualification, and copy are worse</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Use AI at every step for better targeting, qualification, and copy</span></div>
+          </div>
+          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t warm inboxes as long as we do, so they go to spam more</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Warm inboxes longer to stay out of spam</span></div>
+          </div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -1208,8 +1361,7 @@
 <section class="hairline-t bg-bone2/40">
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
     <div class="max-w-[900px] mb-16 md:mb-24">
-      <div class="eyebrow">The team</div>
-      <h2 class="section-h mt-5">The founders run your account.</h2>
+      <h2 class="section-h">The founders run your account.</h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
@@ -1238,7 +1390,7 @@
           <h3 class="font-display text-[40px] leading-none">Andrew Elsakr</h3>
           <div class="eyebrow mt-3">Co-founder</div>
           <ul class="founder-bullets mt-5 text-[16px] leading-[1.6] text-ink/85 max-w-[460px]">
-            <li>Co-founded Lyne.ai &mdash; one of the first AI sales tools of the LLM era, acquired in 2023.</li>
+            <li>Co-founded Lyne.ai, one of the first AI sales tools of the LLM era, acquired in 2023.</li>
             <li>Former AI lead at language-learning startups.</li>
             <li>Featured on the <a href="https://blog.hubspot.com/sales/ai-email-assistant" target="_blank" rel="noopener" class="underline underline-offset-[3px] decoration-ink/30 hover:decoration-ink">HubSpot blog</a> for his work on Lyne.ai.</li>
           </ul>
@@ -1253,40 +1405,39 @@
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
       <div class="lg:col-span-4">
-        <div class="eyebrow">FAQ</div>
-        <h2 class="section-h mt-5">Questions we get before the first call.</h2>
+        <h2 class="section-h">Questions we get before the first call.</h2>
       </div>
 
       <div class="lg:col-span-8 lg:pt-2">
         <div class="hairline-t">
           <details class="faq">
-            <summary>We&rsquo;ve been burned by an agency before. What&rsquo;s different here?<span class="plus" aria-hidden="true"></span></summary>
+            <summary>We&rsquo;ve been burned by an agency before. What&rsquo;s different?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              Look at the case studies. $42M of pipeline for Route. Meetings at 6.5% of US restaurants for Upside. 90 SALs in two months for Gainsight. Most agencies can&rsquo;t produce results like these because they&rsquo;re running the same commodity plays as everyone else. We build custom campaigns for every engagement, which is why our meetings happen where theirs don&rsquo;t.
+              We run a new test every single day and we hand-work every account. Most agencies load a campaign, check it monthly, and hope. We do not. That is why our meetings come from the primary inbox while commodity agencies sit in spam.
             </div>
           </details>
           <details class="faq">
             <summary>What industries do you work in?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              B2B with meaningful ACV. Mostly SaaS, infrastructure, data, fintech, and professional services. We don&rsquo;t take on B2C or low-ACV SMB &mdash; the economics don&rsquo;t work for either side.
+              US B2B software, over $1M ARR, $10k+ ACV, with a real sales team. We turn away companies we cannot reliably win for.
             </div>
           </details>
           <details class="faq">
             <summary>How soon will we see meetings?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              It takes 3&ndash;4 weeks to set up and warm our email infrastructure. The first week of sending, we typically start setting meetings.
+              First meetings usually land in weeks 3 to 4 as infrastructure warms. We ramp from there.
             </div>
           </details>
           <details class="faq">
             <summary>Do you guarantee results?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              No. Anyone promising guaranteed meetings in cold email is lying. What we offer is a track record. If we don&rsquo;t think we can produce meetings for your ICP, we&rsquo;ll tell you on the call.
+              We do, and we walk through exactly how on the call, because it is built around your numbers.
             </div>
           </details>
           <details class="faq">
             <summary>What does it cost?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              Depends on ICP scope and campaign complexity. We put a full proposal together after the first call.
+              We scope it live on the call. We only take engagements where the math works for both of us.
             </div>
           </details>
         </div>
@@ -1299,10 +1450,10 @@
 <section class="hairline-t bg-ink text-bone">
   <div class="max-w-[1000px] mx-auto px-6 md:px-10 py-28 md:py-44 text-center">
     <h2 class="font-display text-[64px] md:text-[112px] leading-[0.95] tracking-[-0.035em] text-bone">
-      Let&rsquo;s fill your <em>calendar.</em>
+      Your ICP might be <em>next.</em>
     </h2>
     <p class="mt-10 text-[18px] md:text-[19px] leading-[1.65] text-bone/95 max-w-[680px] mx-auto">
-      30 minutes. We&rsquo;ll tell you whether cold email can produce meetings for your ICP. If we don&rsquo;t think we can hit your numbers, we&rsquo;ll tell you that too &mdash; and we&rsquo;ll point you toward what would work instead.
+      US B2B software teams. We turn away companies we cannot win for.
     </p>
     <div class="mt-14 flex justify-center">
       <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','final_cta'); trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
@@ -1385,7 +1536,7 @@
         const goodTam = (tam === 'tam_mid' || tam === 'tam_large');
 
         if (acv === 'low') {
-          if (noEl) noEl.textContent = 'At under $20k ACV, cold outbound in most B2B motions rarely pays back. Our engagements start where the math works for both sides — typically $20k+ ACV with a real GTM into good accounts.';
+          if (noEl) noEl.textContent = 'At under $20k ACV, cold outbound in most B2B motions rarely pays back. Our engagements start where the math works for both sides, typically $20k+ ACV with a real GTM into good accounts.';
           applyQualifierCalLinksForStep('3-no');
           showStep('3-no');
           return;
@@ -1393,7 +1544,7 @@
 
         if (acv === 'vhigh') {
           if (yesEl) {
-            yesEl.textContent = '$500k+ ACV is the profile we treat as a priority conversation. TAM and motion still matter on the call&mdash;but you should book.';
+            yesEl.textContent = '$500k+ ACV is the profile we treat as a priority conversation. TAM and motion still matter on the call, but you should book.';
           }
           applyQualifierCalLinksForStep('3-yes');
           showStep('3-yes');
@@ -1404,7 +1555,7 @@
           if (yesEl) {
             yesEl.textContent = acv === 'high'
               ? 'Strong ACV and a broad enough TAM is the mix behind the $42M for Route, 6.5% of US restaurants for Upside, and 90 SALs in 2 months for Gainsight. You should be on a call with us.'
-              : '$20k–$100k ACV with a real market to work&mdash;that is a profile we run successfully. Most of our recent engagements look like this.';
+              : '$20k–$100k ACV with a real market to work. That is a profile we run successfully. Most of our recent engagements look like this.';
           }
           applyQualifierCalLinksForStep('3-yes');
           showStep('3-yes');
@@ -1413,9 +1564,9 @@
 
         if (maybeEl) {
           if (tam === 'tam_niche') {
-            maybeEl.textContent = 'Your ACV can work, but a very narrow TAM has to clear a higher bar for outbound economics&mdash;we can tell you in a few minutes on a call if the math is there.';
+            maybeEl.textContent = 'Your ACV can work, but a very narrow TAM has to clear a higher bar for outbound economics. We can tell you in a few minutes on a call if the math is there.';
           } else {
-            maybeEl.textContent = 'Your ACV is in range. TAM and motion need a pass to see if cold outbound is the right lever&mdash;one short call is enough to know.';
+            maybeEl.textContent = 'Your ACV is in range. TAM and motion need a pass to see if cold outbound is the right lever. One short call is enough to know.';
           }
         }
         applyQualifierCalLinksForStep('3-maybe');
@@ -1426,44 +1577,23 @@
     });
   });
 
-  // GH fallback grid
-  const grid = document.getElementById('ghGrid');
-  if (grid) {
-    const weeks = 53, days = 7;
-    const frag = document.createDocumentFragment();
-    let s = 1337;
+  // Daily feedback-loop strips — each square is a day in one quarter (~90)
+  function buildLoop(id, ratio, onClass, seed) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const N = 90;
+    let s = seed;
     function rnd(){ s = (s*9301 + 49297) % 233280; return s/233280; }
-    const cells = [];
-    for (let d = 0; d < days; d++) {
-      for (let w = 0; w < weeks; w++) {
-        const recency = w / (weeks-1);
-        const weekend = (d === 0 || d === 6) ? 0.55 : 1.0;
-        const p = 0.28 + recency * 0.55;
-        const r = rnd();
-        let level = 0;
-        if (r < p * weekend) {
-          const lv = rnd() * (0.4 + recency * 0.9);
-          if (lv > 0.75) level = 4;
-          else if (lv > 0.5) level = 3;
-          else if (lv > 0.25) level = 2;
-          else level = 1;
-        }
-        const cell = document.createElement('span');
-        cell.className = 'gh-cell' + (level ? ' gh-l' + level : '');
-        cells.push({ cell, w, d });
-      }
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < N; i++) {
+      const cell = document.createElement('span');
+      cell.className = 'loop-cell' + (rnd() < ratio ? ' ' + onClass : '');
+      frag.appendChild(cell);
     }
-    grid.style.gridTemplateColumns = `repeat(${weeks}, 1fr)`;
-    grid.style.gridTemplateRows = `repeat(${days}, 1fr)`;
-    grid.style.gridAutoFlow = 'column';
-    cells.sort((a,b)=> a.w - b.w || a.d - b.d).forEach(({cell}) => frag.appendChild(cell));
-    grid.appendChild(frag);
+    el.appendChild(frag);
   }
-
-  const ghImg = document.querySelector('img[alt*="contribution graph"]');
-  if (ghImg) {
-    ghImg.addEventListener('load', () => ghImg.classList.remove('hidden'));
-  }
+  buildLoop('loopTypical', 0.05, 'loop-cell--faint', 4291);
+  buildLoop('loopUs', 0.90, 'loop-cell--on', 9173);
 
   const faqs = document.querySelectorAll('details.faq');
   faqs.forEach(el => {
