@@ -39,11 +39,14 @@ export default async function handler(req, res) {
     const cs = clip(b.cs, 200);
     if (!cs.startsWith('cs_')) return res.status(400).json({ error: 'session_required' });
 
-    // Gate: the session must exist and be paid.
+    // Gate: the session must exist and be completed (setup mode has no payment to be "paid").
     const session = await stripeGet('checkout/sessions/' + cs, key);
-    if (session.payment_status !== 'paid') return res.status(402).json({ error: 'not_paid' });
+    if (session.status !== 'complete') return res.status(402).json({ error: 'not_complete' });
     const customerId = session.customer;
     if (!customerId) return res.status(400).json({ error: 'no_customer' });
+    const sBid = parseInt(session.metadata && session.metadata.bid, 10) || null;
+    const sEmail = (session.customer_details && session.customer_details.email) || null;
+    const sPhone = (session.customer_details && session.customer_details.phone) || null;
 
     const bookingLink = clip(b.bookingLink, 400);
     const company = clip(b.company, 200);
@@ -66,15 +69,18 @@ export default async function handler(req, res) {
     }
 
     // Update the account row.
-    const patch = {
+    // Upsert (create-or-merge) so onboarding works even if the webhook has not created the row yet.
+    const row = {
+      stripe_customer_id: customerId,
       company: company || null, website: website || null, booking_link: bookingLink || null,
-      icp: icp || null, targeting: targeting, min_minutes: minMinutes, status: 'onboarded', updated_at: new Date().toISOString(),
+      icp: icp || null, targeting: targeting, min_minutes: minMinutes, status: 'onboarded',
+      bid_usd: sBid, email: sEmail, phone: sPhone, checkout_session_id: cs, updated_at: new Date().toISOString(),
     };
-    if (blocklistPath) patch.blocklist_path = blocklistPath;
-    const r = await fetch(sbUrl + '/rest/v1/od_accounts?stripe_customer_id=eq.' + encodeURIComponent(customerId), {
-      method: 'PATCH',
-      headers: { 'apikey': sbSrv, 'Authorization': 'Bearer ' + sbSrv, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify(patch),
+    if (blocklistPath) row.blocklist_path = blocklistPath;
+    const r = await fetch(sbUrl + '/rest/v1/od_accounts?on_conflict=stripe_customer_id', {
+      method: 'POST',
+      headers: { 'apikey': sbSrv, 'Authorization': 'Bearer ' + sbSrv, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify(row),
     });
     if (!r.ok) return res.status(500).json({ error: 'save_failed' });
 

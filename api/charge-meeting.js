@@ -70,7 +70,12 @@ export default async function handler(req, res) {
     const customer = await stripe('customers/' + customerId, null, key);
     const bid = parseInt(b.amount, 10) || parseInt(customer.metadata && customer.metadata.bid, 10);
     if (isNaN(bid) || bid < BID_FLOOR_USD) return res.status(400).json({ error: 'bid_below_floor' });
-    const pm = (customer.invoice_settings && customer.invoice_settings.default_payment_method) || (customer.metadata && customer.metadata.pm);
+    let pm = (customer.invoice_settings && customer.invoice_settings.default_payment_method) || (customer.metadata && customer.metadata.pm);
+    if (!pm) {
+      // Fallback: setup mode attaches the card to the customer even if the webhook never set a default.
+      const pms = await stripe('customers/' + customerId + '/payment_methods?type=card', null, key);
+      pm = pms && pms.data && pms.data[0] && pms.data[0].id;
+    }
     if (!pm) return res.status(400).json({ error: 'no_saved_card' });
 
     let pi;
