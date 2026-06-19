@@ -14,6 +14,18 @@
   "functions": {
     "api/slack-notify.js": {
       "maxDuration": 5
+    },
+    "api/lead.js": {
+      "maxDuration": 5
+    },
+    "api/create-deposit-session.js": {
+      "maxDuration": 10
+    },
+    "api/stripe-webhook.js": {
+      "maxDuration": 10
+    },
+    "api/draw-meeting.js": {
+      "maxDuration": 10
     }
   }
 }
