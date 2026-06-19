@@ -103,6 +103,14 @@
   #buyBar { position:fixed; left:12px; right:12px; bottom:12px; z-index:60; background:#0F0F0F; color:#F1EDE4; border-radius:12px; display:none; align-items:center; justify-content:space-between; padding:12px 14px 12px 18px; box-shadow:0 10px 30px rgba(0,0,0,0.2); }
   @media (max-width:640px){ #buyBar.show { display:flex; } }
   .trust-chip { display:inline-flex; align-items:center; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px; letter-spacing:0.04em; color:#2A2A2A; border:1px solid rgba(15,15,15,0.16); border-radius:999px; padding:6px 12px; background:#fff; }
+  .calc { background:#FBFAF6; border:1px solid rgba(15,15,15,0.12); border-radius:12px; padding:18px 18px 16px; margin-bottom:22px; }
+  .calc-inp { width:100%; border:1px solid rgba(15,15,15,0.16); border-radius:8px; background:#fff; padding:11px 12px; font-size:15px; color:#0F0F0F; font-family:inherit; }
+  .calc-inp:focus { outline:2px solid #0F0F0F; outline-offset:1px; border-color:#0F0F0F; }
+  .calc-pct { position:relative; }
+  .calc-pct input { padding-right:30px; }
+  .calc-pct .pctsign { position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#6B6A65; font-weight:600; }
+  .worth-out { margin-top:14px; font-family:'Instrument Serif',Georgia,serif; font-size:21px; line-height:1.25; letter-spacing:-0.01em; color:#0F0F0F; }
+  .worth-out strong { color:#1f7a36; }
 </style>
 </head>
 
@@ -290,13 +298,29 @@
     <p class="mt-3 text-center label-mono">Built for US B2B software teams with a rep ready to take meetings</p>
 
     <div class="buy-card mt-10 p-6 md:p-9">
-      <label class="field-label" for="bid">Your price per held meeting</label>
+      <div class="calc">
+        <div class="field-label" style="margin-bottom:10px;">First, what is a held meeting worth to you?</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="field-help" for="ltv" style="margin-top:0;display:block;margin-bottom:5px;">Revenue per new customer ($)</label>
+            <input id="ltv" class="calc-inp" type="number" inputmode="numeric" placeholder="e.g. 25000" />
+          </div>
+          <div>
+            <label class="field-help" for="closerate" style="margin-top:0;display:block;margin-bottom:5px;">Of meetings we book, % that become customers</label>
+            <div class="calc-pct"><input id="closerate" class="calc-inp" type="number" inputmode="numeric" placeholder="e.g. 20" /><span class="pctsign">%</span></div>
+          </div>
+        </div>
+        <div id="worthOut" class="worth-out" style="display:none;"></div>
+      </div>
+
+      <label class="field-label" for="bid">Now name your price per held meeting</label>
       <div class="bid-wrap">
         <span class="cur">$</span>
-        <input id="bid" type="number" inputmode="numeric" min="200" step="25" value="200" />
+        <input id="bid" type="number" inputmode="numeric" min="200" step="25" placeholder="your price (min $200)" />
       </div>
-      <p class="field-help">Floor is $200. Capacity is limited, so higher bids get priority access and let us cast a wider, higher-quality net for you. You are only ever charged this when a meeting is actually held.</p>
-      <p id="bidErr" class="field-help" style="color:#b42318;display:none;">Minimum is $200 per held meeting.</p>
+      <p class="field-help">You set it. Floor is $200, and higher bids get priority access and a wider, higher-quality net. You are only ever charged this when a meeting is actually held.</p>
+      <p id="roiOut" class="field-help" style="color:#1f7a36;display:none;"></p>
+      <p id="bidErr" class="field-help" style="color:#b42318;display:none;">Enter your price. Minimum is $200 per held meeting.</p>
 
       <div class="guarantee mt-6">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" stroke="#1f7a36" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke="#1f7a36" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -371,12 +395,36 @@
 
   (function(){
     var bid = document.getElementById('bid');
+    var ltv = document.getElementById('ltv'), cr = document.getElementById('closerate');
+    var worthOut = document.getElementById('worthOut'), roiOut = document.getElementById('roiOut');
+    var meetingWorth = 0;
+    function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+    function calcWorth(){
+      var L = parseFloat(ltv.value) || 0, C = parseFloat(cr.value) || 0;
+      if (L > 0 && C > 0) {
+        meetingWorth = L * (C / 100);
+        worthOut.innerHTML = 'A booked meeting is worth about <strong>' + fmt(meetingWorth) + '</strong> to you.';
+        worthOut.style.display = 'block';
+      } else { meetingWorth = 0; worthOut.style.display = 'none'; }
+      updateRoi();
+    }
+    function updateRoi(){
+      var b = parseInt(bid.value, 10) || 0;
+      if (meetingWorth > 0 && b >= 200) {
+        var x = meetingWorth / b;
+        roiOut.innerHTML = 'At ' + fmt(b) + ' per held meeting, every meeting we book returns about <strong>' + (x >= 10 ? Math.round(x) : x.toFixed(1)) + 'x</strong>.';
+        roiOut.style.display = 'block';
+      } else { roiOut.style.display = 'none'; }
+    }
     function bidValid(){ var v = parseInt(bid.value,10); return !isNaN(v) && v >= 200; }
     bid.addEventListener('input', function(){
       var ok = bidValid();
       document.getElementById('bidErr').style.display = ok ? 'none' : 'block';
       bid.classList.toggle('err', !ok);
+      updateRoi();
     });
+    if (ltv) ltv.addEventListener('input', calcWorth);
+    if (cr) cr.addEventListener('input', calcWorth);
 
     document.getElementById('payBtn').addEventListener('click', function(){
       var btn = this, err = document.getElementById('buyErr');
