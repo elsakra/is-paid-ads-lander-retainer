@@ -76,7 +76,7 @@ export default async function handler(req, res) {
       cancel_url: base + '/ondemand',
     }, key);
 
-    await notifySlack(':moneybag: *Meetings on Demand* checkout started — bid *$' + bid + '*/held meeting, $' + SETUP_FEE_USD + ' setup. Session `' + session.id + '`.');
+    await notifySlack(':moneybag: *Meetings on Demand* checkout started: bid *$' + bid + '*/held meeting, $' + SETUP_FEE_USD + ' setup. Session `' + session.id + '`.');
     return res.status(200).json({ url: session.url });
   } catch (err) {
     return res.status(500).json({ error: 'checkout_failed', detail: String(err && err.message || err).slice(0, 200) });

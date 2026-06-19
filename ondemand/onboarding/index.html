@@ -22,6 +22,15 @@
   .ta { min-height:90px; resize:vertical; }
   .inp:focus,.ta:focus,.sel:focus { outline:2px solid #0F0F0F; outline-offset:1px; border-color:#0F0F0F; }
   .err { border-color:#b42318 !important; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { position:relative; }
+  .chip input { position:absolute; opacity:0; width:0; height:0; }
+  .chip span { display:inline-block; border:1px solid rgba(15,15,15,0.18); border-radius:999px; padding:8px 14px; font-size:13.5px; color:#1A1A1A; cursor:pointer; transition:all .12s ease; background:#fff; }
+  .chip input:checked + span { background:#0F0F0F; color:#F1EDE4; border-color:#0F0F0F; }
+  .chip span:hover { border-color:#0F0F0F; }
+  .guide { display:flex; gap:12px; align-items:flex-start; background:#0F0F0F; color:#F1EDE4; border-radius:10px; padding:16px 18px; }
+  .guide svg { flex:0 0 auto; margin-top:2px; }
+  .sub-label { font-size:13px; font-weight:600; color:#1A1A1A; margin:0 0 8px; }
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; background:#0F0F0F; color:#F1EDE4; padding:18px 28px; border-radius:8px; font-weight:500; font-size:16px; border:none; cursor:pointer; width:100%; }
   .btn:disabled { opacity:.55; cursor:not-allowed; }
   .file-drop { border:1px dashed rgba(15,15,15,0.3); border-radius:10px; padding:18px; text-align:center; font-size:14px; color:#6B6A65; cursor:pointer; }
@@ -53,8 +62,70 @@
       </div>
 
       <div>
-        <label class="field-label" for="icp">Who should we book? (target ICP)</label>
-        <textarea class="ta" id="icp" placeholder="Titles, company size, geo, and any named target accounts. Example: VP Sales / CRO at US SaaS, 50-500 employees. Named: Acme, Globex..."></textarea>
+        <label class="field-label">Who should we book? (targeting)</label>
+        <div class="guide mt-1 mb-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l2.4 6.9H22l-6 4.6 2.3 7.1L12 16.9 5.7 20.6 8 13.5 2 8.9h7.6L12 2z" stroke="#9BD4D4" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <div class="text-[13.5px] leading-[1.55]" style="color:#F1EDE4;">The broader you leave the targeting and the higher your price per meeting, the better the job we can do for you. Tight filters on a small market are the hardest to book, so widen wherever you reasonably can.</div>
+        </div>
+
+        <p class="sub-label">Company size (employees)</p>
+        <div class="chips" id="sizes">
+          <label class="chip"><input type="checkbox" value="1-10"><span>1-10</span></label>
+          <label class="chip"><input type="checkbox" value="11-50"><span>11-50</span></label>
+          <label class="chip"><input type="checkbox" value="51-200"><span>51-200</span></label>
+          <label class="chip"><input type="checkbox" value="201-500"><span>201-500</span></label>
+          <label class="chip"><input type="checkbox" value="501-1000"><span>501-1,000</span></label>
+          <label class="chip"><input type="checkbox" value="1001-5000"><span>1,001-5,000</span></label>
+          <label class="chip"><input type="checkbox" value="5001-10000"><span>5,001-10,000</span></label>
+          <label class="chip"><input type="checkbox" value="10001+"><span>10,001+</span></label>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
+          <div><label class="field-label" for="companyCountries">Company countries</label><input class="inp" id="companyCountries" type="text" placeholder="United States, Canada" /><p class="field-help">Comma-separated. Leave blank for no country filter.</p></div>
+          <div><label class="field-label" for="personCountries">Person countries</label><input class="inp" id="personCountries" type="text" placeholder="United States" /><p class="field-help">Where the contact is located.</p></div>
+        </div>
+
+        <p class="sub-label mt-5">Seniority</p>
+        <div class="chips" id="seniorities">
+          <label class="chip"><input type="checkbox" value="Founder/Owner"><span>Founder / Owner</span></label>
+          <label class="chip"><input type="checkbox" value="C-Suite"><span>C-Suite</span></label>
+          <label class="chip"><input type="checkbox" value="VP"><span>VP</span></label>
+          <label class="chip"><input type="checkbox" value="Director"><span>Director</span></label>
+          <label class="chip"><input type="checkbox" value="Head"><span>Head</span></label>
+          <label class="chip"><input type="checkbox" value="Manager"><span>Manager</span></label>
+          <label class="chip"><input type="checkbox" value="Senior"><span>Senior IC</span></label>
+          <label class="chip"><input type="checkbox" value="Entry"><span>Individual contributor</span></label>
+        </div>
+
+        <p class="sub-label mt-5">Departments</p>
+        <div class="chips" id="departments">
+          <label class="chip"><input type="checkbox" value="Executive"><span>Executive</span></label>
+          <label class="chip"><input type="checkbox" value="Sales"><span>Sales</span></label>
+          <label class="chip"><input type="checkbox" value="Marketing"><span>Marketing</span></label>
+          <label class="chip"><input type="checkbox" value="Operations"><span>Operations</span></label>
+          <label class="chip"><input type="checkbox" value="Finance"><span>Finance</span></label>
+          <label class="chip"><input type="checkbox" value="Product"><span>Product</span></label>
+          <label class="chip"><input type="checkbox" value="Engineering"><span>Engineering</span></label>
+          <label class="chip"><input type="checkbox" value="IT"><span>IT</span></label>
+          <label class="chip"><input type="checkbox" value="HR"><span>HR / People</span></label>
+        </div>
+
+        <div class="mt-5">
+          <label class="field-label" for="titles">Job titles to match</label>
+          <input class="inp" id="titles" type="text" placeholder="VP Sales, CRO, Head of Demand Gen, Director of RevOps" />
+          <p class="field-help">Comma-separated title strings. We match contains, so partial titles work.</p>
+        </div>
+
+        <div class="mt-5">
+          <label class="field-label" for="industries">Industries</label>
+          <textarea class="ta" id="industries" placeholder="e.g. B2B SaaS and fintech only. Or: any industry. If you must include or exclude specific industries, explain here."></textarea>
+          <p class="field-help">Optional. If specific industries matter, name the must-haves and the excludes.</p>
+        </div>
+
+        <div class="mt-5">
+          <label class="field-label" for="accounts">Named target accounts (optional)</label>
+          <textarea class="ta" id="accounts" placeholder="Any specific companies you especially want in front of."></textarea>
+        </div>
       </div>
 
       <div>
@@ -117,12 +188,24 @@
       if (!booking || booking.indexOf('http') !== 0) { err.textContent = 'Please paste your booking link (starts with http).'; err.style.display='block'; document.getElementById('booking').classList.add('err'); return; }
       if (!cs) { err.textContent = 'Missing checkout reference. Please return from the payment confirmation, or email hello@intentsignal.ai.'; err.style.display='block'; return; }
       btn.disabled = true; btn.querySelector('span').textContent = '…';
+      var checkedVals = function(id){ return Array.prototype.slice.call(document.querySelectorAll('#'+id+' input:checked')).map(function(i){ return i.value; }); };
+      var targeting = {
+        company_sizes: checkedVals('sizes'),
+        company_countries: document.getElementById('companyCountries').value.trim(),
+        person_countries: document.getElementById('personCountries').value.trim(),
+        seniorities: checkedVals('seniorities'),
+        departments: checkedVals('departments'),
+        job_titles: document.getElementById('titles').value.trim(),
+        industries: document.getElementById('industries').value.trim(),
+        named_accounts: document.getElementById('accounts').value.trim()
+      };
       fetch('/api/onboard', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({
         cs: cs,
         company: document.getElementById('company').value.trim(),
         website: document.getElementById('website').value.trim(),
         bookingLink: booking,
-        icp: document.getElementById('icp').value.trim(),
+        targeting: targeting,
+        icp: targeting.industries,
         minMinutes: document.getElementById('minutes').value,
         blocklistCsv: fileText
       }) })

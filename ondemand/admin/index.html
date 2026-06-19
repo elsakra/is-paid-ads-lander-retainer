@@ -10,86 +10,144 @@
   body { background:#0c0d10; color:#e6e7ea; font-family:ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
   .mono { font-family:ui-monospace,'JetBrains Mono',monospace; }
   .card { background:#14161b; border:1px solid #23262e; border-radius:12px; }
-  .inp { background:#0c0d10; border:1px solid #2a2e38; border-radius:7px; color:#e6e7ea; padding:9px 11px; font-size:13px; width:100%; }
-  .inp:focus { outline:2px solid #2f6fed; }
+  .inp, .sel, .ta { background:#0c0d10; border:1px solid #2a2e38; border-radius:7px; color:#e6e7ea; padding:9px 11px; font-size:13px; width:100%; }
+  .ta { min-height:54px; resize:vertical; }
+  .inp:focus,.sel:focus,.ta:focus { outline:2px solid #2f6fed; }
   .btn { background:#2f6fed; color:#fff; border:none; border-radius:7px; padding:9px 14px; font-size:13px; font-weight:600; cursor:pointer; }
   .btn:disabled { opacity:.5; cursor:not-allowed; }
   .btn-charge { background:#1f9d4d; }
-  .pill { display:inline-block; font-size:11px; padding:2px 9px; border-radius:999px; }
-  .p-paid { background:#3a2f0b; color:#e7c14b; }
-  .p-onb { background:#0b3a24; color:#4fd089; }
+  .btn-ghost { background:#23262e; }
+  .btn-danger { background:#7a271a; }
+  .pill { display:inline-block; font-size:11px; padding:2px 9px; border-radius:999px; background:#23262e; color:#cdd1d9; }
+  .lbl { font-size:11px; color:#7b8090; text-transform:uppercase; letter-spacing:.08em; }
   a { color:#6ea8ff; }
+  .msg { font-size:12px; margin-top:6px; min-height:14px; }
 </style>
 </head>
 <body>
 <div class="max-w-[1200px] mx-auto px-5 py-8">
   <div class="flex items-center justify-between mb-6">
     <h1 class="text-xl font-semibold">Meetings on Demand <span class="text-[#7b8090] font-normal">· ops</span></h1>
-    <div id="gate" class="flex items-center gap-2">
+    <div class="flex items-center gap-2">
       <input id="secret" class="inp" type="password" placeholder="admin secret" style="width:220px;" />
       <button id="loadBtn" class="btn">Load</button>
     </div>
   </div>
-  <p id="msg" class="text-sm text-[#9aa0ad] mb-5">Enter the admin secret to load accounts. Charge a card only after a meeting is verified held and matches the buyer's criteria.</p>
+  <p id="msg" class="text-sm text-[#9aa0ad] mb-5">Enter the admin secret to load accounts. Charge a card only after a VA verifies a meeting was held and matches the buyer's criteria.</p>
   <div id="list" class="space-y-4"></div>
 </div>
 
 <script>
   var KEY = '';
+  var STATUSES = ['paid_pending_onboarding','onboarded','fit_check','building','active','paused','declined_refunded'];
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function fmtTargeting(t){
+    if(!t||typeof t!=='object') return '<span class="text-[#7b8090]">broad / not specified</span>';
+    var a=function(x){return Array.isArray(x)&&x.length?x.join(', '):'';};
+    var parts=[];
+    if(a(t.company_sizes))parts.push('Size '+a(t.company_sizes));
+    if(t.company_countries)parts.push('Co '+t.company_countries);
+    if(t.person_countries)parts.push('Person '+t.person_countries);
+    if(a(t.seniorities))parts.push('Seniority '+a(t.seniorities));
+    if(a(t.departments))parts.push('Dept '+a(t.departments));
+    if(t.job_titles)parts.push('Titles '+t.job_titles);
+    if(t.named_accounts)parts.push('Named '+t.named_accounts);
+    return parts.length?esc(parts.join(' · ')):'<span class="text-[#7b8090]">broad / not specified</span>';
+  }
+  function api(path, body){ return fetch(path, { method:'POST', headers:{'content-type':'application/json','x-draw-secret':KEY}, body: JSON.stringify(body||{}) }).then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); }); }
 
-  function fmtMeetings(meetings, cus){
+  function meetingsBlock(meetings, cus){
     var rows = meetings.filter(function(m){ return m.stripe_customer_id === cus; });
-    if (!rows.length) return '<div class="text-[#7b8090] text-xs mt-2">No meetings billed yet.</div>';
     var held = rows.filter(function(r){ return r.charge_status==='succeeded'; });
     var sum = held.reduce(function(a,r){ return a + (r.amount_usd||0); }, 0);
-    return '<div class="text-xs mt-3 text-[#9aa0ad]">'+held.length+' held · $'+sum+' charged</div>' +
-      rows.slice(0,6).map(function(r){ return '<div class="text-xs mono mt-1 '+(r.charge_status==='succeeded'?'text-[#4fd089]':'text-[#e58]')+'">$'+(r.amount_usd||0)+' · '+esc(r.meeting_ref)+' · '+esc(r.charge_status)+'</div>'; }).join('');
+    var head = '<div class="text-xs mt-3 text-[#9aa0ad]">'+held.length+' held · $'+sum+' charged'+(rows.length>held.length?(' · '+(rows.length-held.length)+' failed/other'):'')+'</div>';
+    var list = rows.slice(0,6).map(function(r){ return '<div class="text-xs mono mt-1 '+(r.charge_status==='succeeded'?'text-[#4fd089]':'text-[#e58]')+'">$'+(r.amount_usd||0)+' · '+esc(r.meeting_ref)+' · '+esc(r.charge_status)+'</div>'; }).join('');
+    return head + list;
   }
+
+  function statusOpts(cur){ return STATUSES.map(function(s){ return '<option value="'+s+'"'+(s===cur?' selected':'')+'>'+s+'</option>'; }).join(''); }
 
   function render(data){
     var meetings = data.meetings || [];
-    var html = (data.accounts||[]).map(function(a){
-      var statusPill = a.status==='onboarded' ? '<span class="pill p-onb">onboarded</span>' : '<span class="pill p-paid">'+esc(a.status)+'</span>';
-      return '<div class="card p-5">'+
-        '<div class="flex items-start justify-between gap-4">'+
+    document.getElementById('list').innerHTML = (data.accounts||[]).map(function(a){
+      var c = esc(a.stripe_customer_id);
+      return '<div class="card p-5" data-cus="'+c+'">'+
+        '<div class="flex items-start justify-between gap-4 flex-wrap">'+
           '<div>'+
-            '<div class="font-semibold">'+esc(a.company||a.email||a.stripe_customer_id)+' '+statusPill+'</div>'+
+            '<div class="font-semibold text-[15px]">'+esc(a.company||a.email||a.stripe_customer_id)+' <span class="pill">'+esc(a.status)+'</span></div>'+
             '<div class="text-xs text-[#9aa0ad] mt-1">'+esc(a.email||'')+(a.phone?(' · '+esc(a.phone)):'')+' · bid <b class="text-[#e6e7ea]">$'+(a.bid_usd||'?')+'</b>/held · setup $'+(a.setup_fee_usd||'?')+'</div>'+
-            '<div class="text-xs mono text-[#7b8090] mt-1">'+esc(a.stripe_customer_id)+'</div>'+
+            '<div class="text-xs mono text-[#7b8090] mt-1">'+c+'</div>'+
+          '</div>'+
+          '<div class="flex items-center gap-2">'+
+            '<select class="sel statusSel" style="width:auto;">'+statusOpts(a.status)+'</select>'+
+            '<button class="btn btn-ghost saveStatus">Set status</button>'+
           '</div>'+
         '</div>'+
-        '<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 mt-3 text-[13px]">'+
-          '<div><span class="text-[#7b8090]">Booking:</span> '+(a.booking_link?('<a href="'+esc(a.booking_link)+'" target="_blank">'+esc(a.booking_link)+'</a>'):'<span class="text-[#7b8090]">·</span>')+'</div>'+
-          '<div><span class="text-[#7b8090]">Min minutes:</span> '+esc(a.min_minutes||'')+'</div>'+
-          '<div class="md:col-span-2"><span class="text-[#7b8090]">ICP:</span> '+esc(a.icp||'·')+'</div>'+
-          '<div class="md:col-span-2"><span class="text-[#7b8090]">Blocklist:</span> '+(a.blocklist_path?esc(a.blocklist_path):'·')+'</div>'+
-        '</div>'+
-        fmtMeetings(meetings, a.stripe_customer_id)+
-        '<div class="flex items-center gap-2 mt-4 pt-4 border-t border-[#23262e]">'+
-          '<input class="inp ref" data-cus="'+esc(a.stripe_customer_id)+'" placeholder="meeting ref (prospect / calendar id)" style="flex:1;" />'+
-          '<input class="inp amt" data-cus="'+esc(a.stripe_customer_id)+'" type="number" placeholder="$'+(a.bid_usd||'')+'" style="width:90px;" />'+
-          '<button class="btn btn-charge chargeBtn" data-cus="'+esc(a.stripe_customer_id)+'">Charge held meeting</button>'+
-        '</div>'+
-        '<div class="chargeMsg text-xs mt-2" data-cus="'+esc(a.stripe_customer_id)+'"></div>'+
-      '</div>';
-    }).join('');
-    document.getElementById('list').innerHTML = html || '<div class="text-[#7b8090]">No accounts yet.</div>';
 
-    document.querySelectorAll('.chargeBtn').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var cus = btn.getAttribute('data-cus');
-        var ref = document.querySelector('.ref[data-cus="'+cus+'"]').value.trim();
-        var amt = document.querySelector('.amt[data-cus="'+cus+'"]').value.trim();
-        var msg = document.querySelector('.chargeMsg[data-cus="'+cus+'"]');
-        if (!ref) { msg.textContent = 'Add a meeting ref first.'; msg.style.color='#e58'; return; }
-        if (!confirm('Charge this account for a HELD meeting "'+ref+'"'+(amt?(' at $'+amt):' at their bid')+'? This puts a real charge on their card.')) return;
-        btn.disabled = true; msg.style.color='#9aa0ad'; msg.textContent = 'Charging…';
-        var body = { customer: cus, meetingRef: ref }; if (amt) body.amount = parseInt(amt,10);
-        fetch('/api/charge-meeting', { method:'POST', headers:{'content-type':'application/json','x-draw-secret':KEY}, body: JSON.stringify(body) })
-          .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
-          .then(function(res){ if(res.ok && res.j.ok){ msg.style.color='#4fd089'; msg.textContent='Charged $'+res.j.charged_usd+' ('+res.j.status+'). Reloading…'; setTimeout(load, 1200); } else { throw new Error((res.j&&res.j.detail)||(res.j&&res.j.error)||'failed'); } })
-          .catch(function(e){ msg.style.color='#e58'; msg.textContent='Failed: '+e.message; btn.disabled=false; });
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 mt-3 text-[13px]">'+
+          '<div><span class="text-[#7b8090]">Booking:</span> '+(a.booking_link?('<a href="'+esc(a.booking_link)+'" target="_blank">'+esc(a.booking_link)+'</a>'):'<span class="text-[#7b8090]">none</span>')+'</div>'+
+          '<div><span class="text-[#7b8090]">Min minutes:</span> '+esc(a.min_minutes||'')+'</div>'+
+          '<div class="md:col-span-2"><span class="text-[#7b8090]">Targeting:</span> '+fmtTargeting(a.targeting)+'</div>'+
+          '<div class="md:col-span-2"><span class="text-[#7b8090]">Industries:</span> '+esc((a.targeting&&a.targeting.industries)||a.icp||'none')+'</div>'+
+          '<div class="md:col-span-2"><span class="text-[#7b8090]">Blocklist:</span> '+(a.blocklist_path?('<button class="btn btn-ghost dlBlock" style="padding:3px 9px;">Download CSV</button>'):'<span class="text-[#7b8090]">none</span>')+' <span class="blockMsg msg" style="display:inline;"></span></div>'+
+        '</div>'+
+
+        meetingsBlock(meetings, a.stripe_customer_id)+
+
+        '<div class="mt-4 pt-4 border-t border-[#23262e]">'+
+          '<div class="lbl mb-1">Notes (VA fit-check, context)</div>'+
+          '<textarea class="ta notes" placeholder="e.g. fit check passed, infra building, paused for billing issue">'+esc(a.notes||'')+'</textarea>'+
+          '<div class="flex items-center gap-2 mt-2"><button class="btn btn-ghost saveNotes">Save notes</button><span class="notesMsg msg"></span></div>'+
+        '</div>'+
+
+        '<div class="flex flex-wrap items-end gap-2 mt-4 pt-4 border-t border-[#23262e]">'+
+          '<div style="flex:1; min-width:200px;"><div class="lbl mb-1">Charge a HELD meeting</div><input class="inp ref" placeholder="meeting ref (prospect / calendar id)" /></div>'+
+          '<input class="inp amt" type="number" placeholder="$'+(a.bid_usd||'')+'" style="width:90px;" />'+
+          '<button class="btn btn-charge chargeBtn">Charge held meeting</button>'+
+          '<button class="btn btn-danger refundBtn" title="Refund the setup fee and decline this account">Refund + decline</button>'+
+        '</div>'+
+        '<div class="chargeMsg msg"></div>'+
+      '</div>';
+    }).join('') || '<div class="text-[#7b8090]">No accounts yet.</div>';
+
+    bind();
+  }
+
+  function bind(){
+    document.querySelectorAll('[data-cus]').forEach(function(cardEl){
+      var cus = cardEl.getAttribute('data-cus');
+      var q = function(sel){ return cardEl.querySelector(sel); };
+
+      q('.saveStatus').addEventListener('click', function(){
+        var status = q('.statusSel').value; var btn = this; btn.disabled=true;
+        api('/api/admin-action', { action:'update', customer:cus, patch:{ status:status } }).then(function(res){ btn.disabled=false; if(res.ok&&res.j.ok){ load(); } else alert('Status update failed: '+((res.j&&res.j.error)||'')); });
+      });
+
+      q('.saveNotes').addEventListener('click', function(){
+        var notes = q('.notes').value; var m = q('.notesMsg'); var btn=this; btn.disabled=true; m.style.color='#9aa0ad'; m.textContent='Saving…';
+        api('/api/admin-action', { action:'update', customer:cus, patch:{ notes:notes } }).then(function(res){ btn.disabled=false; if(res.ok&&res.j.ok){ m.style.color='#4fd089'; m.textContent='Saved.'; } else { m.style.color='#e58'; m.textContent='Failed.'; } });
+      });
+
+      var dl = q('.dlBlock');
+      if (dl) dl.addEventListener('click', function(){
+        var m = q('.blockMsg'); m.style.color='#9aa0ad'; m.textContent=' generating…';
+        api('/api/admin-action', { action:'blocklist_url', customer:cus }).then(function(res){ if(res.ok&&res.j.url){ m.textContent=''; window.open(res.j.url,'_blank'); } else { m.style.color='#e58'; m.textContent=' '+((res.j&&res.j.error)||'failed'); } });
+      });
+
+      q('.chargeBtn').addEventListener('click', function(){
+        var ref = q('.ref').value.trim(); var amt = q('.amt').value.trim(); var m = q('.chargeMsg'); var btn=this;
+        if (!ref) { m.style.color='#e58'; m.textContent='Add a meeting ref first.'; return; }
+        if (!confirm('Charge a HELD meeting "'+ref+'"'+(amt?(' at $'+amt):' at their bid')+'? Real charge on their card.')) return;
+        btn.disabled=true; m.style.color='#9aa0ad'; m.textContent='Charging…';
+        var body = { customer:cus, meetingRef:ref }; if (amt) body.amount = parseInt(amt,10);
+        api('/api/charge-meeting', body).then(function(res){ if(res.ok&&res.j.ok){ m.style.color='#4fd089'; m.textContent='Charged $'+res.j.charged_usd+' ('+res.j.status+'). Reloading…'; setTimeout(load,1200); } else { m.style.color='#e58'; m.textContent='Failed: '+((res.j&&(res.j.detail||res.j.error))||''); btn.disabled=false; } });
+      });
+
+      q('.refundBtn').addEventListener('click', function(){
+        var m = q('.chargeMsg'); var btn=this;
+        if (!confirm('Refund the setup fee and mark this account declined? Use this when the fit check fails.')) return;
+        btn.disabled=true; m.style.color='#9aa0ad'; m.textContent='Refunding…';
+        api('/api/admin-action', { action:'refund', customer:cus }).then(function(res){ if(res.ok&&res.j.ok){ m.style.color='#4fd089'; m.textContent='Refunded ('+res.j.status+'). Reloading…'; setTimeout(load,1200); } else { m.style.color='#e58'; m.textContent='Failed: '+((res.j&&(res.j.detail||res.j.error))||''); btn.disabled=false; } });
       });
     });
   }
@@ -98,11 +156,9 @@
     KEY = document.getElementById('secret').value.trim();
     if (!KEY) return;
     try { sessionStorage.setItem('od_admin', KEY); } catch(e){}
-    var msg = document.getElementById('msg'); msg.textContent = 'Loading…';
-    fetch('/api/admin-accounts', { method:'POST', headers:{'content-type':'application/json','x-draw-secret':KEY} })
-      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
-      .then(function(res){ if(!res.ok){ throw new Error(res.j.error||'unauthorized'); } msg.textContent = (res.j.accounts||[]).length+' accounts.'; render(res.j); })
-      .catch(function(e){ msg.style.color='#e58'; msg.textContent = 'Could not load: '+e.message+(e.message==='supabase_not_configured'||e.message==='admin_not_configured'?' (set env vars in Vercel)':''); });
+    var msg = document.getElementById('msg'); msg.style.color='#9aa0ad'; msg.textContent = 'Loading…';
+    api('/api/admin-accounts', {}).then(function(res){ if(!res.ok){ throw new Error(res.j.error||'unauthorized'); } msg.textContent = (res.j.accounts||[]).length+' accounts.'; render(res.j); })
+      .catch(function(e){ msg.style.color='#e58'; msg.textContent = 'Could not load: '+e.message; });
   }
 
   document.getElementById('loadBtn').addEventListener('click', load);

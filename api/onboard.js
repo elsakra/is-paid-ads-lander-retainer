@@ -50,6 +50,7 @@ export default async function handler(req, res) {
     const website = clip(b.website, 200);
     const icp = clip(b.icp, 4000);
     const minMinutes = parseInt(b.minMinutes, 10) || 15;
+    const targeting = (b.targeting && typeof b.targeting === 'object') ? b.targeting : null;
 
     // Upload do-not-contact CSV (text) to private storage, if provided.
     let blocklistPath = null;
@@ -67,7 +68,7 @@ export default async function handler(req, res) {
     // Update the account row.
     const patch = {
       company: company || null, website: website || null, booking_link: bookingLink || null,
-      icp: icp || null, min_minutes: minMinutes, status: 'onboarded', updated_at: new Date().toISOString(),
+      icp: icp || null, targeting: targeting, min_minutes: minMinutes, status: 'onboarded', updated_at: new Date().toISOString(),
     };
     if (blocklistPath) patch.blocklist_path = blocklistPath;
     const r = await fetch(sbUrl + '/rest/v1/od_accounts?stripe_customer_id=eq.' + encodeURIComponent(customerId), {
@@ -86,9 +87,22 @@ export default async function handler(req, res) {
       });
     } catch (_) {}
 
+    var t = targeting || {};
+    var arr = function(x){ return Array.isArray(x) && x.length ? x.join(', ') : ''; };
+    var tgt = [
+      arr(t.company_sizes) && ('size ' + arr(t.company_sizes)),
+      t.company_countries && ('co ' + clip(t.company_countries, 80)),
+      t.person_countries && ('person ' + clip(t.person_countries, 80)),
+      arr(t.seniorities) && ('seniority ' + arr(t.seniorities)),
+      arr(t.departments) && ('dept ' + arr(t.departments)),
+      t.job_titles && ('titles ' + clip(t.job_titles, 120)),
+    ].filter(Boolean).join(' · ') || 'broad / not specified';
+
     await notifySlack(':rocket: *Meetings on Demand* ONBOARDED: ' + (company || customerId) +
-      '\n> Booking: ' + (bookingLink || '—') + ' · Min: ' + minMinutes + 'm · Blocklist: ' + (blocklistPath ? 'uploaded' : 'none') +
-      '\n> ICP: ' + (clip(icp, 280) || '—') + '\n> Ready to build. Run the post-pay fit check, then spin up infra. `' + customerId + '`');
+      '\n> Booking: ' + (bookingLink || 'none') + ' · Min: ' + minMinutes + 'm · Blocklist: ' + (blocklistPath ? 'uploaded' : 'none') +
+      '\n> Targeting: ' + tgt +
+      (t.industries ? ('\n> Industries: ' + clip(t.industries, 200)) : '') +
+      '\n> Ready to build. Run the post-pay fit check, then spin up infra. `' + customerId + '`');
 
     return res.status(200).json({ ok: true });
   } catch (err) {

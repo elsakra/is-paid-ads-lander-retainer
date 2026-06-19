@@ -32,6 +32,9 @@
     },
     "api/admin-accounts.js": {
       "maxDuration": 10
+    },
+    "api/admin-action.js": {
+      "maxDuration": 10
     }
   }
 }
