@@ -62,7 +62,6 @@ export default async function handler(req, res) {
       mode: 'setup',
       payment_method_types: { 0: 'card' },
       setup_intent_data: { metadata: { bid: String(bid), kind: 'ondemand_card_on_file' } },
-      phone_number_collection: { enabled: true },
       metadata: meta,
       success_url: base + '/ondemand/onboarding?cs={CHECKOUT_SESSION_ID}',
       cancel_url: base + '/ondemand',
