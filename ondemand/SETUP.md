@@ -28,7 +28,7 @@ Stripe Dashboard -> Developers -> Webhooks -> Add endpoint:
 1. Open `https://go.intentsignal.ai/ondemand`, set a bid, Continue to checkout.
 2. Pay with Stripe test card `4242 4242 4242 4242`, any future expiry/CVC.
 3. You land on `/ondemand/onboarding` automatically. Fill booking link + ICP, upload a CSV.
-4. Check: Slack pings for "checkout started", "setup fee paid", "ONBOARDED"; a row appears in
+4. Check: Slack pings for "card-capture started", "card saved (no charge)", "ONBOARDED"; a row appears in
    Supabase `od_accounts` (status `onboarded`); the CSV is in the `od-blocklists` bucket.
 
 ## 4. Deliver + charge (ops)
@@ -40,8 +40,8 @@ Stripe Dashboard -> Developers -> Webhooks -> Add endpoint:
   PaymentIntent in Stripe.
 
 ## Tunable constants
-- Setup fee: `SETUP_FEE_USD` in `api/create-checkout.js` (currently 500). Keep the `$500` shown
-  on `ondemand/index.html` in sync.
+- No charge today: the card is captured at $0 via Stripe Checkout `mode=setup`. There is no
+  setup fee. The only charge ever is the bid per held meeting (from the admin console).
 - Bid floor: `BID_FLOOR_USD` (200) in `create-checkout.js` and `charge-meeting.js`.
 
 ## Next passes (need your accounts to wire)

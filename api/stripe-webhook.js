@@ -80,34 +80,35 @@ export default async function handler(req, res) {
   try { event = JSON.parse(raw); } catch (_) { return res.status(400).json({ error: 'bad_payload' }); }
 
   try {
-    if (event.type === 'checkout.session.completed') {
+    if (event.type === 'checkout.session.completed' && event.data.object && event.data.object.customer) {
       const s = event.data.object;
-      if (s.mode === 'payment' && s.customer) {
-        const email = (s.customer_details && s.customer_details.email) || '';
-        const phone = (s.customer_details && s.customer_details.phone) || '';
-        const bid = (s.metadata && s.metadata.bid) || '';
-        let pm = '';
-        if (s.payment_intent) { const pi = await stripe('payment_intents/' + s.payment_intent, null, key); pm = pi.payment_method || ''; }
+      const email = (s.customer_details && s.customer_details.email) || '';
+      const phone = (s.customer_details && s.customer_details.phone) || '';
+      const bid = (s.metadata && s.metadata.bid) || '';
 
-        const update = { metadata: { bid: bid, setup_paid: 'yes', onboarded: 'no', source: 'ondemand', pm: pm } };
-        if (email) update.email = email;
-        if (phone) update.phone = phone;
-        if (pm) update['invoice_settings[default_payment_method]'] = pm;
-        await stripe('customers/' + s.customer, update, key);
+      // Card lives on the SetupIntent (setup mode) or PaymentIntent (legacy payment mode).
+      let pm = '';
+      if (s.setup_intent) { const si = await stripe('setup_intents/' + s.setup_intent, null, key); pm = si.payment_method || ''; }
+      else if (s.payment_intent) { const pi = await stripe('payment_intents/' + s.payment_intent, null, key); pm = pi.payment_method || ''; }
 
-        await supabaseUpsert({
-          stripe_customer_id: s.customer,
-          email: email || null,
-          phone: phone || null,
-          bid_usd: bid ? parseInt(bid, 10) : null,
-          setup_fee_usd: s.amount_total ? Math.round(s.amount_total / 100) : null,
-          status: 'paid_pending_onboarding',
-          checkout_session_id: s.id,
-        });
+      const update = { metadata: { bid: bid, card_on_file: 'yes', onboarded: 'no', source: 'ondemand', pm: pm } };
+      if (email) update.email = email;
+      if (phone) update.phone = phone;
+      if (pm) update['invoice_settings[default_payment_method]'] = pm;
+      await stripe('customers/' + s.customer, update, key);
 
-        await notifySlack(':white_check_mark: *Meetings on Demand* setup fee paid: $' + ((s.amount_total || 0) / 100).toFixed(0) +
-          ' by *' + (email || s.customer) + '*. Bid $' + bid + '/held meeting. Card saved. Awaiting onboarding.');
-      }
+      await supabaseUpsert({
+        stripe_customer_id: s.customer,
+        email: email || null,
+        phone: phone || null,
+        bid_usd: bid ? parseInt(bid, 10) : null,
+        setup_fee_usd: 0,
+        status: 'paid_pending_onboarding',
+        checkout_session_id: s.id,
+      });
+
+      await notifySlack(':white_check_mark: *Meetings on Demand* card saved (no charge) for *' + (email || s.customer) +
+        '*. Bid $' + bid + '/held meeting. Awaiting onboarding.');
     }
     return res.status(200).json({ received: true });
   } catch (err) {

@@ -39,7 +39,7 @@
 
 <script>
   var KEY = '';
-  var STATUSES = ['paid_pending_onboarding','onboarded','fit_check','building','active','paused','declined_refunded'];
+  var STATUSES = ['paid_pending_onboarding','onboarded','fit_check','building','active','paused','declined','declined_refunded'];
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function fmtTargeting(t){
     if(!t||typeof t!=='object') return '<span class="text-[#7b8090]">broad / not specified</span>';
@@ -104,7 +104,7 @@
           '<div style="flex:1; min-width:200px;"><div class="lbl mb-1">Charge a HELD meeting</div><input class="inp ref" placeholder="meeting ref (prospect / calendar id)" /></div>'+
           '<input class="inp amt" type="number" placeholder="$'+(a.bid_usd||'')+'" style="width:90px;" />'+
           '<button class="btn btn-charge chargeBtn">Charge held meeting</button>'+
-          '<button class="btn btn-danger refundBtn" title="Refund the setup fee and decline this account">Refund + decline</button>'+
+          '<button class="btn btn-danger refundBtn" title="Decline this account (no charge today, nothing to refund)">Decline account</button>'+
         '</div>'+
         '<div class="chargeMsg msg"></div>'+
       '</div>';
@@ -145,9 +145,9 @@
 
       q('.refundBtn').addEventListener('click', function(){
         var m = q('.chargeMsg'); var btn=this;
-        if (!confirm('Refund the setup fee and mark this account declined? Use this when the fit check fails.')) return;
-        btn.disabled=true; m.style.color='#9aa0ad'; m.textContent='Refunding…';
-        api('/api/admin-action', { action:'refund', customer:cus }).then(function(res){ if(res.ok&&res.j.ok){ m.style.color='#4fd089'; m.textContent='Refunded ('+res.j.status+'). Reloading…'; setTimeout(load,1200); } else { m.style.color='#e58'; m.textContent='Failed: '+((res.j&&(res.j.detail||res.j.error))||''); btn.disabled=false; } });
+        if (!confirm('Mark this account declined? No charge was taken today, so nothing is refunded. Use this when the fit check fails.')) return;
+        btn.disabled=true; m.style.color='#9aa0ad'; m.textContent='Declining…';
+        api('/api/admin-action', { action:'decline', customer:cus }).then(function(res){ if(res.ok&&res.j.ok){ m.style.color='#4fd089'; m.textContent='Declined. Reloading…'; setTimeout(load,1200); } else { m.style.color='#e58'; m.textContent='Failed: '+((res.j&&(res.j.detail||res.j.error))||''); btn.disabled=false; } });
       });
     });
   }

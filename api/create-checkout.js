@@ -1,9 +1,9 @@
 // POST /api/create-checkout
-// One step: charge a small refundable SETUP FEE and save the card off_session (for per-held-meeting
-// charges later). Minimal friction: the only thing asked before payment is the bid; Stripe Checkout
-// collects email + card. Secret lives only in STRIPE_SECRET_KEY (Vercel env). Returns { url }.
+// Zero-friction card capture: Stripe Checkout in SETUP mode saves the card off_session with NO
+// charge today. The only charge that ever lands is the bid, per held meeting, later. Minimal
+// friction: the only thing asked before this is the bid; Checkout collects email + card.
+// Secret lives only in STRIPE_SECRET_KEY (Vercel env). Returns { url }.
 
-const SETUP_FEE_USD = 500;   // sized to cost-to-serve (infra build/warm). Refundable if we don't deliver.
 const BID_FLOOR_USD = 200;
 
 function toForm(obj, prefix, out) {
@@ -55,28 +55,20 @@ export default async function handler(req, res) {
     const host = req.headers['x-forwarded-host'] || req.headers.host || 'go.intentsignal.ai';
     const base = process.env.SITE_URL || (proto + '://' + host);
 
-    const meta = { bid: String(bid), setup_fee: String(SETUP_FEE_USD), source: 'ondemand', onboarded: 'no' };
+    const meta = { bid: String(bid), source: 'ondemand', onboarded: 'no' };
 
+    // SETUP mode: saves the card (off_session) with NO charge. A customer is created automatically.
     const session = await stripe('checkout/sessions', {
-      mode: 'payment',
-      customer_creation: 'always',
-      billing_address_collection: 'auto',
+      mode: 'setup',
+      payment_method_types: { 0: 'card' },
+      setup_intent_data: { metadata: { bid: String(bid), kind: 'ondemand_card_on_file' } },
       phone_number_collection: { enabled: true },
-      line_items: { 0: {
-        price_data: {
-          currency: 'usd',
-          unit_amount: SETUP_FEE_USD * 100,
-          product_data: { name: 'Meetings on Demand setup', description: 'One-time, refundable. Then $' + bid + ' per qualified meeting held.' },
-        },
-        quantity: 1,
-      } },
-      payment_intent_data: { setup_future_usage: 'off_session', metadata: { bid: String(bid), kind: 'ondemand_setup' } },
       metadata: meta,
       success_url: base + '/ondemand/onboarding?cs={CHECKOUT_SESSION_ID}',
       cancel_url: base + '/ondemand',
     }, key);
 
-    await notifySlack(':moneybag: *Meetings on Demand* checkout started: bid *$' + bid + '*/held meeting, $' + SETUP_FEE_USD + ' setup. Session `' + session.id + '`.');
+    await notifySlack(':credit_card: *Meetings on Demand* card-capture started: bid *$' + bid + '*/held meeting (no charge today). Session `' + session.id + '`.');
     return res.status(200).json({ url: session.url });
   } catch (err) {
     return res.status(500).json({ error: 'checkout_failed', detail: String(err && err.message || err).slice(0, 200) });

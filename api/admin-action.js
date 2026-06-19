@@ -7,7 +7,7 @@
 
 const SB_URL = () => process.env.SUPABASE_URL;
 const SB_SRV = () => process.env.SUPABASE_SERVICE_ROLE_KEY;
-const STATUSES = ['paid_pending_onboarding', 'onboarded', 'fit_check', 'building', 'active', 'paused', 'declined_refunded'];
+const STATUSES = ['paid_pending_onboarding', 'onboarded', 'fit_check', 'building', 'active', 'paused', 'declined', 'declined_refunded'];
 
 async function readJsonBody(req) {
   if (req.body) return typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
@@ -83,18 +83,21 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, url: SB_URL() + '/storage/v1' + signed.signedURL });
     }
 
-    if (action === 'refund') {
+    if (action === 'decline') {
+      // No charge today, so usually nothing to refund. If a setup charge ever exists, refund it too.
       const key = process.env.STRIPE_SECRET_KEY;
-      if (!key) return res.status(500).json({ error: 'stripe_not_configured' });
       const rows = await (await sbFetch('/rest/v1/od_accounts' + q + '&select=checkout_session_id,company', {})).json();
       const csId = rows && rows[0] && rows[0].checkout_session_id;
-      if (!csId) return res.status(404).json({ error: 'no_session_on_file' });
-      const session = await stripeGet('checkout/sessions/' + csId, key);
-      if (!session.payment_intent) return res.status(400).json({ error: 'no_payment_intent' });
-      const refund = await stripeForm('refunds', { payment_intent: session.payment_intent, reason: 'requested_by_customer' }, key);
-      await sbFetch('/rest/v1/od_accounts' + q, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify({ status: 'declined_refunded', updated_at: new Date().toISOString() }) });
-      await notifySlack(':leftwards_arrow_with_hook: *Meetings on Demand* setup fee refunded + declined: ' + (clip((rows[0] || {}).company, 120) || customer) + ' (refund `' + refund.id + '`).');
-      return res.status(200).json({ ok: true, refund: refund.id, status: refund.status });
+      let refundId = null;
+      if (key && csId) {
+        try {
+          const session = await stripeGet('checkout/sessions/' + csId, key);
+          if (session.payment_intent) { const r = await stripeForm('refunds', { payment_intent: session.payment_intent, reason: 'requested_by_customer' }, key); refundId = r.id; }
+        } catch (_) {}
+      }
+      await sbFetch('/rest/v1/od_accounts' + q, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify({ status: 'declined', updated_at: new Date().toISOString() }) });
+      await notifySlack(':leftwards_arrow_with_hook: *Meetings on Demand* declined: ' + (clip((rows[0] || {}).company, 120) || customer) + (refundId ? (' (refund `' + refundId + '`)') : ' (no charge to refund)') + '.');
+      return res.status(200).json({ ok: true, refund: refundId, status: 'declined' });
     }
 
     return res.status(400).json({ error: 'unknown_action' });
