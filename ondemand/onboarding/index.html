@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>You're in. Let's set up your meetings.</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { background:#F1EDE4; color:#0F0F0F; font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .font-display { font-family:'Instrument Serif',Georgia,serif; letter-spacing:-0.02em; }
+  .h { font-family:'Instrument Serif',Georgia,serif; font-weight:400; line-height:1.0; letter-spacing:-0.03em; font-size:clamp(36px,5.5vw,60px); }
+  .label-mono { font-family:'JetBrains Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:0.16em; font-size:11px; color:#1f7a36; }
+  .card { background:#fff; border:1px solid rgba(15,15,15,0.14); border-radius:14px; box-shadow:0 1px 2px rgba(15,15,15,0.04), 0 14px 44px rgba(15,15,15,0.08); }
+  .field-label { display:block; font-size:13px; font-weight:600; color:#1A1A1A; margin-bottom:6px; }
+  .field-help { font-size:12.5px; color:#6B6A65; line-height:1.5; margin-top:6px; }
+  .inp, .ta, .sel { width:100%; border:1px solid rgba(15,15,15,0.16); border-radius:8px; background:#fff; padding:12px 14px; font-size:15px; color:#0F0F0F; font-family:inherit; }
+  .ta { min-height:90px; resize:vertical; }
+  .inp:focus,.ta:focus,.sel:focus { outline:2px solid #0F0F0F; outline-offset:1px; border-color:#0F0F0F; }
+  .err { border-color:#b42318 !important; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; background:#0F0F0F; color:#F1EDE4; padding:18px 28px; border-radius:8px; font-weight:500; font-size:16px; border:none; cursor:pointer; width:100%; }
+  .btn:disabled { opacity:.55; cursor:not-allowed; }
+  .file-drop { border:1px dashed rgba(15,15,15,0.3); border-radius:10px; padding:18px; text-align:center; font-size:14px; color:#6B6A65; cursor:pointer; }
+  ul.next { list-style:none; padding:0; margin:24px 0 0; }
+  ul.next li { position:relative; padding-left:24px; margin-top:12px; font-size:15px; line-height:1.55; color:#2A2A2A; }
+  ul.next li::before { content:""; position:absolute; left:0; top:7px; width:7px; height:7px; border-radius:999px; background:#26A641; }
+</style>
+</head>
+<body>
+<div class="max-w-[640px] mx-auto px-6 md:px-10 py-[7vh]">
+  <a href="/" aria-label="IntentSignal"><img src="/assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] w-auto mb-10" /></a>
+
+  <!-- FORM -->
+  <div id="formWrap">
+    <div class="label-mono">Payment received</div>
+    <h1 class="h mt-3">You're in. Two minutes to set up your meetings.</h1>
+    <p class="mt-4 text-[16px] leading-[1.6] text-ink/75">Now that you're a client, tell us where to send the meetings and who to target. This is the only setup we ask for, and we do the rest.</p>
+
+    <div class="card mt-8 p-6 md:p-8 space-y-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div><label class="field-label" for="company">Company</label><input class="inp" id="company" type="text" placeholder="Company name" autocomplete="organization" /></div>
+        <div><label class="field-label" for="website">Website</label><input class="inp" id="website" type="text" placeholder="company.com" /></div>
+      </div>
+
+      <div>
+        <label class="field-label" for="booking">Your booking link (Calendly or similar)</label>
+        <input class="inp" id="booking" type="url" placeholder="https://calendly.com/you/intro" />
+        <p class="field-help">Where we put booked meetings on your calendar. We also use it plus join data to confirm a meeting was held before you're ever charged.</p>
+      </div>
+
+      <div>
+        <label class="field-label" for="icp">Who should we book? (target ICP)</label>
+        <textarea class="ta" id="icp" placeholder="Titles, company size, geo, and any named target accounts. Example: VP Sales / CRO at US SaaS, 50-500 employees. Named: Acme, Globex..."></textarea>
+      </div>
+
+      <div>
+        <label class="field-label" for="minutes">Minimum minutes attended to count as held</label>
+        <select class="sel" id="minutes">
+          <option value="10">10 minutes</option>
+          <option value="15" selected>15 minutes</option>
+          <option value="20">20 minutes</option>
+          <option value="30">30 minutes</option>
+        </select>
+        <p class="field-help">A meeting only bills when the prospect matches your ICP and stays at least this long.</p>
+      </div>
+
+      <div>
+        <label class="field-label">Do-not-contact list (CSV)</label>
+        <label for="blocklist" class="file-drop block"><span id="fileLabel">Upload a CSV of domains and companies we should never touch</span></label>
+        <input id="blocklist" type="file" accept=".csv,text/csv" class="hidden" />
+        <p class="field-help">Optional now, but recommended. Active customers, open opps, partners.</p>
+      </div>
+
+      <div id="obErr" class="field-help" style="color:#b42318;display:none;"></div>
+      <button id="finishBtn" class="btn">Finish setup <span>→</span></button>
+      <p class="field-help text-center">We run a quick fit check before building. If your market can't be booked profitably, we refund the setup fee and tell you straight.</p>
+    </div>
+  </div>
+
+  <!-- DONE -->
+  <div id="doneWrap" style="display:none;">
+    <div class="label-mono">All set</div>
+    <h1 class="h mt-3">We're building your meetings now.</h1>
+    <p class="mt-4 text-[16px] leading-[1.6] text-ink/75">Setup is locked in. Here's what happens next.</p>
+    <ul class="next">
+      <li>We run a fast fit check, then build and warm your sending infrastructure.</li>
+      <li>First meetings usually land in weeks 3 to 4. We brief your rep before each one.</li>
+      <li>Your card is charged your per-meeting price only when a qualified meeting is actually held.</li>
+    </ul>
+    <a href="/" class="inline-block mt-9 text-[14px] underline underline-offset-[5px]">← Back to IntentSignal</a>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var params = new URLSearchParams(location.search);
+    var cs = params.get('cs') || '';
+    var fileText = '';
+    var fileInput = document.getElementById('blocklist');
+    fileInput.addEventListener('change', function(){
+      var f = fileInput.files && fileInput.files[0];
+      if (!f) return;
+      document.getElementById('fileLabel').textContent = f.name;
+      var reader = new FileReader();
+      reader.onload = function(){ fileText = String(reader.result || '').slice(0, 2000000); };
+      reader.readAsText(f);
+    });
+
+    document.getElementById('finishBtn').addEventListener('click', function(){
+      var btn = this, err = document.getElementById('obErr');
+      err.style.display = 'none';
+      var booking = document.getElementById('booking').value.trim();
+      if (!booking || booking.indexOf('http') !== 0) { err.textContent = 'Please paste your booking link (starts with http).'; err.style.display='block'; document.getElementById('booking').classList.add('err'); return; }
+      if (!cs) { err.textContent = 'Missing checkout reference. Please return from the payment confirmation, or email hello@intentsignal.ai.'; err.style.display='block'; return; }
+      btn.disabled = true; btn.querySelector('span').textContent = '…';
+      fetch('/api/onboard', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({
+        cs: cs,
+        company: document.getElementById('company').value.trim(),
+        website: document.getElementById('website').value.trim(),
+        bookingLink: booking,
+        icp: document.getElementById('icp').value.trim(),
+        minMinutes: document.getElementById('minutes').value,
+        blocklistCsv: fileText
+      }) })
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+      .then(function(res){
+        if (res.ok && res.j && res.j.ok) { document.getElementById('formWrap').style.display='none'; document.getElementById('doneWrap').style.display='block'; window.scrollTo(0,0); return; }
+        throw new Error((res.j && res.j.error) || 'failed');
+      })
+      .catch(function(e){ err.textContent = 'Could not save setup ('+e.message+'). Please try again, or email hello@intentsignal.ai.'; err.style.display='block'; btn.disabled=false; btn.querySelector('span').textContent='→'; });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -18,13 +18,19 @@
     "api/lead.js": {
       "maxDuration": 5
     },
-    "api/create-deposit-session.js": {
+    "api/create-checkout.js": {
       "maxDuration": 10
     },
     "api/stripe-webhook.js": {
       "maxDuration": 10
     },
-    "api/draw-meeting.js": {
+    "api/charge-meeting.js": {
+      "maxDuration": 10
+    },
+    "api/onboard.js": {
+      "maxDuration": 10
+    },
+    "api/admin-accounts.js": {
       "maxDuration": 10
     }
   }

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Meetings on Demand · Ops</title>
+<meta name="robots" content="noindex,nofollow" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { background:#0c0d10; color:#e6e7ea; font-family:ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .mono { font-family:ui-monospace,'JetBrains Mono',monospace; }
+  .card { background:#14161b; border:1px solid #23262e; border-radius:12px; }
+  .inp { background:#0c0d10; border:1px solid #2a2e38; border-radius:7px; color:#e6e7ea; padding:9px 11px; font-size:13px; width:100%; }
+  .inp:focus { outline:2px solid #2f6fed; }
+  .btn { background:#2f6fed; color:#fff; border:none; border-radius:7px; padding:9px 14px; font-size:13px; font-weight:600; cursor:pointer; }
+  .btn:disabled { opacity:.5; cursor:not-allowed; }
+  .btn-charge { background:#1f9d4d; }
+  .pill { display:inline-block; font-size:11px; padding:2px 9px; border-radius:999px; }
+  .p-paid { background:#3a2f0b; color:#e7c14b; }
+  .p-onb { background:#0b3a24; color:#4fd089; }
+  a { color:#6ea8ff; }
+</style>
+</head>
+<body>
+<div class="max-w-[1200px] mx-auto px-5 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-xl font-semibold">Meetings on Demand <span class="text-[#7b8090] font-normal">· ops</span></h1>
+    <div id="gate" class="flex items-center gap-2">
+      <input id="secret" class="inp" type="password" placeholder="admin secret" style="width:220px;" />
+      <button id="loadBtn" class="btn">Load</button>
+    </div>
+  </div>
+  <p id="msg" class="text-sm text-[#9aa0ad] mb-5">Enter the admin secret to load accounts. Charge a card only after a meeting is verified held and matches the buyer's criteria.</p>
+  <div id="list" class="space-y-4"></div>
+</div>
+
+<script>
+  var KEY = '';
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function fmtMeetings(meetings, cus){
+    var rows = meetings.filter(function(m){ return m.stripe_customer_id === cus; });
+    if (!rows.length) return '<div class="text-[#7b8090] text-xs mt-2">No meetings billed yet.</div>';
+    var held = rows.filter(function(r){ return r.charge_status==='succeeded'; });
+    var sum = held.reduce(function(a,r){ return a + (r.amount_usd||0); }, 0);
+    return '<div class="text-xs mt-3 text-[#9aa0ad]">'+held.length+' held · $'+sum+' charged</div>' +
+      rows.slice(0,6).map(function(r){ return '<div class="text-xs mono mt-1 '+(r.charge_status==='succeeded'?'text-[#4fd089]':'text-[#e58]')+'">$'+(r.amount_usd||0)+' · '+esc(r.meeting_ref)+' · '+esc(r.charge_status)+'</div>'; }).join('');
+  }
+
+  function render(data){
+    var meetings = data.meetings || [];
+    var html = (data.accounts||[]).map(function(a){
+      var statusPill = a.status==='onboarded' ? '<span class="pill p-onb">onboarded</span>' : '<span class="pill p-paid">'+esc(a.status)+'</span>';
+      return '<div class="card p-5">'+
+        '<div class="flex items-start justify-between gap-4">'+
+          '<div>'+
+            '<div class="font-semibold">'+esc(a.company||a.email||a.stripe_customer_id)+' '+statusPill+'</div>'+
+            '<div class="text-xs text-[#9aa0ad] mt-1">'+esc(a.email||'')+(a.phone?(' · '+esc(a.phone)):'')+' · bid <b class="text-[#e6e7ea]">$'+(a.bid_usd||'?')+'</b>/held · setup $'+(a.setup_fee_usd||'?')+'</div>'+
+            '<div class="text-xs mono text-[#7b8090] mt-1">'+esc(a.stripe_customer_id)+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 mt-3 text-[13px]">'+
+          '<div><span class="text-[#7b8090]">Booking:</span> '+(a.booking_link?('<a href="'+esc(a.booking_link)+'" target="_blank">'+esc(a.booking_link)+'</a>'):'<span class="text-[#7b8090]">·</span>')+'</div>'+
+          '<div><span class="text-[#7b8090]">Min minutes:</span> '+esc(a.min_minutes||'')+'</div>'+
+          '<div class="md:col-span-2"><span class="text-[#7b8090]">ICP:</span> '+esc(a.icp||'·')+'</div>'+
+          '<div class="md:col-span-2"><span class="text-[#7b8090]">Blocklist:</span> '+(a.blocklist_path?esc(a.blocklist_path):'·')+'</div>'+
+        '</div>'+
+        fmtMeetings(meetings, a.stripe_customer_id)+
+        '<div class="flex items-center gap-2 mt-4 pt-4 border-t border-[#23262e]">'+
+          '<input class="inp ref" data-cus="'+esc(a.stripe_customer_id)+'" placeholder="meeting ref (prospect / calendar id)" style="flex:1;" />'+
+          '<input class="inp amt" data-cus="'+esc(a.stripe_customer_id)+'" type="number" placeholder="$'+(a.bid_usd||'')+'" style="width:90px;" />'+
+          '<button class="btn btn-charge chargeBtn" data-cus="'+esc(a.stripe_customer_id)+'">Charge held meeting</button>'+
+        '</div>'+
+        '<div class="chargeMsg text-xs mt-2" data-cus="'+esc(a.stripe_customer_id)+'"></div>'+
+      '</div>';
+    }).join('');
+    document.getElementById('list').innerHTML = html || '<div class="text-[#7b8090]">No accounts yet.</div>';
+
+    document.querySelectorAll('.chargeBtn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var cus = btn.getAttribute('data-cus');
+        var ref = document.querySelector('.ref[data-cus="'+cus+'"]').value.trim();
+        var amt = document.querySelector('.amt[data-cus="'+cus+'"]').value.trim();
+        var msg = document.querySelector('.chargeMsg[data-cus="'+cus+'"]');
+        if (!ref) { msg.textContent = 'Add a meeting ref first.'; msg.style.color='#e58'; return; }
+        if (!confirm('Charge this account for a HELD meeting "'+ref+'"'+(amt?(' at $'+amt):' at their bid')+'? This puts a real charge on their card.')) return;
+        btn.disabled = true; msg.style.color='#9aa0ad'; msg.textContent = 'Charging…';
+        var body = { customer: cus, meetingRef: ref }; if (amt) body.amount = parseInt(amt,10);
+        fetch('/api/charge-meeting', { method:'POST', headers:{'content-type':'application/json','x-draw-secret':KEY}, body: JSON.stringify(body) })
+          .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+          .then(function(res){ if(res.ok && res.j.ok){ msg.style.color='#4fd089'; msg.textContent='Charged $'+res.j.charged_usd+' ('+res.j.status+'). Reloading…'; setTimeout(load, 1200); } else { throw new Error((res.j&&res.j.detail)||(res.j&&res.j.error)||'failed'); } })
+          .catch(function(e){ msg.style.color='#e58'; msg.textContent='Failed: '+e.message; btn.disabled=false; });
+      });
+    });
+  }
+
+  function load(){
+    KEY = document.getElementById('secret').value.trim();
+    if (!KEY) return;
+    try { sessionStorage.setItem('od_admin', KEY); } catch(e){}
+    var msg = document.getElementById('msg'); msg.textContent = 'Loading…';
+    fetch('/api/admin-accounts', { method:'POST', headers:{'content-type':'application/json','x-draw-secret':KEY} })
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+      .then(function(res){ if(!res.ok){ throw new Error(res.j.error||'unauthorized'); } msg.textContent = (res.j.accounts||[]).length+' accounts.'; render(res.j); })
+      .catch(function(e){ msg.style.color='#e58'; msg.textContent = 'Could not load: '+e.message+(e.message==='supabase_not_configured'||e.message==='admin_not_configured'?' (set env vars in Vercel)':''); });
+  }
+
+  document.getElementById('loadBtn').addEventListener('click', load);
+  document.getElementById('secret').addEventListener('keydown', function(e){ if(e.key==='Enter') load(); });
+  try { var s = sessionStorage.getItem('od_admin'); if (s) { document.getElementById('secret').value = s; load(); } } catch(e){}
+</script>
+</body>
+</html>

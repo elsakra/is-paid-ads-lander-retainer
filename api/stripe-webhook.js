@@ -1,7 +1,7 @@
 // POST /api/stripe-webhook
-// On deposit payment: credit the customer's Stripe balance by the deposit amount (so per-meeting
-// draws can be applied against it) and set the saved card as the invoice default payment method.
-// Verifies the Stripe signature with STRIPE_WEBHOOK_SECRET. Raw body required (do not pre-parse).
+// On setup-fee payment: save the card as the customer's default payment method (so per-held-meeting
+// charges can run off_session later) and stamp the bid/email/onboarding state on the customer.
+// Also upserts an account row into Supabase when configured. Verifies the Stripe signature.
 
 import crypto from 'node:crypto';
 
@@ -15,7 +15,6 @@ function readRaw(req) {
     req.on('error', () => resolve(''));
   });
 }
-
 function verify(raw, sigHeader, secret) {
   if (!sigHeader) return false;
   const map = {};
@@ -28,11 +27,8 @@ function verify(raw, sigHeader, secret) {
   });
   if (!map.t || !map.v1) return false;
   const expected = crypto.createHmac('sha256', secret).update(map.t + '.' + raw, 'utf8').digest('hex');
-  return map.v1.some((sig) => {
-    try { return crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); } catch (_) { return false; }
-  });
+  return map.v1.some((sig) => { try { return crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); } catch (_) { return false; } });
 }
-
 function toForm(obj, prefix, out) {
   out = out || new URLSearchParams();
   for (const key in obj) {
@@ -58,6 +54,18 @@ async function notifySlack(text) {
   if (!hook) return;
   try { await fetch(hook, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }) }); } catch (_) {}
 }
+// Best-effort upsert into Supabase (no-op if not configured). Keyed on stripe_customer_id.
+async function supabaseUpsert(row) {
+  const url = process.env.SUPABASE_URL, srv = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !srv) return;
+  try {
+    await fetch(url + '/rest/v1/od_accounts?on_conflict=stripe_customer_id', {
+      method: 'POST',
+      headers: { 'apikey': srv, 'Authorization': 'Bearer ' + srv, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify(row),
+    });
+  } catch (_) {}
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).end(); }
@@ -66,38 +74,43 @@ export default async function handler(req, res) {
   if (!key || !whSecret) return res.status(500).json({ error: 'stripe_not_configured' });
 
   const raw = await readRaw(req);
-  if (!verify(raw, req.headers['stripe-signature'], whSecret)) {
-    return res.status(400).json({ error: 'bad_signature' });
-  }
+  if (!verify(raw, req.headers['stripe-signature'], whSecret)) return res.status(400).json({ error: 'bad_signature' });
 
   let event;
   try { event = JSON.parse(raw); } catch (_) { return res.status(400).json({ error: 'bad_payload' }); }
 
   try {
     if (event.type === 'checkout.session.completed') {
-      const session = event.data.object;
-      if (session.mode === 'payment' && session.customer && session.amount_total) {
-        const customer = await stripe('customers/' + session.customer, null, key);
-        const newBalance = (customer.balance || 0) - session.amount_total; // negative balance = credit
-        const update = { balance: newBalance };
+      const s = event.data.object;
+      if (s.mode === 'payment' && s.customer) {
+        const email = (s.customer_details && s.customer_details.email) || '';
+        const phone = (s.customer_details && s.customer_details.phone) || '';
+        const bid = (s.metadata && s.metadata.bid) || '';
+        let pm = '';
+        if (s.payment_intent) { const pi = await stripe('payment_intents/' + s.payment_intent, null, key); pm = pi.payment_method || ''; }
 
-        // Make the card saved at checkout the default for future per-meeting invoices.
-        if (session.payment_intent) {
-          const pi = await stripe('payment_intents/' + session.payment_intent, null, key);
-          if (pi.payment_method) update['invoice_settings[default_payment_method]'] = pi.payment_method;
-        }
-        await stripe('customers/' + session.customer, update, key);
+        const update = { metadata: { bid: bid, setup_paid: 'yes', onboarded: 'no', source: 'ondemand', pm: pm } };
+        if (email) update.email = email;
+        if (phone) update.phone = phone;
+        if (pm) update['invoice_settings[default_payment_method]'] = pm;
+        await stripe('customers/' + s.customer, update, key);
 
-        await notifySlack(
-          ':white_check_mark: *Meetings on Demand* deposit captured: $' + (session.amount_total / 100).toFixed(0) +
-          ' from `' + session.customer + '`. Credit balance now $' + (Math.abs(newBalance) / 100).toFixed(0) +
-          '. Bid $' + (session.metadata && session.metadata.bid || '?') + '/meeting.'
-        );
+        await supabaseUpsert({
+          stripe_customer_id: s.customer,
+          email: email || null,
+          phone: phone || null,
+          bid_usd: bid ? parseInt(bid, 10) : null,
+          setup_fee_usd: s.amount_total ? Math.round(s.amount_total / 100) : null,
+          status: 'paid_pending_onboarding',
+          checkout_session_id: s.id,
+        });
+
+        await notifySlack(':white_check_mark: *Meetings on Demand* setup fee paid: $' + ((s.amount_total || 0) / 100).toFixed(0) +
+          ' by *' + (email || s.customer) + '*. Bid $' + bid + '/held meeting. Card saved. Awaiting onboarding.');
       }
     }
     return res.status(200).json({ received: true });
   } catch (err) {
-    // 200 so Stripe does not hammer retries on our own downstream errors; we logged via Slack intent.
     await notifySlack(':warning: Meetings on Demand webhook error: ' + String(err && err.message || err).slice(0, 200));
     return res.status(200).json({ received: true, handled: false });
   }

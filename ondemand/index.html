@@ -12,10 +12,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Meetings on Demand: pay only when a meeting is held.</title>
-<meta name="description" content="We book qualified meetings with your buyers. You only pay when one is actually held. Start in five minutes, no call." />
+<meta name="description" content="We book qualified sales meetings with your buyers. You only pay when a meeting is actually held. Set your price, put a card down, start in two minutes." />
 
 <meta property="og:title" content="Meetings on Demand: pay only when a meeting is held." />
-<meta property="og:description" content="Booked meetings with buyers who close. You only pay when a meeting is actually held. No retainer to start, no call." />
+<meta property="og:description" content="Qualified meetings with buyers who close. You only pay when one is held. Refundable setup fee, no retainer, no call." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://go.intentsignal.ai/ondemand" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -30,226 +30,110 @@
 <script>
   window.tailwind = window.tailwind || {};
   window.tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          bone:    '#F1EDE4',
-          bone2:   '#EAE4D6',
-          ink:     '#0F0F0F',
-          ink2:    '#1A1A1A',
-          mute:    '#6B6A65',
-          hair:    'rgba(15,15,15,0.14)',
-          gh:      '#26A641',
-          teal:    '#9BD4D4',
-        },
-        fontFamily: {
-          sans:    ['Inter','system-ui','sans-serif'],
-          display: ['"Instrument Serif"','Georgia','serif'],
-          mono:    ['"JetBrains Mono"','ui-monospace','monospace'],
-        }
-      }
-    }
+    theme: { extend: {
+      colors: { bone:'#F1EDE4', bone2:'#EAE4D6', ink:'#0F0F0F', ink2:'#1A1A1A', mute:'#6B6A65', hair:'rgba(15,15,15,0.14)', gh:'#26A641', teal:'#9BD4D4' },
+      fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['"Instrument Serif"','Georgia','serif'], mono:['"JetBrains Mono"','ui-monospace','monospace'] }
+    } }
   };
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
   html { scroll-behavior: smooth; }
-  body {
-    background: #F1EDE4;
-    color: #0F0F0F;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-feature-settings: "ss01","cv11";
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  .font-display { font-family: 'Instrument Serif', Georgia, serif; letter-spacing: -0.02em; }
-  .font-mono    { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  body { background:#F1EDE4; color:#0F0F0F; font-family:'Inter',system-ui,sans-serif; font-feature-settings:"ss01","cv11"; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  .font-display { font-family:'Instrument Serif',Georgia,serif; letter-spacing:-0.02em; }
+  .font-mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  .hairline-t { border-top:1px solid rgba(15,15,15,0.14); }
 
-  .hairline-t { border-top: 1px solid rgba(15,15,15,0.14); }
-  .hairline-b { border-bottom: 1px solid rgba(15,15,15,0.14); }
+  .hero-h { font-family:'Instrument Serif',Georgia,serif; font-weight:400; line-height:1.02; letter-spacing:-0.035em; font-size:clamp(40px,6.2vw,78px); padding-bottom:0.08em; }
+  .hero-h em { font-style:italic; }
+  .section-h { font-family:'Instrument Serif',Georgia,serif; font-weight:400; line-height:0.98; letter-spacing:-0.028em; font-size:clamp(38px,5.4vw,72px); }
+  .section-h em { font-style:italic; color:#1f7a36; }
 
-  .hero-h {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-weight: 400; line-height: 1.02; letter-spacing: -0.035em;
-    font-size: clamp(40px, 6.2vw, 78px); padding-bottom: 0.08em;
-  }
-  .hero-h em { font-style: italic; }
-  .section-h {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-weight: 400; line-height: 0.98; letter-spacing: -0.028em;
-    font-size: clamp(38px, 5.4vw, 72px);
-  }
-  .section-h em { font-style: italic; color: #1f7a36; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:10px; background:#0F0F0F; color:#F1EDE4; padding:16px 26px; border-radius:6px; font-weight:500; font-size:15px; transition:background .18s ease; white-space:nowrap; border:none; cursor:pointer; }
+  .btn-primary:hover { background:#2a2a2a; }
+  .btn-primary:disabled { opacity:.55; cursor:not-allowed; }
+  .btn-primary .arrow { transition:transform .2s ease; display:inline-block; }
+  .btn-primary:hover .arrow { transform:translateX(3px); }
+  .btn-large { padding:20px 32px; font-size:16px; }
 
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: #0F0F0F; color: #F1EDE4;
-    padding: 16px 26px; border-radius: 6px;
-    font-weight: 500; font-size: 15px;
-    transition: background .18s ease; white-space: nowrap;
-    border: none; cursor: pointer;
-  }
-  .btn-primary:hover { background: #2a2a2a; }
-  .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
-  .btn-primary .arrow { transition: transform .2s ease; display:inline-block; }
-  .btn-primary:hover .arrow { transform: translateX(3px); }
-  .btn-large { padding: 20px 32px; font-size: 16px; }
+  .label-mono { font-family:'JetBrains Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:0.16em; font-size:11px; color:#6B6A65; }
 
-  .label-mono {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    text-transform: uppercase; letter-spacing: 0.16em; font-size: 11px; color: #6B6A65;
-  }
+  .risk-band { background:#0F0F0F; color:#F1EDE4; }
+  .risk-h { font-family:'Instrument Serif',Georgia,serif; font-weight:400; line-height:1.04; letter-spacing:-0.025em; font-size:clamp(30px,4.4vw,56px); }
+  .risk-h em { font-style:italic; color:#9BD4D4; }
 
-  /* Risk-reversal band */
-  .risk-band { background: #0F0F0F; color: #F1EDE4; }
-  .risk-h {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-weight: 400; line-height: 1.04; letter-spacing: -0.025em;
-    font-size: clamp(30px, 4.4vw, 56px);
-  }
-  .risk-h em { font-style: italic; color: #9BD4D4; }
-
-  /* Proof chips / scarcity */
-  .scar-line {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px; color: #2A2A2A; letter-spacing: 0.04em;
-  }
-  .scar-line .dot-g { width: 8px; height: 8px; background: #26A641; border-radius: 999px; display:inline-block;
-    box-shadow: 0 0 0 0 rgba(38,166,65,0.5); animation: pulse 2.4s infinite; }
+  .scar-line { display:inline-flex; align-items:center; gap:10px; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:12px; color:#2A2A2A; letter-spacing:0.04em; }
+  .scar-line .dot-g { width:8px; height:8px; background:#26A641; border-radius:999px; display:inline-block; box-shadow:0 0 0 0 rgba(38,166,65,0.5); animation:pulse 2.4s infinite; }
   @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(38,166,65,0.45);} 70%{box-shadow:0 0 0 7px rgba(38,166,65,0);} 100%{box-shadow:0 0 0 0 rgba(38,166,65,0);} }
-  @media (prefers-reduced-motion: reduce){ .scar-line .dot-g { animation: none; } }
+  @media (prefers-reduced-motion: reduce){ .scar-line .dot-g { animation:none; } }
 
-  /* Proof cards */
-  .proof-card { border-left: 2px solid rgba(15,15,15,0.18); padding-left: 20px; }
-  .proof-num {
-    font-family: 'Instrument Serif', Georgia, serif; font-style: italic;
-    font-size: clamp(40px, 5vw, 60px); line-height: 0.95; letter-spacing: -0.03em;
-  }
-  .client-logo-row { display:flex; flex-wrap:wrap; align-items:center; gap: 28px 40px; }
-  .client-logo-row img { height: 28px; width:auto; filter: grayscale(1); opacity:.62; }
+  .proof-card { border-left:2px solid rgba(15,15,15,0.18); padding-left:20px; }
+  .proof-num { font-family:'Instrument Serif',Georgia,serif; font-style:italic; font-size:clamp(40px,5vw,60px); line-height:0.95; letter-spacing:-0.03em; }
+  .client-logo-row { display:flex; flex-wrap:wrap; align-items:center; gap:28px 40px; }
+  .client-logo-row img { height:28px; width:auto; filter:grayscale(1); opacity:.62; }
 
-  /* Flow card (gate + config + checkout) */
-  .flow-card {
-    background: #FFFFFF; border: 1px solid rgba(15,15,15,0.14); border-radius: 12px;
-    box-shadow: 0 1px 2px rgba(15,15,15,0.04), 0 12px 40px rgba(15,15,15,0.07);
-  }
-  .flow-step { display: none; }
-  .flow-step.active { display: block; }
-  .step-q {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-size: clamp(26px, 3.2vw, 34px); line-height: 1.08; letter-spacing: -0.02em; color: #0F0F0F;
-  }
-  .opt {
-    width: 100%; text-align: left; display:flex; align-items:center; justify-content:space-between;
-    padding: 15px 18px; border: 1px solid rgba(15,15,15,0.14); border-radius: 8px;
-    font-size: 15px; font-weight: 500; color:#0F0F0F; background:#fff; cursor:pointer;
-    transition: all .15s ease; margin-bottom: 8px;
-  }
-  .opt:hover { border-color:#0F0F0F; transform: translateY(-1px); }
-  .opt .qa { opacity:0; transition:.15s; font-family:'JetBrains Mono',ui-monospace,monospace; color:#6B6A65; }
-  .opt:hover .qa { opacity:1; transform: translateX(2px); }
-  .opt.selected { border-color:#0F0F0F; background:#0F0F0F; color:#F1EDE4; }
-  .opt.selected .qa { opacity:1; color:#9BD4D4; }
+  .how-num { font-family:'Instrument Serif',Georgia,serif; font-size:clamp(40px,5vw,64px); line-height:0.85; color:rgba(15,15,15,0.22); }
 
-  .field-label { display:block; font-size: 13px; font-weight: 600; color:#1A1A1A; margin-bottom: 6px; }
-  .field-help { font-size: 12.5px; color:#6B6A65; line-height: 1.5; margin-top: 5px; }
-  .inp, .ta, .sel {
-    width:100%; border:1px solid rgba(15,15,15,0.16); border-radius:8px; background:#fff;
-    padding: 12px 14px; font-size: 15px; color:#0F0F0F; font-family: inherit;
-  }
-  .ta { min-height: 78px; resize: vertical; }
-  .inp:focus, .ta:focus, .sel:focus { outline: 2px solid #0F0F0F; outline-offset: 1px; border-color:#0F0F0F; }
-  .inp-error { border-color:#b42318 !important; }
+  /* Checkout card */
+  .buy-card { background:#FFFFFF; border:1px solid rgba(15,15,15,0.14); border-radius:14px; box-shadow:0 1px 2px rgba(15,15,15,0.04), 0 14px 44px rgba(15,15,15,0.08); }
+  .field-label { display:block; font-size:13px; font-weight:600; color:#1A1A1A; margin-bottom:6px; }
+  .field-help { font-size:12.5px; color:#6B6A65; line-height:1.5; margin-top:6px; }
+  .bid-wrap { position:relative; }
+  .bid-wrap .cur { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#6B6A65; font-weight:700; font-size:20px; }
+  .bid-wrap input { width:100%; border:1px solid rgba(15,15,15,0.16); border-radius:10px; background:#fff; padding:18px 16px 18px 34px; font-weight:700; font-size:22px; color:#0F0F0F; font-family:inherit; }
+  .bid-wrap input:focus { outline:2px solid #0F0F0F; outline-offset:1px; border-color:#0F0F0F; }
+  .bid-wrap input.err { border-color:#b42318; }
+  .guarantee { display:flex; gap:12px; align-items:flex-start; background:#FBFAF6; border:1px solid rgba(15,15,15,0.10); border-radius:10px; padding:16px 18px; }
+  .guarantee svg { flex:0 0 auto; margin-top:1px; }
 
-  .bid-wrap { position: relative; }
-  .bid-wrap .cur { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#6B6A65; font-weight:600; }
-  .bid-wrap .inp { padding-left: 30px; font-weight:600; font-size: 17px; }
-
-  .toggle { position: relative; display:inline-flex; align-items:center; cursor:pointer; }
-  .toggle input { position:absolute; opacity:0; }
-  .toggle .track { width:44px; height:26px; border-radius:999px; background:rgba(15,15,15,0.18); transition:.18s; }
-  .toggle .knob { position:absolute; left:3px; top:3px; width:20px; height:20px; border-radius:999px; background:#fff; transition:.18s; box-shadow:0 1px 2px rgba(0,0,0,.2); }
-  .toggle input:checked + .track { background:#26A641; }
-  .toggle input:checked + .track + .knob { transform: translateX(18px); }
-
-  .comp-list { list-style:none; padding:0; margin:0; }
-  .comp-list li { position:relative; padding-left: 26px; margin-top: 10px; font-size: 14.5px; line-height: 1.5; color:#1F1F1F; }
-  .comp-list li::before { content:""; position:absolute; left:0; top:6px; width:7px; height:7px; border-radius:999px; background:#26A641; }
-  .nobill li::before { background:#b9b6ac; border-radius:2px; }
-
-  .deposit-box { background:#0F0F0F; color:#F1EDE4; border-radius:12px; padding: 26px; }
-  .deposit-amt { font-family:'Instrument Serif',Georgia,serif; font-size: 56px; line-height:1; letter-spacing:-0.03em; }
-
-  .progress { display:flex; gap:6px; margin-bottom: 22px; }
-  .progress span { flex:1; height:3px; border-radius:2px; background:rgba(15,15,15,0.10); }
-  .progress span.done { background:#0F0F0F; }
-
-  details.faq { border-bottom: 1px solid rgba(15,15,15,0.14); }
-  details.faq > summary {
-    list-style:none; cursor:pointer; padding: 24px 0; display:flex; align-items:flex-start; justify-content:space-between;
-    gap: 24px; font-weight:500; font-size:18px; color:#0F0F0F;
-  }
+  details.faq { border-bottom:1px solid rgba(15,15,15,0.14); }
+  details.faq > summary { list-style:none; cursor:pointer; padding:24px 0; display:flex; align-items:flex-start; justify-content:space-between; gap:24px; font-weight:500; font-size:18px; color:#0F0F0F; }
   details.faq > summary::-webkit-details-marker { display:none; }
   details.faq .plus { flex:0 0 auto; width:18px; height:18px; position:relative; margin-top:5px; }
   details.faq .plus::before, details.faq .plus::after { content:""; position:absolute; background:#0F0F0F; }
   details.faq .plus::before { left:0; right:0; top:8px; height:2px; }
   details.faq .plus::after { top:0; bottom:0; left:8px; width:2px; transition:.2s; }
-  details.faq[open] .plus::after { transform: scaleY(0); }
-  details.faq .answer { padding: 0 36px 26px 0; color:#2A2A2A; font-size:15.5px; line-height:1.65; max-width: 760px; }
+  details.faq[open] .plus::after { transform:scaleY(0); }
+  details.faq .answer { padding:0 36px 26px 0; color:#2A2A2A; font-size:15.5px; line-height:1.65; max-width:760px; }
 
-  .note { font-size: 13px; color:#6B6A65; line-height:1.55; }
-  .pill { display:inline-flex; align-items:center; gap:7px; border:1px solid rgba(15,15,15,0.16); border-radius:999px; padding:7px 13px; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11.5px; letter-spacing:.04em; color:#2A2A2A; background:#fff; }
+  .note { font-size:13px; color:#6B6A65; line-height:1.55; }
+
+  /* Sticky mobile buy bar */
+  #buyBar { position:fixed; left:12px; right:12px; bottom:12px; z-index:60; background:#0F0F0F; color:#F1EDE4; border-radius:12px; display:none; align-items:center; justify-content:space-between; padding:12px 14px 12px 18px; box-shadow:0 10px 30px rgba(0,0,0,0.2); }
+  @media (max-width:640px){ #buyBar.show { display:flex; } }
 </style>
 </head>
 
 <body class="antialiased">
 
-<!-- Header -->
 <header class="relative z-40">
   <div class="max-w-[1180px] mx-auto px-6 md:px-10 pt-7 md:pt-9 flex items-center justify-between">
     <a href="/" class="flex items-center min-w-0" aria-label="IntentSignal">
       <img src="/assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[26px] md:h-[30px] w-auto max-w-[min(220px,62vw)] object-contain object-left" width="220" height="34" />
     </a>
-    <a href="#start" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
-      Start in 5 minutes
-    </a>
+    <a href="#buy" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">Start now</a>
   </div>
 </header>
 
-<!-- 1) PROMISE + PROOF -->
+<!-- HERO + PROOF -->
 <section class="max-w-[1180px] mx-auto px-6 md:px-10 pt-10 md:pt-16 pb-12 md:pb-16">
-  <div class="max-w-[820px]">
+  <div class="max-w-[860px]">
     <div class="scar-line mb-5"><span class="dot-g"></span>Taking a handful of new accounts this month</div>
-    <h1 class="hero-h">
-      Booked meetings with buyers who close. <em>You only pay when one is held.</em>
-    </h1>
-    <p class="mt-6 max-w-[640px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85">
-      We book qualified sales meetings with your buyers, billed only when a meeting is actually held. Start in five minutes. No call, no retainer, no long-term contract.
+    <h1 class="hero-h">Qualified sales meetings with buyers who close. <em>You only pay when one is held.</em></h1>
+    <p class="mt-6 max-w-[660px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85">
+      We book the meetings. You set your price per meeting, put a card down, and the only real charge lands when a buyer who matches your criteria actually shows. No retainer. No call. Start in two minutes.
     </p>
     <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-      <a href="#start" class="btn-primary btn-large w-full sm:w-auto justify-center" onclick="trackCTA('hero_primary')">
-        Start in 5 minutes, no call <span class="arrow">→</span>
-      </a>
-      <span class="note">Self-serve. You set the price and the rules.</span>
+      <a href="#buy" class="btn-primary btn-large w-full sm:w-auto" onclick="trackCTA('hero')">Start in 2 minutes <span class="arrow">→</span></a>
+      <span class="note">Set your price. Refundable if we don't deliver.</span>
     </div>
   </div>
 
-  <!-- proof -->
   <div class="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
-    <div class="proof-card">
-      <div class="proof-num">$42M</div>
-      <p class="mt-3 text-[15px] leading-[1.55] text-ink/80">of pipeline for Route in three quarters. Out-produced a 17-person SDR team in a single month.</p>
-    </div>
-    <div class="proof-card">
-      <div class="proof-num">6.5%</div>
-      <p class="mt-3 text-[15px] leading-[1.55] text-ink/80">of all US restaurants booked into meetings for Upside in one quarter, in a vertical they started from zero.</p>
-    </div>
-    <div class="proof-card">
-      <div class="proof-num">90 SALs</div>
-      <p class="mt-3 text-[15px] leading-[1.55] text-ink/80">in two months for Gainsight, in a market everyone said was locked up. One email was called a masterclass on LinkedIn.</p>
-    </div>
+    <div class="proof-card"><div class="proof-num">$42M</div><p class="mt-3 text-[15px] leading-[1.55] text-ink/80">of pipeline for Route in three quarters. Out-produced a 17-person SDR team in a single month.</p></div>
+    <div class="proof-card"><div class="proof-num">6.5%</div><p class="mt-3 text-[15px] leading-[1.55] text-ink/80">of all US restaurants booked into meetings for Upside in one quarter, in a vertical they started from zero.</p></div>
+    <div class="proof-card"><div class="proof-num">90 SALs</div><p class="mt-3 text-[15px] leading-[1.55] text-ink/80">in two months for Gainsight, in a market everyone said was locked up. One email was called a masterclass on LinkedIn.</p></div>
   </div>
 
   <div class="mt-12 md:mt-16 pt-8 border-t border-ink/10">
@@ -267,33 +151,23 @@
   </div>
 </section>
 
-<!-- 2) RISK REVERSAL -->
+<!-- RISK REVERSAL -->
 <section class="risk-band">
   <div class="max-w-[1180px] mx-auto px-6 md:px-10 py-20 md:py-28">
-    <h2 class="risk-h max-w-[920px]">
-      You only pay when a meeting is <em>actually held.</em> No retainer to start. No long-term contract.
-    </h2>
-    <p class="mt-7 max-w-[680px] text-[16.5px] leading-[1.65] text-bone/85">
-      A held meeting means your buyer showed, stayed, and matched the criteria you set. No-shows, reschedules, and wrong-fit do not bill. You put a deposit down, we draw your price per held meeting against it, and you stay in control of every rule.
+    <h2 class="risk-h max-w-[940px]">You only pay when a meeting is <em>actually held.</em> And if we don't book you one that fits, your setup fee comes back.</h2>
+    <p class="mt-7 max-w-[700px] text-[16.5px] leading-[1.65] text-bone/85">
+      A held meeting means a buyer who matches the criteria you set showed and stayed. No-shows, reschedules, and wrong-fit never bill. You put a card down with a small setup fee, we build and warm your infrastructure, and we draw your price per held meeting after that. If we don't deliver a qualified meeting, the setup fee is refunded.
     </p>
-    <div class="mt-9 flex flex-wrap gap-3">
-      <span class="pill" style="background:transparent;border-color:rgba(241,237,228,0.22);color:#EFEAE0;">Start in 5 minutes</span>
-      <span class="pill" style="background:transparent;border-color:rgba(241,237,228,0.22);color:#EFEAE0;">No sales call to begin</span>
-      <span class="pill" style="background:transparent;border-color:rgba(241,237,228,0.22);color:#EFEAE0;">No 40-field form</span>
-      <span class="pill" style="background:transparent;border-color:rgba(241,237,228,0.22);color:#EFEAE0;">No 12-month lock</span>
-    </div>
   </div>
 </section>
 
-<!-- 3) VSL -->
+<!-- VSL -->
 <section class="hairline-t">
   <div class="max-w-[1180px] mx-auto px-6 md:px-10 py-20 md:py-28">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
       <div class="lg:col-span-5">
         <h2 class="section-h">90 seconds on how it works.</h2>
-        <p class="mt-6 text-[16.5px] leading-[1.65] text-ink/80 max-w-[420px]">
-          The founder walks through the mechanism, shows the proof, and states exactly how the billing works. Everything a sales call would cover, without the call.
-        </p>
+        <p class="mt-6 text-[16.5px] leading-[1.65] text-ink/80 max-w-[420px]">The founder walks through the mechanism, shows the proof, and explains exactly how the billing works. Everything a call would cover, without the call.</p>
       </div>
       <div class="lg:col-span-7">
         <div class="rounded-xl overflow-hidden border border-ink/10 shadow-[0_8px_30px_rgba(15,15,15,0.08)]" style="position:relative;padding-top:56.25%;">
@@ -304,236 +178,62 @@
   </div>
 </section>
 
-<!-- 4-6) FIT GATE + CONFIG + CHECKOUT -->
-<section id="start" class="hairline-t bg-bone2/40" style="scroll-margin-top:1.5rem;">
-  <div class="max-w-[760px] mx-auto px-6 md:px-10 py-20 md:py-28">
-    <h2 class="section-h text-center">Start in five minutes.</h2>
-    <p class="mt-5 text-center text-[16px] leading-[1.6] text-ink/75 max-w-[560px] mx-auto">
-      Three quick questions, then set your rules and your price. Put a deposit down and we start building your infrastructure today.
-    </p>
-
-    <div class="flow-card mt-10 p-6 md:p-9">
-
-      <!-- STEP 1: fit gate -->
-      <div class="flow-step active" data-step="1">
-        <div class="progress"><span class="done"></span><span></span><span></span></div>
-        <div class="label-mono mb-3">Fit check · 1 of 3</div>
-        <div class="step-q mb-6">Is this a fit? Two of these have to be yes.</div>
-
-        <div class="mb-6">
-          <div class="field-label">What is your average contract value?</div>
-          <div data-gate="acv">
-            <button type="button" class="opt" data-val="low"><span>Under $10k / year</span><span class="qa">→</span></button>
-            <button type="button" class="opt" data-val="mid"><span>$10k – $50k / year</span><span class="qa">→</span></button>
-            <button type="button" class="opt" data-val="high"><span>$50k – $250k / year</span><span class="qa">→</span></button>
-            <button type="button" class="opt" data-val="vhigh"><span>$250k+ / year</span><span class="qa">→</span></button>
-          </div>
-        </div>
-
-        <div class="mb-6">
-          <div class="field-label">Are you US B2B software?</div>
-          <div data-gate="b2b" class="flex gap-3">
-            <button type="button" class="opt !mb-0" data-val="yes" style="flex:1;justify-content:center;">Yes</button>
-            <button type="button" class="opt !mb-0" data-val="no" style="flex:1;justify-content:center;">No</button>
-          </div>
-        </div>
-
-        <div class="mb-7">
-          <div class="field-label">Do you have a rep who can take the meetings we book?</div>
-          <div data-gate="rep" class="flex gap-3">
-            <button type="button" class="opt !mb-0" data-val="yes" style="flex:1;justify-content:center;">Yes</button>
-            <button type="button" class="opt !mb-0" data-val="no" style="flex:1;justify-content:center;">No</button>
-          </div>
-        </div>
-
-        <button id="gateNext" class="btn-primary btn-large w-full justify-center" disabled>
-          Continue <span class="arrow">→</span>
-        </button>
-        <p class="note mt-4">We turn away engagements where the math does not work. It protects your result and our capacity.</p>
-      </div>
-
-      <!-- STEP 1b: disqualified -->
-      <div class="flow-step" data-step="dq">
-        <div class="step-q mb-4">This one is not a fit, and we would rather tell you straight.</div>
-        <p class="text-[15px] leading-[1.6] text-ink/80 mb-6">
-          Per-held-meeting outbound needs enough contract value and a rep ready to take the meetings, or the economics do not work for either of us. Leave your email and we will send the free Signal Report plus a note if that changes.
-        </p>
-        <div class="mb-3"><input class="inp" id="dqEmail" type="email" placeholder="Work email" autocomplete="email" /></div>
-        <button id="dqSubmit" class="btn-primary w-full justify-center">Send me the Signal Report <span class="arrow">→</span></button>
-        <p id="dqDone" class="note mt-4" style="display:none;">Got it. Check your inbox shortly.</p>
-        <button onclick="flowShow('1')" class="note underline underline-offset-4 mt-4">← Back</button>
-      </div>
-
-      <!-- STEP 2: config / order form -->
-      <div class="flow-step" data-step="2">
-        <div class="progress"><span class="done"></span><span class="done"></span><span></span></div>
-        <div class="label-mono mb-3">Your rules · 2 of 3</div>
-        <div class="step-q mb-6">Set the target, the rules, and your price.</div>
-
-        <div class="space-y-6">
-          <div>
-            <label class="field-label" for="cfEmail">Work email</label>
-            <input class="inp" id="cfEmail" type="email" placeholder="you@company.com" autocomplete="email" />
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label class="field-label" for="cfCompany">Company</label>
-              <input class="inp" id="cfCompany" type="text" placeholder="Company name" autocomplete="organization" />
-            </div>
-            <div>
-              <label class="field-label" for="cfDomain">Company domain</label>
-              <input class="inp" id="cfDomain" type="text" placeholder="company.com" />
-            </div>
-          </div>
-
-          <div>
-            <label class="field-label" for="cfIcp">Booking list / target ICP</label>
-            <textarea class="ta" id="cfIcp" placeholder="Titles, company size, geo, and any named target accounts. Example: VP Sales / CRO at US SaaS, 50–500 employees. Named: Acme, Globex…"></textarea>
-            <p class="field-help">Who do you want in front of? The tighter this is, the better the meetings.</p>
-          </div>
-
-          <div>
-            <label class="field-label" for="cfBlock">Blocklists</label>
-            <textarea class="ta" id="cfBlock" placeholder="Domains and active customers we should never touch. One per line or comma-separated."></textarea>
-            <p class="field-help">We manage blocklists carefully so we never email your active customers or open opps.</p>
-          </div>
-
-          <!-- Comp criteria: the dispute-prevention engine -->
-          <div class="rounded-lg border border-ink/14 p-5" style="background:#FBFAF6;">
-            <div class="field-label" style="margin-bottom:8px;">What counts as a billable meeting</div>
-            <p class="field-help" style="margin-top:0;margin-bottom:12px;">This is locked in at checkout. Nothing outside it bills.</p>
-            <ul class="comp-list">
-              <li>Matches the ICP and criteria you set above (title, company size, geo).</li>
-              <li>The prospect showed and stayed at least the minimum time you choose.</li>
-              <li>Confirmed objectively by calendar event plus join data.</li>
-            </ul>
-            <div class="mt-4">
-              <label class="field-label" for="cfMinutes">Minimum minutes attended to bill</label>
-              <select class="sel" id="cfMinutes">
-                <option value="10">10 minutes</option>
-                <option value="15" selected>15 minutes</option>
-                <option value="20">20 minutes</option>
-                <option value="30">30 minutes</option>
-              </select>
-            </div>
-            <div class="mt-4">
-              <div class="field-label" style="margin-bottom:4px;">Never billed</div>
-              <ul class="comp-list nobill">
-                <li>No-shows and reschedules.</li>
-                <li>Wrong-fit or off-criteria prospects.</li>
-                <li>Existing customers or anyone on your blocklist.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Incentive toggle -->
-          <div class="flex items-start justify-between gap-4 rounded-lg border border-ink/14 p-5">
-            <div>
-              <div class="field-label" style="margin-bottom:4px;">Show-rate gift card</div>
-              <p class="field-help" style="margin-top:0;">Allow a small gift card to lift show rate. Billed through to you only when a meeting is held.</p>
-            </div>
-            <label class="toggle mt-1">
-              <input type="checkbox" id="cfIncentive" />
-              <span class="track"></span><span class="knob"></span>
-            </label>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label class="field-label" for="cfBid">Your bid per held meeting</label>
-              <div class="bid-wrap">
-                <span class="cur">$</span>
-                <input class="inp" id="cfBid" type="number" inputmode="numeric" min="200" step="25" value="200" />
-              </div>
-              <p class="field-help">Floor is $200. Capacity is limited, so higher bids get priority access.</p>
-              <p id="bidErr" class="field-help" style="color:#b42318;display:none;">Minimum bid is $200 per held meeting.</p>
-            </div>
-            <div>
-              <label class="field-label" for="cfCap">Monthly cap</label>
-              <div class="bid-wrap">
-                <input class="inp" id="cfCap" type="number" inputmode="numeric" min="1" step="1" placeholder="e.g. 20" style="padding-left:14px;" />
-              </div>
-              <p class="field-help">Most meetings we will bill in a month. Acts as your budget ceiling.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8 flex items-center gap-4">
-          <button onclick="flowShow('1')" class="note underline underline-offset-4">← Back</button>
-          <button id="toCheckout" class="btn-primary btn-large flex-1 justify-center">
-            Review and put deposit down <span class="arrow">→</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- STEP 3: checkout -->
-      <div class="flow-step" data-step="3">
-        <div class="progress"><span class="done"></span><span class="done"></span><span class="done"></span></div>
-        <div class="label-mono mb-3">Deposit · 3 of 3</div>
-        <div class="step-q mb-6">Put your deposit down and we start today.</div>
-
-        <div class="deposit-box">
-          <div class="label-mono" style="color:#9BD4D4;">Refundable against meetings</div>
-          <div class="deposit-amt mt-2">$3,000</div>
-          <p class="mt-3 text-[14.5px] leading-[1.6] text-bone/85">
-            Your deposit covers infrastructure setup and your first held meetings. We draw <span id="revBid" class="font-mono text-teal">$200</span> from it each time a meeting is verified held, and ask you to top up when it runs low. No charge after the fact to dispute, money up front, you in control.
-          </p>
-        </div>
-
-        <ul class="comp-list mt-6">
-          <li>You only pay when a meeting is actually held, on the rules you just set.</li>
-          <li>We brief your rep before every meeting.</li>
-          <li>No retainer, no long-term contract. Stop any time and your remaining deposit is yours.</li>
-        </ul>
-
-        <div id="checkoutErr" class="field-help mt-5" style="color:#b42318;display:none;"></div>
-
-        <div class="mt-7 flex items-center gap-4">
-          <button onclick="flowShow('2')" class="note underline underline-offset-4">← Back</button>
-          <button id="payBtn" class="btn-primary btn-large flex-1 justify-center">
-            Put down deposit and start <span class="arrow">→</span>
-          </button>
-        </div>
-        <p class="note mt-4">Secure checkout by Stripe. You will confirm the deposit and save a card for per-meeting draws.</p>
-      </div>
-
+<!-- HOW IT WORKS -->
+<section class="hairline-t bg-bone2/40">
+  <div class="max-w-[1180px] mx-auto px-6 md:px-10 py-20 md:py-28">
+    <h2 class="section-h mb-12 md:mb-16">Three steps. Then meetings.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+      <div><div class="how-num">01</div><div class="font-display text-[26px] leading-[1.1] mt-3 mb-2">Set your price and put a card down.</div><p class="text-[15.5px] leading-[1.6] text-ink/80">Name your price per held meeting and pay a small, refundable setup fee. Two minutes, no call.</p></div>
+      <div><div class="how-num">02</div><div class="font-display text-[26px] leading-[1.1] mt-3 mb-2">Tell us who and where.</div><p class="text-[15.5px] leading-[1.6] text-ink/80">After you pay, drop your booking link, upload a do-not-contact list, and set your ICP. Five minutes.</p></div>
+      <div><div class="how-num">03</div><div class="font-display text-[26px] leading-[1.1] mt-3 mb-2">We book, you get charged on held.</div><p class="text-[15.5px] leading-[1.6] text-ink/80">We research, write, and book qualified meetings onto your calendar. Your card is charged your price only when one is held.</p></div>
     </div>
   </div>
 </section>
 
-<!-- 7) FAQ -->
+<!-- BUY -->
+<section id="buy" class="hairline-t" style="scroll-margin-top:1rem;">
+  <div class="max-w-[620px] mx-auto px-6 md:px-10 py-20 md:py-28">
+    <h2 class="section-h text-center">Start in two minutes.</h2>
+    <p class="mt-5 text-center text-[16px] leading-[1.6] text-ink/75 max-w-[520px] mx-auto">Name your price per held meeting. Next screen is secure checkout: your card and a small refundable setup fee. We onboard you right after.</p>
+
+    <div class="buy-card mt-10 p-6 md:p-9">
+      <label class="field-label" for="bid">Your price per held meeting</label>
+      <div class="bid-wrap">
+        <span class="cur">$</span>
+        <input id="bid" type="number" inputmode="numeric" min="200" step="25" value="200" />
+      </div>
+      <p class="field-help">Floor is $200. Capacity is limited, so higher bids get priority access. You are only ever charged this when a meeting is actually held.</p>
+      <p id="bidErr" class="field-help" style="color:#b42318;display:none;">Minimum is $200 per held meeting.</p>
+
+      <div class="guarantee mt-6">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" stroke="#1f7a36" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke="#1f7a36" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <div class="text-[14px] font-semibold text-ink">Refund guarantee</div>
+          <p class="note mt-0.5">A one-time <strong>$500 setup fee</strong> covers building and warming your infrastructure. If we don't book you a qualified meeting that matches your criteria, the setup fee is refunded.</p>
+        </div>
+      </div>
+
+      <div id="buyErr" class="field-help" style="color:#b42318;display:none;margin-top:14px;"></div>
+
+      <button id="payBtn" class="btn-primary btn-large w-full mt-6">Continue to secure checkout <span class="arrow">→</span></button>
+      <p class="note mt-4 text-center">Secure checkout by Stripe. No charge per meeting until one is held.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
 <section class="hairline-t">
   <div class="max-w-[1180px] mx-auto px-6 md:px-10 py-20 md:py-28">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-      <div class="lg:col-span-4">
-        <h2 class="section-h">Before you start.</h2>
-      </div>
+      <div class="lg:col-span-4"><h2 class="section-h">Before you start.</h2></div>
       <div class="lg:col-span-8 lg:pt-2">
         <div class="hairline-t">
-          <details class="faq">
-            <summary>What if the meetings are bad?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer">You do not pay for them. A meeting only bills when it matches the ICP and criteria you set, the prospect shows and stays past your minimum time, and it is confirmed by calendar plus join data. No-shows, reschedules, and wrong-fit never bill.</div>
-          </details>
-          <details class="faq">
-            <summary>How is deliverability handled?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer">We build the sending infrastructure first and match it to each prospect's email provider, run premium verification to keep bounce rates low, rotate infrastructure before it degrades, and manage blocklists so we never touch your active customers. It is the part most agencies skip, and it is why our email reaches the primary inbox.</div>
-          </details>
-          <details class="faq">
-            <summary>How fast do meetings start?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer">First meetings usually land in weeks 3 to 4 as infrastructure warms. Your deposit covers that setup, and you only ever pay per held meeting after that.</div>
-          </details>
-          <details class="faq">
-            <summary>What exactly counts as a qualified meeting?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer">Exactly what you set in the config: title, company size, and geo match your ICP, the prospect attends for at least your chosen minimum minutes, and it is verified objectively. You lock those rules at checkout, so there is nothing to argue about later.</div>
-          </details>
-          <details class="faq">
-            <summary>Can I stop?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer">Any time. There is no long-term contract. Pause or stop and whatever is left of your deposit is yours.</div>
-          </details>
-          <details class="faq">
-            <summary>Why a deposit instead of paying per meeting after the fact?<span class="plus" aria-hidden="true"></span></summary>
-            <div class="answer">The deposit covers setup and your first meetings, and we draw your bid from it as meetings are held. It keeps money up front and means there is never a charge after the fact to dispute. You top up when it runs low.</div>
-          </details>
+          <details class="faq"><summary>What is the setup fee for, and is it really refundable?<span class="plus"></span></summary><div class="answer">It covers building and warming the sending infrastructure your campaign runs on, which is the work most agencies skip and the reason our email reaches the primary inbox. If we don't book you a qualified meeting that matches your criteria, the setup fee comes back. After that you only ever pay your price per held meeting.</div></details>
+          <details class="faq"><summary>What if the meetings are bad?<span class="plus"></span></summary><div class="answer">You don't pay for them. A meeting only bills when it matches the ICP and criteria you set, the prospect shows and stays, and it is confirmed objectively. No-shows, reschedules, and wrong-fit never bill.</div></details>
+          <details class="faq"><summary>How is deliverability handled?<span class="plus"></span></summary><div class="answer">We build the infrastructure first and match it to each prospect's email provider, run premium verification to keep bounce rates low, rotate infrastructure before it degrades, and manage blocklists so we never touch your active customers.</div></details>
+          <details class="faq"><summary>How fast do meetings start?<span class="plus"></span></summary><div class="answer">First meetings usually land in weeks 3 to 4 as infrastructure warms. The setup fee covers that build, and you only pay per held meeting after.</div></details>
+          <details class="faq"><summary>What counts as a qualified meeting?<span class="plus"></span></summary><div class="answer">Title, company size, and geo match the ICP you set, the prospect attends for at least your chosen minimum minutes, and it is verified by your booking tool plus join data. You lock those rules in onboarding, so there is nothing to argue about later.</div></details>
+          <details class="faq"><summary>Can I stop?<span class="plus"></span></summary><div class="answer">Any time. There is no long-term contract. You are only ever charged for meetings that are held.</div></details>
         </div>
       </div>
     </div>
@@ -543,11 +243,9 @@
 <!-- FINAL CTA -->
 <section class="hairline-t risk-band">
   <div class="max-w-[900px] mx-auto px-6 md:px-10 py-24 md:py-32 text-center">
-    <h2 class="risk-h">Meetings on your reps' calendars. <em>You only pay when they are held.</em></h2>
+    <h2 class="risk-h">Meetings on your reps' calendars. <em>You only pay when they're held.</em></h2>
     <div class="mt-10 flex justify-center">
-      <a href="#start" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white" onclick="trackCTA('final_cta')">
-        Start in 5 minutes, no call <span class="arrow">→</span>
-      </a>
+      <a href="#buy" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white" onclick="trackCTA('final')">Start in 2 minutes <span class="arrow">→</span></a>
     </div>
     <p class="mt-8 scar-line justify-center" style="color:#A9A79D;"><span class="dot-g"></span>Taking a handful of new accounts this month</p>
   </div>
@@ -560,117 +258,40 @@
   </div>
 </footer>
 
+<div id="buyBar">
+  <span class="font-medium text-[15px]">Start in 2 minutes</span>
+  <button onclick="document.getElementById('bid').scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('bid').focus(); trackCTA('mobile_bar');" class="btn-primary !py-2.5 !px-4 text-sm">Set my price <span class="arrow">→</span></button>
+</div>
+
 <script>
   window.dataLayer = window.dataLayer || [];
-  function trackCTA(location){ try{ window.dataLayer.push({event:'cta_click', cta_location:'ondemand_'+location, ts:Date.now()}); }catch(e){} return true; }
+  function trackCTA(loc){ try{ window.dataLayer.push({event:'cta_click', cta_location:'ondemand_'+loc, ts:Date.now()}); }catch(e){} return true; }
 
   (function(){
-    var steps = document.querySelectorAll('.flow-step');
-    window.flowShow = function(key){
-      steps.forEach(function(s){ s.classList.toggle('active', s.dataset.step === key); });
-      var card = document.querySelector('.flow-card');
-      if (card && key !== '1') card.scrollIntoView({behavior:'smooth', block:'start'});
-    };
-
-    // ---- Fit gate ----
-    var gate = { acv:null, b2b:null, rep:null };
-    document.querySelectorAll('[data-gate]').forEach(function(group){
-      var key = group.getAttribute('data-gate');
-      group.querySelectorAll('.opt').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          group.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('selected'); });
-          btn.classList.add('selected');
-          gate[key] = btn.getAttribute('data-val');
-          document.getElementById('gateNext').disabled = !(gate.acv && gate.b2b && gate.rep);
-        });
-      });
-    });
-
-    document.getElementById('gateNext').addEventListener('click', function(){
-      // Qualify: US B2B yes AND has rep yes AND ACV not "low"
-      var qualified = gate.b2b === 'yes' && gate.rep === 'yes' && gate.acv !== 'low';
-      trackCTA('gate_' + (qualified ? 'pass' : 'fail'));
-      if (qualified) { flowShow('2'); }
-      else { flowShow('dq'); }
-    });
-
-    // ---- Disqualified capture ----
-    document.getElementById('dqSubmit').addEventListener('click', function(){
-      var email = (document.getElementById('dqEmail').value || '').trim();
-      if (!email || email.indexOf('@') < 0) { document.getElementById('dqEmail').classList.add('inp-error'); return; }
-      captureLead({ email: email, reason: 'disqualified', acv: gate.acv, b2b: gate.b2b, rep: gate.rep });
-      document.getElementById('dqDone').style.display = 'block';
-      document.getElementById('dqSubmit').disabled = true;
-    });
-
-    function captureLead(payload){
-      try {
-        var body = JSON.stringify(payload);
-        if (navigator.sendBeacon) { navigator.sendBeacon('/api/lead', new Blob([body], {type:'application/json'})); }
-        else { fetch('/api/lead', {method:'POST', headers:{'content-type':'application/json'}, body: body, keepalive:true}).catch(function(){}); }
-      } catch(_){}
-    }
-
-    // ---- Bid floor + review sync ----
-    var bid = document.getElementById('cfBid');
-    function bidValid(){ var v = parseInt(bid.value, 10); return !isNaN(v) && v >= 200; }
+    var bid = document.getElementById('bid');
+    function bidValid(){ var v = parseInt(bid.value,10); return !isNaN(v) && v >= 200; }
     bid.addEventListener('input', function(){
       var ok = bidValid();
       document.getElementById('bidErr').style.display = ok ? 'none' : 'block';
-      bid.classList.toggle('inp-error', !ok);
-      document.getElementById('revBid').textContent = '$' + (parseInt(bid.value,10) || 0);
+      bid.classList.toggle('err', !ok);
     });
 
-    // ---- Config -> checkout ----
-    document.getElementById('toCheckout').addEventListener('click', function(){
-      var email = (document.getElementById('cfEmail').value || '').trim();
-      if (!email || email.indexOf('@') < 0) { document.getElementById('cfEmail').classList.add('inp-error'); document.getElementById('cfEmail').focus(); return; }
-      document.getElementById('cfEmail').classList.remove('inp-error');
-      if (!bidValid()) { document.getElementById('bidErr').style.display='block'; bid.classList.add('inp-error'); bid.focus(); return; }
-      document.getElementById('revBid').textContent = '$' + (parseInt(bid.value,10) || 0);
-      trackCTA('to_checkout');
-      flowShow('3');
-    });
-
-    function collectConfig(){
-      return {
-        email: (document.getElementById('cfEmail').value||'').trim(),
-        company: (document.getElementById('cfCompany').value||'').trim(),
-        domain: (document.getElementById('cfDomain').value||'').trim(),
-        icp: (document.getElementById('cfIcp').value||'').trim(),
-        blocklists: (document.getElementById('cfBlock').value||'').trim(),
-        minMinutes: document.getElementById('cfMinutes').value,
-        incentive: document.getElementById('cfIncentive').checked,
-        bid: parseInt(bid.value, 10),
-        cap: parseInt(document.getElementById('cfCap').value, 10) || null,
-        acv: gate.acv
-      };
-    }
-
-    // ---- Stripe deposit checkout ----
     document.getElementById('payBtn').addEventListener('click', function(){
-      var btn = this; var errEl = document.getElementById('checkoutErr');
-      errEl.style.display = 'none';
-      if (!bidValid()) { flowShow('2'); return; }
+      var btn = this, err = document.getElementById('buyErr');
+      err.style.display = 'none';
+      if (!bidValid()) { document.getElementById('bidErr').style.display='block'; bid.classList.add('err'); bid.focus(); return; }
       btn.disabled = true; btn.querySelector('.arrow').textContent = '…';
-      trackCTA('deposit_start');
-      fetch('/api/create-deposit-session', {
-        method:'POST', headers:{'content-type':'application/json'},
-        body: JSON.stringify(collectConfig())
-      })
-      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
-      .then(function(res){
-        if (res.ok && res.j && res.j.url) { window.location.href = res.j.url; return; }
-        throw new Error((res.j && res.j.error) || 'checkout_unavailable');
-      })
-      .catch(function(e){
-        errEl.textContent = 'Checkout is not available yet. Please try again shortly, or email hello@intentsignal.ai and we will set you up.';
-        errEl.style.display = 'block';
-        btn.disabled = false; btn.querySelector('.arrow').textContent = '→';
-      });
+      trackCTA('checkout_start');
+      fetch('/api/create-checkout', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ bid: parseInt(bid.value,10) }) })
+        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+        .then(function(res){ if (res.ok && res.j && res.j.url) { window.location.href = res.j.url; return; } throw new Error((res.j && res.j.error) || 'unavailable'); })
+        .catch(function(){ err.textContent = 'Checkout is not live yet. Please try again shortly, or email hello@intentsignal.ai.'; err.style.display='block'; btn.disabled=false; btn.querySelector('.arrow').textContent='→'; });
     });
 
-    // FAQ accordion
+    // sticky mobile bar after hero
+    var bar = document.getElementById('buyBar');
+    window.addEventListener('scroll', function(){ if (bar) bar.classList.toggle('show', window.scrollY > window.innerHeight*0.9); }, {passive:true});
+
     var faqs = document.querySelectorAll('details.faq');
     faqs.forEach(function(el){ el.addEventListener('toggle', function(){ if (el.open) faqs.forEach(function(o){ if(o!==el) o.open=false; }); }); });
   })();
