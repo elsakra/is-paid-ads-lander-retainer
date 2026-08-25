@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HMXSGLFCMW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HMXSGLFCMW');
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>You&rsquo;re booked &middot; IntentSignal</title>
+<meta name="description" content="Your call with IntentSignal is confirmed." />
+<meta name="robots" content="noindex" />
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/assets/favicon.png" type="image/png" sizes="32x32" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>
+  window.tailwind = window.tailwind || {};
+  window.tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bone: '#F1EDE4', bone2: '#EAE4D6', ink: '#0F0F0F', ink2: '#1A1A1A',
+          mute: '#6B6A65', hair: 'rgba(15,15,15,0.14)', gh: '#26A641',
+        },
+        fontFamily: {
+          sans: ['Inter','system-ui','sans-serif'],
+          display: ['"Instrument Serif"','Georgia','serif'],
+          mono: ['"JetBrains Mono"','ui-monospace','monospace'],
+        }
+      }
+    }
+  };
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  body {
+    background: #F1EDE4; color: #0F0F0F;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    font-size: 11px; color: #6B6A65;
+  }
+  .thanks-h {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(48px, 9vw, 92px);
+    line-height: 0.98; letter-spacing: -0.03em;
+  }
+  .thanks-h em { font-style: italic; }
+  .step {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 18px 0; border-top: 1px solid rgba(15,15,15,0.10);
+  }
+  .step-n {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.16em; color: #6B6A65;
+    flex: 0 0 28px; padding-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header class="relative z-40">
+  <div class="max-w-[820px] mx-auto px-6 md:px-10 pt-7 md:pt-9">
+    <a href="/" class="inline-flex items-center min-w-0" aria-label="IntentSignal">
+      <img src="/assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] md:h-[32px] w-auto max-w-[min(240px,70vw)] object-contain object-left" width="240" height="36" fetchpriority="high" decoding="async" />
+    </a>
+  </div>
+</header>
+
+<main class="flex-1">
+  <section class="max-w-[820px] mx-auto px-6 md:px-10 pt-16 md:pt-28 pb-24 md:pb-32">
+    <p class="eyebrow mb-6">Confirmed</p>
+
+    <h1 class="thanks-h">You&rsquo;re on the <em>calendar.</em></h1>
+
+    <p class="mt-8 text-[18px] md:text-[19px] leading-[1.6] text-ink/85 max-w-[600px]">
+      The invite is in your inbox with the call details. If it isn&rsquo;t there in a couple of
+      minutes, check spam &mdash; and tell us, because that&rsquo;s literally our job.
+    </p>
+
+    <div class="mt-14">
+      <p class="eyebrow mb-2">What happens on the call</p>
+      <div class="mt-6">
+        <div class="step">
+          <div class="step-n">01</div>
+          <div class="text-[16px] leading-[1.6] text-ink/85">
+            Kyle looks at your market before you join &mdash; who&rsquo;s in it, how many accounts are
+            realistically reachable, and what signals we could monitor for you.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">02</div>
+          <div class="text-[16px] leading-[1.6] text-ink/85">
+            You walk him through how you sell today and where pipeline is actually breaking.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">03</div>
+          <div class="text-[16px] leading-[1.6] text-ink/85">
+            He tells you straight what he&rsquo;d run, what it would cost, and what a realistic
+            month three looks like. Scoped live, not sent as a deck a week later.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-10 border-t border-ink/10">
+      <p class="eyebrow mb-4">Worth having ready</p>
+      <ul class="text-[16px] leading-[1.75] text-ink/85 list-disc pl-5 max-w-[560px]">
+        <li>Your rough average contract value.</li>
+        <li>The titles you sell to, and any accounts you&rsquo;ve tried and struck out on.</li>
+        <li>What you&rsquo;ve already tried for outbound, and what happened.</li>
+      </ul>
+    </div>
+
+    <p class="mt-16 text-[15px] leading-[1.6] text-mute">
+      Need to move it? Use the reschedule link in your confirmation email.
+    </p>
+  </section>
+</main>
+
+<footer class="bg-ink text-bone/70 border-t border-white/10">
+  <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-8 flex items-center justify-between text-[13px]">
+    <div>&copy; 2026 IntentSignal Systems, LLC</div>
+    <a href="https://intentsignal.ai/privacy" target="_blank" rel="noopener noreferrer" class="hover:text-bone underline-offset-[5px] hover:underline">Privacy</a>
+  </div>
+</footer>
+
+<script>
+  // Google Ads imports this GA4 event as the conversion action.
+  gtag('event', 'generate_lead', {
+    event_category: 'booking',
+    event_label: 'retainer_lander',
+    value: 1
+  });
+</script>
+</body>
+</html>

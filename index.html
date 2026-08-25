@@ -11,19 +11,29 @@
 </script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>IntentSignal: Qualified sales meetings on your calendar.</title>
-<meta name="description" content="$42M of pipeline for Route. Meetings at 6.5% of US restaurants for Upside. 90 SALs in 2 months for Gainsight. Book a 30-minute call." />
+<title>IntentSignal: 30 qualified meetings a month. Per client.</title>
+<meta name="description" content="The outbound team behind Gainsight, Upside, and Route. Cold email and paid ads that put in-market buyers on your reps' calendars. Book a 30-minute call with Kyle." />
 
-<meta property="og:title" content="IntentSignal: Qualified sales meetings on your calendar." />
-<meta property="og:description" content="We fill your team's calendar with qualified sales meetings. For B2B teams that need pipeline." />
+<meta property="og:title" content="IntentSignal: 30 qualified meetings a month. Per client." />
+<meta property="og:description" content="The outbound team behind Gainsight, Upside, and Route. Cold email and paid ads that put in-market buyers on your reps' calendars. Book a 30-minute call with Kyle." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://pipeline.intentsignal.ai" />
+<meta property="og:url" content="https://go.intentsignal.ai" />
+<meta property="og:site_name" content="IntentSignal" />
+<meta property="og:image" content="https://go.intentsignal.ai/assets/og-card-v2.png" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="IntentSignal: 30 qualified meetings a month. Per client." />
+<meta name="twitter:description" content="The outbound team behind Gainsight, Upside, and Route. Cold email and paid ads that put in-market buyers on your reps' calendars. Book a 30-minute call with Kyle." />
+<meta name="twitter:image" content="https://go.intentsignal.ai/assets/og-card-v2.png" />
+<link rel="canonical" href="https://go.intentsignal.ai/" />
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32" />
 <link rel="preload" as="image" href="assets/logos/intentsignal-lockup.avif" type="image/avif" />
 <link rel="preload" as="image" href="assets/logos/recent-2026/aarp.png" />
+
+<link rel="preconnect" href="https://assets.calendly.com">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +104,6 @@
   .hero-h em { font-style: italic; }
   .hero-eyebrow { letter-spacing: 0.18em; }
   .hero-logo-strips { scroll-margin-top: 5rem; max-width: 1120px; margin-left: auto; margin-right: auto; }
-  #qualifier { scroll-margin-top: 5rem; }
 
   .section-h {
     font-family: 'Instrument Serif', Georgia, serif;
@@ -162,15 +171,6 @@
   @media (max-width: 640px) {
     #mobileCta { display: flex; }
   }
-
-  /* GitHub panel */
-  .gh-panel { background: #0D1117; color: #C9D1D9; border: 1px solid #21262D; border-radius: 10px; }
-  .gh-grid { display: grid; gap: 3px; }
-  .gh-cell { aspect-ratio: 1 / 1; border-radius: 2px; background: #161B22; }
-  .gh-l1 { background: #0E4429; }
-  .gh-l2 { background: #006D32; }
-  .gh-l3 { background: #26A641; }
-  .gh-l4 { background: #39D353; }
 
   /* FAQ */
   details.faq { border-bottom: 1px solid rgba(15,15,15,0.14); }
@@ -357,69 +357,6 @@
     letter-spacing: 0.04em;
   }
   .avail-line .dot-g { width: 8px; height: 8px; background: #26A641; border-radius: 999px; display:inline-block; }
-
-  /* Qualifier widget */
-  .qual-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(15,15,15,0.14);
-    border-radius: 10px;
-    padding: 28px;
-    box-shadow: 0 1px 2px rgba(15,15,15,0.04), 0 8px 32px rgba(15,15,15,0.06);
-    position: relative;
-  }
-  .qual-step { display: none; }
-  .qual-step.active { display: block; }
-  .qual-q {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 30px; line-height: 1.1; letter-spacing: -0.02em;
-    color: #0F0F0F;
-    margin-bottom: 22px;
-  }
-  .qual-opt {
-    width: 100%; text-align: left;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 18px;
-    border: 1px solid rgba(15,15,15,0.14);
-    border-radius: 8px;
-    font-size: 15px; font-weight: 500; color: #0F0F0F;
-    background: #FFFFFF;
-    transition: all .15s ease;
-    cursor: pointer;
-    margin-bottom: 8px;
-  }
-  .qual-opt:hover {
-    border-color: #0F0F0F;
-    transform: translateY(-1px);
-  }
-  .qual-opt .qarrow {
-    opacity: 0; transition: opacity .15s, transform .15s;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    color: #6B6A65;
-  }
-  .qual-opt:hover .qarrow { opacity: 1; transform: translateX(2px); }
-  .qual-progress {
-    display:flex; gap: 6px; margin-bottom: 22px;
-  }
-  .qual-progress span {
-    flex: 1; height: 3px; border-radius: 2px;
-    background: rgba(15,15,15,0.10);
-  }
-  .qual-progress span.done { background: #0F0F0F; }
-
-  .qual-result-yes {
-    background: linear-gradient(135deg, #0F0F0F 0%, #1a1a1a 100%);
-    color: #F1EDE4;
-    margin: -28px -28px -28px -28px;
-    padding: 28px;
-    border-radius: 10px;
-  }
-  .qual-result-no {
-    background: #F1EDE4;
-    margin: -28px -28px -28px -28px;
-    padding: 28px;
-    border-radius: 10px;
-    border: 1px solid rgba(15,15,15,0.14);
-  }
 
   /* Objections row */
   .obj-card {
@@ -621,8 +558,6 @@
 
   /* Larger touch */
   @media (max-width: 900px) {
-    .qual-card { padding: 24px; }
-    .qual-q { font-size: 26px; }
   }
   .client-logo {
     height: 42px; width: auto;
@@ -639,37 +574,69 @@
   }
 
   /* ============ Daily feedback loop ============ */
-  .loop-label {
+  .cadence {
+    display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 11px;
-    color: #6B6A65;
-    margin-bottom: 10px;
   }
-  .loop-grid {
-    display: grid;
-    grid-template-columns: repeat(30, 1fr);
-    gap: 4px;
-    max-width: 560px;
+  .cadence-num {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 44px; line-height: 1; letter-spacing: -0.02em; color: #0F0F0F;
   }
-  .loop-cell {
-    aspect-ratio: 1 / 1;
-    border-radius: 2px;
-    background: rgba(15,15,15,0.06);
+  .cadence-num--us { color: #1f7a36; }
+  .cadence-lbl {
+    text-transform: uppercase; letter-spacing: 0.16em; font-size: 11px; color: #6B6A65;
   }
-  .loop-cell--faint { background: rgba(15,15,15,0.22); }
-  .loop-cell--on { background: #26A641; }
-  .loop-chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px; color: #2A2A2A;
+  .cadence-vs {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6A65;
+  }
+
+  /* CRM-style activity feed */
+  .feed {
     border: 1px solid rgba(15,15,15,0.14);
-    border-radius: 999px;
-    padding: 8px 14px;
+    border-radius: 10px;
     background: #FFFFFF;
+    overflow: hidden;
+    max-width: 600px;
+    box-shadow: 0 1px 2px rgba(15,15,15,0.04), 0 8px 32px rgba(15,15,15,0.06);
   }
-  .loop-chip .dot-g { width: 7px; height: 7px; background: #26A641; border-radius: 999px; display: inline-block; flex: 0 0 auto; }
+  .feed-head {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    font-size: 11px; color: #6B6A65;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(15,15,15,0.10);
+    background: #FAF8F3;
+  }
+  .feed-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 13px 18px;
+    border-top: 1px solid rgba(15,15,15,0.07);
+    font-size: 14.5px; line-height: 1.45; color: #2A2A2A;
+  }
+  .feed-row:first-of-type { border-top: 0; }
+  .feed-day {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11.5px; color: #6B6A65;
+    flex: 0 0 34px; padding-top: 2px;
+  }
+  .feed-dot {
+    width: 7px; height: 7px; border-radius: 999px; background: #26A641;
+    flex: 0 0 auto; margin-top: 7px;
+  }
+  @media (max-width: 640px) {
+    .feed-row { font-size: 13.5px; padding: 12px 14px; gap: 10px; }
+    .feed-head { padding: 12px 14px; }
+    .cadence-num { font-size: 36px; }
+  }
+
+  /* Calendly inline embed on the dark final CTA */
+  .cal-embed-wrap {
+    max-width: 760px; margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.28);
+  }
 
   /* ============ Comparison ============ */
   .cmp-row { border-top: 1px solid rgba(15,15,15,0.10); }
@@ -688,7 +655,9 @@
   }
   details.cmp-more > summary:hover { background: rgba(15,15,15,0.04); }
   details.cmp-more > summary::-webkit-details-marker { display: none; }
-  details.cmp-more[open] > summary { display: none; }
+  details.cmp-more[open] > summary .cmp-more-open { display: none; }
+  details.cmp-more > summary .cmp-more-close { display: none; }
+  details.cmp-more[open] > summary .cmp-more-close { display: inline; }
 </style>
 
 <!--
@@ -720,7 +689,7 @@
   // the page unload that happens when the browser follows the Calendly link.
   function notifyCalRedirect(rep, location) {
     try {
-      var payload = JSON.stringify({ rep: rep || 'david', location: location || 'unknown' });
+      var payload = JSON.stringify({ rep: rep || 'kyle', location: location || 'unknown' });
       if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
         var blob = new Blob([payload], { type: 'application/json' });
         navigator.sendBeacon('/api/slack-notify', blob);
@@ -735,6 +704,37 @@
     } catch (_) { /* never block the click */ }
     return true;
   }
+
+  // Open Calendly in a popup so the visitor never leaves the page. Falls through
+  // to the plain href if widget.js hasn't loaded, so the CTA always works.
+  function openCal(el, location) {
+    notifyCalRedirect('kyle', location);
+    if (typeof trackCTA === 'function') trackCTA(location);
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      window.Calendly.initPopupWidget({ url: el.href + '?hide_gdpr_banner=1' });
+      return false;
+    }
+    return true;
+  }
+
+  // Catch the booking itself — fires identically for the popup and the inline
+  // embed. Only 'event_scheduled'; Calendly also emits page-view events that
+  // would fire for anyone who merely scrolls past the embed.
+  window.addEventListener('message', function (e) {
+    var host;
+    try { host = new URL(e.origin).hostname; } catch (_) { return; }
+    if (!/(^|\.)calendly\.com$/.test(host)) return;
+    if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
+    notifyCalRedirect('kyle', 'booked');
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        event_category: 'booking',
+        event_label: 'retainer_lander',
+        value: 1
+      });
+    }
+    window.location.href = '/thanks';
+  });
 </script>
 </head>
 
@@ -746,14 +746,14 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal home">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[24px] md:h-[28px] w-auto max-w-[min(200px,46vw)] object-contain object-left" width="200" height="32" />
     </a>
-    <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','sticky_bar'); trackCTA('sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
+    <a href="https://calendly.com/meetktr/intro-calls-website" target="_blank" rel="noopener noreferrer" onclick="return openCal(this,'sticky_bar')" class="btn-primary text-sm !py-2.5 !px-4">
       Book a 30-min call <span class="arrow arr">→</span>
     </a>
   </div>
 </div>
 
 <div id="mobileCta" role="region" aria-label="Book a call">
-  <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','mobile_sticky'); trackCTA('mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
+  <a href="https://calendly.com/meetktr/intro-calls-website" target="_blank" rel="noopener noreferrer" onclick="return openCal(this,'mobile_sticky')" class="flex-1 flex items-center gap-2 font-medium text-[15px]">
     Book a 30-min call <span class="arr">→</span>
   </a>
   <button id="mobileCtaDismiss" aria-label="Dismiss" class="ml-3 w-7 h-7 rounded-full flex items-center justify-center hover:bg-white/10">
@@ -767,7 +767,7 @@
     <a href="#top" class="flex items-center min-w-0" aria-label="IntentSignal">
       <img src="assets/logos/intentsignal-lockup.avif" alt="IntentSignal" class="h-[28px] md:h-[32px] w-auto max-w-[min(240px,70vw)] object-contain object-left" width="240" height="36" fetchpriority="high" decoding="async" />
     </a>
-    <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','header'); trackCTA('header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
+    <a href="https://calendly.com/meetktr/intro-calls-website" target="_blank" rel="noopener noreferrer" onclick="return openCal(this,'header')" class="text-[14px] font-medium underline underline-offset-[6px] decoration-[1.5px] decoration-ink/40 hover:decoration-ink transition">
       Book a call
     </a>
   </div>
@@ -775,42 +775,29 @@
 
 <!-- HERO — lg+: copy + CTA left, VSL right (narrows 9:16 height); logos full width below -->
 <section class="max-w-[1320px] mx-auto px-6 md:px-10 pt-8 md:pt-12 pb-10 md:pb-16">
-  <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14 items-start">
-    <div class="lg:col-span-7 text-center lg:text-left max-w-[780px] mx-auto lg:mx-0 lg:max-w-none">
-      <h1 class="hero-h fade-up d2">
-        Qualified sales meetings on <em>your calendar.</em>
-      </h1>
+  <div class="text-center lg:text-left">
+    <h1 class="hero-h fade-up d2">
+      30 qualified meetings a month. <em>Per client.</em>
+    </h1>
 
-      <p class="mt-6 mx-auto lg:mx-0 max-w-[620px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
-        We are the done-for-you outbound team for US B2B software companies. We monitor your market for the accounts already showing a reason to buy, write to each one personally, and book the meeting for your sales reps.
-      </p>
+    <p class="mt-6 mx-auto lg:mx-0 max-w-[760px] text-[18px] md:text-[19px] leading-[1.5] text-ink/85 fade-up d3">
+      IntentSignal is the outbound team behind Gainsight, Upside, and Route. We run cold email and paid ads that put in-market buyers on your reps&rsquo; calendars. In 2026 we&rsquo;ve averaged 30 booked meetings per client, per month.
+    </p>
 
-      <div class="quote-row mt-6 md:mt-8 fade-up d3 mx-auto lg:mx-0 text-left" style="max-width: 620px;">
-        <div class="quote-face">
-          <img src="assets/face-route.avif" alt="McLeod Abbott" loading="eager" decoding="async" />
-        </div>
-        <div>
-          <div class="quote-text">&ldquo;Out-produced our 17-person SDR team in a single month. $42M of pipeline in three quarters.&rdquo;</div>
-          <div class="quote-attr">McLeod Abbott · Chief of Staff, Revenue · Route</div>
-        </div>
+    <div class="quote-row mt-6 md:mt-8 fade-up d3 mx-auto lg:mx-0 text-left" style="max-width: 620px;">
+      <div class="quote-face">
+        <img src="assets/face-route.avif" alt="McLeod Abbott" loading="eager" decoding="async" />
       </div>
-
-      <div class="mt-6 md:mt-8 fade-up d4 flex flex-col items-center lg:items-start">
-        <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','hero_primary'); trackCTA('hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
-          Book a 30-min call <span class="arrow arr">→</span>
-        </a>
+      <div>
+        <div class="quote-text">&ldquo;Out-produced our 17-person SDR team in a single month. $42M of pipeline in three quarters.&rdquo;</div>
+        <div class="quote-attr">McLeod Abbott · Chief of Staff, Revenue · Route</div>
       </div>
     </div>
 
-    <div class="lg:col-span-5 mt-8 lg:mt-0 w-full flex justify-center lg:justify-end fade-up d4 lg:sticky lg:top-24 xl:top-28 self-start">
-      <div class="w-full max-w-[min(100%,320px)] sm:max-w-[360px] lg:max-w-[280px] xl:max-w-[300px]">
-        <p class="eyebrow text-center lg:text-right mb-3 md:mb-4">Watch the 90-second overview</p>
-        <div class="rounded-xl overflow-hidden border border-ink/10 shadow-[0_8px_30px_rgba(15,15,15,0.08)]">
-          <div style="padding:177.78% 0 0 0;position:relative;">
-            <iframe src="https://player.vimeo.com/video/1189633438?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="IntentSignal overview"></iframe>
-          </div>
-        </div>
-      </div>
+    <div class="mt-6 md:mt-8 fade-up d4 flex flex-col items-center lg:items-start">
+      <a href="https://calendly.com/meetktr/intro-calls-website" target="_blank" rel="noopener noreferrer" onclick="return openCal(this,'hero_primary')" class="btn-primary btn-large w-full sm:w-auto justify-center">
+        Book a 30-minute call with Kyle <span class="arrow arr">→</span>
+      </a>
     </div>
   </div>
 
@@ -840,7 +827,7 @@
         <div class="logo-marquee__track">
           <div class="logo-marquee__set">
             <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/aarp.png" alt="AARP" loading="eager" decoding="async" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay.png" alt="Clay" loading="eager" decoding="async" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay-v2.avif" alt="Clay" loading="eager" decoding="async" /></div>
             <div class="logo-slot"><img class="mark-mono opt-w-150" src="assets/logos/recent-2026/databricks.svg" alt="Databricks" loading="eager" decoding="async" /></div>
             <div class="logo-slot"><img class="mark-mono mark--disney-script opt-w-120" src="assets/logos/recent-2026/disney-wordmark.svg" alt="Disney" loading="eager" decoding="async" /></div>
             <div class="logo-slot"><img class="mark-mono opt-w-145" src="assets/logos/recent-2026/headspace.svg" alt="Headspace" loading="eager" decoding="async" /></div>
@@ -853,7 +840,7 @@
           </div>
           <div class="logo-marquee__set" aria-hidden="true">
             <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/aarp.png" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
-            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay.png" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
+            <div class="logo-slot"><img class="mark-mono opt-w-92" src="assets/logos/recent-2026/clay-v2.avif" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
             <div class="logo-slot"><img class="mark-mono opt-w-150" src="assets/logos/recent-2026/databricks.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
             <div class="logo-slot"><img class="mark-mono mark--disney-script opt-w-120" src="assets/logos/recent-2026/disney-wordmark.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
             <div class="logo-slot"><img class="mark-mono opt-w-145" src="assets/logos/recent-2026/headspace.svg" alt="" loading="eager" decoding="async" fetchpriority="low" /></div>
@@ -870,96 +857,6 @@
   </div>
 
   <!-- ICP quiz below all logos -->
-  <div class="mt-14 md:mt-20 max-w-[640px] mx-auto fade-up d3" id="qualifier">
-    <div class="qual-card">
-      <!-- Step 1: ACV -->
-      <div class="qual-step active" data-step="1">
-        <div class="qual-progress"><span class="done"></span><span></span></div>
-        <div class="qual-q">What&rsquo;s your average contract value?</div>
-        <button class="qual-opt" data-key="acv" data-val="low" data-next="2">
-          <span>Under $20k / year</span><span class="qarrow">→</span>
-        </button>
-        <button class="qual-opt" data-key="acv" data-val="mid" data-next="2">
-          <span>$20k &ndash; $100k / year</span><span class="qarrow">→</span>
-        </button>
-        <button class="qual-opt" data-key="acv" data-val="high" data-next="2">
-          <span>$100k &ndash; $500k / year</span><span class="qarrow">→</span>
-        </button>
-        <button class="qual-opt" data-key="acv" data-val="vhigh" data-next="2">
-          <span>$500k+ / year</span><span class="qarrow">→</span>
-        </button>
-        <div class="text-[12px] font-mono text-mute mt-4">We don&rsquo;t take engagements where the math doesn&rsquo;t work.</div>
-      </div>
-
-      <!-- Step 2: TAM (addressable / motion scale) -->
-      <div class="qual-step" data-step="2">
-        <div class="qual-progress"><span class="done"></span><span class="done"></span></div>
-        <div class="qual-q">What&rsquo;s the rough TAM for your ICP?</div>
-        <button class="qual-opt" data-key="tam" data-val="tam_niche" data-next="3">
-          <span>Narrow / niche (single segment or region)</span><span class="qarrow">→</span>
-        </button>
-        <button class="qual-opt" data-key="tam" data-val="tam_mid" data-next="3">
-          <span>Mid (multiple segments or national)</span><span class="qarrow">→</span>
-        </button>
-        <button class="qual-opt" data-key="tam" data-val="tam_large" data-next="3">
-          <span>Large (category-wide or global)</span><span class="qarrow">→</span>
-        </button>
-        <button class="qual-opt" data-key="tam" data-val="tam_unsure" data-next="3">
-          <span>Not sure yet</span><span class="qarrow">→</span>
-        </button>
-        <button class="text-[12px] font-mono text-mute mt-4 underline underline-offset-4" onclick="qualBack(1)">← Back</button>
-      </div>
-
-      <!-- Step 3 — result (yes path) -->
-      <div class="qual-step" data-step="3-yes">
-        <div class="qual-result-yes">
-          <div class="eyebrow eyebrow-on-dark mb-4">Looks like a fit</div>
-          <div class="font-display text-[44px] leading-[0.95] mb-5">Yes.<br/><em class="text-teal">We book meetings for profiles like yours.</em></div>
-          <p class="text-[14.5px] leading-[1.55] text-[#D9D4C7] mb-7" id="qual-why-yes">
-            Your ACV and TAM line up with the engagements where we produce our strongest results.
-          </p>
-          <a id="qualifierBookYes" href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" data-rep="david" onclick="var r=this.getAttribute('data-rep')||'david'; notifyCalRedirect(r,'qualifier_yes'); if(typeof trackCTA==='function')trackCTA('qualifier_yes_'+r);" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white w-full justify-center">
-            Book a 30-min call <span class="arrow arr">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Step 3 — result (maybe path) -->
-      <div class="qual-step" data-step="3-maybe">
-        <div class="qual-result-no">
-          <div class="eyebrow mb-4">Worth a conversation</div>
-          <div class="font-display text-[40px] leading-[0.95] mb-4 text-ink">Maybe.</div>
-          <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-6" id="qual-why-maybe">
-            We&rsquo;d want to hear more about your motion before committing. Some engagements in this profile work; some don&rsquo;t.
-          </p>
-          <a id="qualifierBookMaybe" href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','qualifier_maybe'); if(typeof trackCTA==='function')trackCTA('qualifier_maybe_david');" class="btn-primary btn-large w-full justify-center">
-            Book a 30-min call <span class="arrow arr">→</span>
-          </a>
-          <p class="mt-5 text-[12.5px] font-mono text-mute leading-[1.5]">
-            We&rsquo;ll tell you on the call whether it&rsquo;s a fit, and end early if it isn&rsquo;t.
-          </p>
-        </div>
-      </div>
-
-      <!-- Step 3 — result (no path) -->
-      <div class="qual-step" data-step="3-no">
-        <div class="qual-result-no">
-          <div class="eyebrow mb-4">Probably not a fit</div>
-          <div class="font-display text-[40px] leading-[0.95] mb-4 text-ink">Probably not.</div>
-          <p class="text-[14.5px] leading-[1.55] text-ink/85 mb-5" id="qual-why-no">
-            At under $20k ACV, cold outbound in most B2B motions usually doesn&rsquo;t pay back. Our engagements start at a scope where the math makes sense for both sides.
-          </p>
-          <p class="text-[14px] leading-[1.55] text-ink/85 mb-5">
-            Honest recommendation: look at PLG motion, inbound, or partnerships first. If you&rsquo;re moving upmarket later, come back. If you&rsquo;d still like a direct take, book a short intro. We&rsquo;ll be straight about fit.
-          </p>
-          <a id="qualifierBookNo" href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','qualifier_no'); if(typeof trackCTA==='function')trackCTA('qualifier_no_david');" class="btn-primary btn-large w-full justify-center mb-4">
-            Book a 30-min call with David <span class="arrow arr">→</span>
-          </a>
-          <button onclick="qualReset()" class="text-[13px] font-mono text-ink underline underline-offset-4">Start over</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- OBJECTIONS — first-scroll reassurance -->
@@ -1126,13 +1023,13 @@
           <div>
             <div class="label mb-2">Receipts</div>
             <div class="gainsight-receipt">
-              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener" class="gainsight-receipt-link">
+              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener noreferrer" class="gainsight-receipt-link">
                 <img src="assets/case-studies/gainsight-kai-post.png" alt="Kai Nielsen LinkedIn post praising the Gainsight cold email" loading="lazy" />
               </a>
-              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener" class="gainsight-receipt-link">
+              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener noreferrer" class="gainsight-receipt-link">
                 <img src="assets/case-studies/gainsight-kai-email.jpg" alt="The actual Gainsight cold email that referenced the prospect's reporting structure" loading="lazy" />
               </a>
-              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener" class="gainsight-receipt-cta">
+              <a href="https://www.linkedin.com/posts/nielsenkai_im-sure-you-get-countless-cold-outreach-activity-7336096911361265664-QDI2/" target="_blank" rel="noopener noreferrer" class="gainsight-receipt-cta">
                 See Kai Nielsen&rsquo;s LinkedIn post <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -1157,8 +1054,8 @@
       <p class="font-display text-[30px] md:text-[40px] leading-[1.1] text-bone max-w-[640px]">
         Your ICP might be next.
       </p>
-      <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','results_footer'); trackCTA('results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
-        Book a 30-min call <span class="arrow arr">→</span>
+      <a href="https://calendly.com/meetktr/intro-calls-website" target="_blank" rel="noopener noreferrer" onclick="return openCal(this,'results_footer')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+        Book a 30-minute call with Kyle <span class="arrow arr">→</span>
       </a>
     </div>
   </div>
@@ -1190,8 +1087,8 @@
           <p class="text-[16.5px] leading-[1.6] text-ink/85">Qualified meetings with the buyers you actually want, booked straight onto your reps&rsquo; calendars.</p>
         </div>
         <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
-          <div class="font-display text-[25px] leading-[1.1] mb-3">More likely to work for you.</div>
-          <p class="text-[16.5px] leading-[1.6] text-ink/85">We are ex-SDRs and AEs from top tech companies, and we have delivered for clients like Gainsight and Route.</p>
+          <div class="font-display text-[25px] leading-[1.1] mb-3">Two channels, one pipeline.</div>
+          <p class="text-[16.5px] leading-[1.6] text-ink/85">Cold email reaches the accounts showing a reason to buy. Paid ads keep you in front of them while they decide. Same targeting, same team, one report.</p>
         </div>
         <div class="md:border-l md:pl-6 lg:pl-8" style="border-color: rgba(15,15,15,0.14);">
           <div class="font-display text-[25px] leading-[1.1] mb-3">Faster, and it never goes dark.</div>
@@ -1218,26 +1115,36 @@
         </div>
       </div>
 
-      <!-- The signature visual: each square is a day -->
+      <!-- Cadence: review frequency, stated plainly -->
       <div class="mt-14 md:mt-20 max-w-[600px]">
-        <div>
-          <div class="loop-label">Typical agency</div>
-          <div class="loop-grid" id="loopTypical" aria-hidden="true"></div>
-        </div>
-        <div class="mt-9">
-          <div class="loop-label" style="color:#1f7a36;">IntentSignal</div>
-          <div class="loop-grid" id="loopUs" aria-hidden="true"></div>
+        <div class="cadence">
+          <div>
+            <div class="cadence-num">12</div>
+            <div class="cadence-lbl mt-2">Reviews a year</div>
+            <div class="cadence-lbl mt-1" style="letter-spacing:0.08em;">Typical agency</div>
+          </div>
+          <div class="cadence-vs">vs</div>
+          <div>
+            <div class="cadence-num cadence-num--us">365</div>
+            <div class="cadence-lbl mt-2">Test cycles</div>
+            <div class="cadence-lbl mt-1" style="letter-spacing:0.08em;color:#1f7a36;">IntentSignal</div>
+          </div>
         </div>
         <p class="mt-6 text-[13px] font-mono text-mute leading-[1.6]">
-          Each square is a day. Filled means we tested, swapped, or rewrote something in your campaign.
+          Most agencies review a campaign once a month. We change something every single day.
         </p>
       </div>
 
-      <div class="mt-8 flex flex-wrap gap-2.5">
-        <span class="loop-chip"><span class="dot-g"></span>Swapped 3 inboxes before they bounced</span>
-        <span class="loop-chip"><span class="dot-g"></span>Tested 14 new subject lines</span>
-        <span class="loop-chip"><span class="dot-g"></span>Added 220 freshly verified contacts</span>
-        <span class="loop-chip"><span class="dot-g"></span>Killed an angle that stopped converting</span>
+      <!-- CRM-style activity feed -->
+      <div class="mt-10 md:mt-12 feed">
+        <div class="feed-head">Campaign activity &mdash; last 7 days</div>
+        <div class="feed-row"><span class="feed-day">Mon</span><span class="feed-dot"></span><span>Swapped 3 inboxes before they bounced</span></div>
+        <div class="feed-row"><span class="feed-day">Mon</span><span class="feed-dot"></span><span>Added 220 freshly verified contacts</span></div>
+        <div class="feed-row"><span class="feed-day">Tue</span><span class="feed-dot"></span><span>Tested 14 new subject lines</span></div>
+        <div class="feed-row"><span class="feed-day">Wed</span><span class="feed-dot"></span><span>Killed an angle that stopped converting</span></div>
+        <div class="feed-row"><span class="feed-day">Wed</span><span class="feed-dot"></span><span>Rewrote opener for the mid-market segment</span></div>
+        <div class="feed-row"><span class="feed-day">Thu</span><span class="feed-dot"></span><span>Rotated sending domains ahead of decay</span></div>
+        <div class="feed-row"><span class="feed-day">Fri</span><span class="feed-dot"></span><span>Scaled the winning play to 3x volume</span></div>
       </div>
 
       <p class="mt-12 text-[16px] leading-[1.55] text-ink/75 max-w-[620px]">
@@ -1259,7 +1166,7 @@
         <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-ink">What we do</div>
       </div>
 
-      <!-- first 8 rows -->
+      <!-- first 7 rows -->
       <div>
         <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
           <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t handle the booking process for you</span></div>
@@ -1278,6 +1185,23 @@
           <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Every email we send is 1:1 unique to that prospect, based on real research of the pain that prospect has</span></div>
         </div>
         <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t have a daily feedback loop</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Run a new test every single day</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Run cold email only, so the accounts that never reply are lost</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Run cold email and paid ads against the same target list</span></div>
+        </div>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Wait until infrastructure is toast before replacing it, resulting in service interruptions</span></div>
+          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Rotate infrastructure before it degrades, so you never get a service interruption</span></div>
+        </div>
+      </div>
+
+      <!-- remaining 15 rows -->
+      <details class="cmp-more">
+        <summary><span class="cmp-more-open">Show the full comparison <span aria-hidden="true">↓</span></span><span class="cmp-more-close">Hide the full comparison <span aria-hidden="true">↑</span></span></summary>
+        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
           <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Use only one sending platform</span></div>
           <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Use multiple sending platforms for diversification</span></div>
         </div>
@@ -1289,22 +1213,12 @@
           <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t diversify email sending infrastructure</span></div>
           <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Diversify infrastructure across multiple providers</span></div>
         </div>
-        <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
-          <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t have a daily feedback loop</span></div>
-          <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Run a new test every single day</span></div>
-        </div>
-      </div>
-
-      <!-- remaining 13 rows -->
-      <details class="cmp-more">
-        <summary>Show the full comparison <span aria-hidden="true">↓</span></summary>
-        <div>
           <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
-            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Get results for a minority of clients</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Often can&rsquo;t show client results at all</span></div>
             <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Get results for the vast majority of clients</span></div>
           </div>
           <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
-            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t have the track record or the caliber of clients we do</span></div>
+            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Rarely name the clients they&rsquo;ve delivered for</span></div>
             <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Have a solid track record of delivering for top-tier B2B SaaS companies</span></div>
           </div>
           <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
@@ -1332,10 +1246,6 @@
             <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Remove prospects on Mimecast to keep bounce rates low</span></div>
           </div>
           <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
-            <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Wait until infrastructure is toast before replacing it, resulting in service interruptions</span></div>
-            <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Rotate infrastructure before it degrades, so you never get a service interruption</span></div>
-          </div>
-          <div class="cmp-row grid grid-cols-1 md:grid-cols-2 gap-x-8 py-4 items-start">
             <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t send meeting briefings, so your reps have no context</span></div>
             <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Brief your reps before every meeting</span></div>
           </div>
@@ -1351,7 +1261,6 @@
             <div class="flex gap-3 text-[15px] leading-[1.55] text-mute"><span class="cmp-mark text-mute/60 mt-[1px]" aria-hidden="true">×</span><span>Don&rsquo;t warm inboxes as long as we do, so they go to spam more</span></div>
             <div class="flex gap-3 text-[15px] leading-[1.55] text-ink"><span class="cmp-mark cmp-dot-g mt-[8px]" aria-hidden="true"></span><span>Warm inboxes longer to stay out of spam</span></div>
           </div>
-        </div>
       </details>
     </div>
   </div>
@@ -1362,6 +1271,9 @@
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36">
     <div class="max-w-[900px] mb-16 md:mb-24">
       <h2 class="section-h">The founders run your account.</h2>
+      <p class="mt-6 text-[17px] md:text-[18px] leading-[1.6] text-ink/75 max-w-[620px]">
+        We keep the roster small enough that Kyle and Andrew run every account personally.
+      </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
@@ -1376,7 +1288,7 @@
           <ul class="founder-bullets mt-5 text-[16px] leading-[1.6] text-ink/85 max-w-[460px]">
             <li>Top sales rep at Glassdoor.</li>
             <li>Led sales at Talview and Chat Metrics.</li>
-            <li>Cold-emailed his way to a meeting with Starbucks&rsquo; Howard Schultz.</li>
+            <li>Cold-emailed his way to a meeting with Starbucks&rsquo; CEO.</li>
           </ul>
         </div>
       </div>
@@ -1392,7 +1304,7 @@
           <ul class="founder-bullets mt-5 text-[16px] leading-[1.6] text-ink/85 max-w-[460px]">
             <li>Co-founded Lyne.ai, one of the first AI sales tools of the LLM era, acquired in 2023.</li>
             <li>Former AI lead at language-learning startups.</li>
-            <li>Featured on the <a href="https://blog.hubspot.com/sales/ai-email-assistant" target="_blank" rel="noopener" class="underline underline-offset-[3px] decoration-ink/30 hover:decoration-ink">HubSpot blog</a> for his work on Lyne.ai.</li>
+            <li>Featured on the <a href="https://blog.hubspot.com/sales/ai-email-assistant" target="_blank" rel="noopener noreferrer" class="underline underline-offset-[3px] decoration-ink/30 hover:decoration-ink">HubSpot blog</a> for his work on Lyne.ai.</li>
           </ul>
         </div>
       </div>
@@ -1419,7 +1331,7 @@
           <details class="faq">
             <summary>What industries do you work in?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              US B2B software, over $1M ARR, $10k+ ACV, with a real sales team. We turn away companies we cannot reliably win for.
+              US B2B software with a real sales team. That&rsquo;s where we&rsquo;re strongest. If you&rsquo;re adjacent, ask &mdash; we&rsquo;ve made exceptions that worked.
             </div>
           </details>
           <details class="faq">
@@ -1437,7 +1349,7 @@
           <details class="faq">
             <summary>What does it cost?<span class="plus" aria-hidden="true"></span></summary>
             <div class="answer">
-              We scope it live on the call. We only take engagements where the math works for both of us.
+              Engagements are retainer-based with hybrid options, and start at $2,999/month. We scope the exact number live on the call.
             </div>
           </details>
         </div>
@@ -1453,12 +1365,17 @@
       Your ICP might be <em>next.</em>
     </h2>
     <p class="mt-10 text-[18px] md:text-[19px] leading-[1.65] text-bone/95 max-w-[680px] mx-auto">
-      US B2B software teams. We turn away companies we cannot win for.
+      US B2B software teams. Let&rsquo;s see what your market looks like.
     </p>
-    <div class="mt-14 flex justify-center">
-      <a href="https://calendly.com/david-intentsignal/30min" target="_blank" rel="noopener noreferrer" onclick="notifyCalRedirect('david','final_cta'); trackCTA('final_cta')" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
-        Book a 30-min call <span class="arrow arr">→</span>
-      </a>
+    <div class="mt-14 cal-embed-wrap">
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/meetktr/intro-calls-website?hide_gdpr_banner=1&amp;background_color=ffffff&amp;primary_color=0f0f0f"
+           style="min-width:320px;height:700px;"></div>
+      <noscript>
+        <a href="https://calendly.com/meetktr/intro-calls-website" target="_blank" rel="noopener noreferrer" class="btn-primary btn-large !bg-bone !text-ink hover:!bg-white">
+          Book a 30-min call <span class="arrow arr">→</span>
+        </a>
+      </noscript>
     </div>
     <p class="mt-16 text-[12.5px] font-mono text-bone/55">
       IntentSignal Systems, LLC &middot; 32 North Gould Street, Sheridan, WY 82801
@@ -1469,7 +1386,7 @@
 <footer class="bg-ink text-bone/70 border-t border-white/10">
   <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-8 flex items-center justify-between text-[13px]">
     <div>&copy; 2026 IntentSignal Systems, LLC</div>
-    <a href="#" class="hover:text-bone underline-offset-[5px] hover:underline">Privacy</a>
+    <a href="https://intentsignal.ai/privacy" target="_blank" rel="noopener noreferrer" class="hover:text-bone underline-offset-[5px] hover:underline">Privacy</a>
   </div>
 </footer>
 
@@ -1491,110 +1408,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // ======== Qualifier widget ========
-  const answers = {};
-  const steps = document.querySelectorAll('.qual-step');
-  const CAL_DAVID = 'https://calendly.com/david-intentsignal/30min';
-  const CAL_KYLE = 'https://calendly.com/meetktr/outbound-strategy-session';
-  function applyQualifierCalLinksForStep(nextStep) {
-    const acv = answers.acv;
-    const yes = document.getElementById('qualifierBookYes');
-    const maybe = document.getElementById('qualifierBookMaybe');
-    const no = document.getElementById('qualifierBookNo');
-    if (nextStep === '3-yes' && yes) {
-      const kyle = acv === 'vhigh' || acv === 'high';
-      yes.href = kyle ? CAL_KYLE : CAL_DAVID;
-      yes.setAttribute('data-rep', kyle ? 'kyle' : 'david');
-    }
-    if (nextStep === '3-maybe' && maybe) {
-      maybe.href = CAL_DAVID;
-    }
-    if (nextStep === '3-no' && no) {
-      no.href = CAL_DAVID;
-    }
-  }
-
-  function showStep(key) {
-    steps.forEach(s => s.classList.toggle('active', s.dataset.step === key));
-  }
-  window.qualBack = function(n) { showStep(String(n)); };
-  window.qualReset = function() { Object.keys(answers).forEach(k => delete answers[k]); showStep('1'); };
-
-  document.querySelectorAll('.qual-opt').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const k = btn.dataset.key, v = btn.dataset.val, next = btn.dataset.next;
-      answers[k] = v;
-      if (typeof trackCTA === 'function') trackCTA('qualifier_' + k + '_' + v);
-
-      if (next === '3') {
-        // Evaluate: ACV (low|mid|high|vhigh) × TAM
-        const acv = answers.acv;
-        const tam = answers.tam;
-        const yesEl  = document.getElementById('qual-why-yes');
-        const maybeEl = document.getElementById('qual-why-maybe');
-        const noEl   = document.getElementById('qual-why-no');
-        const goodTam = (tam === 'tam_mid' || tam === 'tam_large');
-
-        if (acv === 'low') {
-          if (noEl) noEl.textContent = 'At under $20k ACV, cold outbound in most B2B motions rarely pays back. Our engagements start where the math works for both sides, typically $20k+ ACV with a real GTM into good accounts.';
-          applyQualifierCalLinksForStep('3-no');
-          showStep('3-no');
-          return;
-        }
-
-        if (acv === 'vhigh') {
-          if (yesEl) {
-            yesEl.textContent = '$500k+ ACV is the profile we treat as a priority conversation. TAM and motion still matter on the call, but you should book.';
-          }
-          applyQualifierCalLinksForStep('3-yes');
-          showStep('3-yes');
-          return;
-        }
-
-        if ((acv === 'mid' || acv === 'high') && goodTam) {
-          if (yesEl) {
-            yesEl.textContent = acv === 'high'
-              ? 'Strong ACV and a broad enough TAM is the mix behind the $42M for Route, 6.5% of US restaurants for Upside, and 90 SALs in 2 months for Gainsight. You should be on a call with us.'
-              : '$20k–$100k ACV with a real market to work. That is a profile we run successfully. Most of our recent engagements look like this.';
-          }
-          applyQualifierCalLinksForStep('3-yes');
-          showStep('3-yes');
-          return;
-        }
-
-        if (maybeEl) {
-          if (tam === 'tam_niche') {
-            maybeEl.textContent = 'Your ACV can work, but a very narrow TAM has to clear a higher bar for outbound economics. We can tell you in a few minutes on a call if the math is there.';
-          } else {
-            maybeEl.textContent = 'Your ACV is in range. TAM and motion need a pass to see if cold outbound is the right lever. One short call is enough to know.';
-          }
-        }
-        applyQualifierCalLinksForStep('3-maybe');
-        showStep('3-maybe');
-      } else {
-        showStep(next);
-      }
-    });
-  });
-
-  // Daily feedback-loop strips — each square is a day in one quarter (~90)
-  function buildLoop(id, ratio, onClass, seed) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const N = 90;
-    let s = seed;
-    function rnd(){ s = (s*9301 + 49297) % 233280; return s/233280; }
-    const frag = document.createDocumentFragment();
-    for (let i = 0; i < N; i++) {
-      const cell = document.createElement('span');
-      cell.className = 'loop-cell' + (rnd() < ratio ? ' ' + onClass : '');
-      frag.appendChild(cell);
-    }
-    el.appendChild(frag);
-  }
-  buildLoop('loopTypical', 0.05, 'loop-cell--faint', 4291);
-  buildLoop('loopUs', 0.90, 'loop-cell--on', 9173);
-
   const faqs = document.querySelectorAll('details.faq');
   faqs.forEach(el => {
     el.addEventListener('toggle', () => {
@@ -1603,6 +1416,5 @@
   });
 })();
 </script>
-<script src="https://player.vimeo.com/api/player.js" defer></script>
 </body>
 </html>
