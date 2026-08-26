@@ -684,12 +684,46 @@
     return true;
   }
 
+  // First-touch attribution. Captured once on landing and kept in sessionStorage
+  // so it survives the Calendly popup and the /thanks redirect. Google Ads click
+  // ids (gclid, and gbraid/wbraid for iOS/app campaigns) are the tell that a
+  // visit came from Ads; utm_source is the fallback for everything else. We do
+  // NOT assume Ads by default -- this lander also takes direct and organic hits,
+  // and a booking notification that lies about its source is worse than none.
+  function captureAttribution() {
+    try {
+      var KEY = 'is_attr';
+      if (sessionStorage.getItem(KEY)) return;            // first touch wins
+      var q = new URLSearchParams(window.location.search);
+      var attr = {
+        gclid: q.get('gclid') || q.get('gbraid') || q.get('wbraid') || '',
+        utm_source: q.get('utm_source') || '',
+        utm_medium: q.get('utm_medium') || '',
+        utm_campaign: q.get('utm_campaign') || '',
+        referrer: document.referrer || '',
+        landed: new Date().toISOString()
+      };
+      sessionStorage.setItem(KEY, JSON.stringify(attr));
+    } catch (_) { /* private mode / storage disabled -- notify still works */ }
+  }
+  captureAttribution();
+
+  function getAttribution() {
+    try { return JSON.parse(sessionStorage.getItem('is_attr') || '{}'); }
+    catch (_) { return {}; }
+  }
+
   // Fire-and-forget Slack notification via our own serverless proxy (keeps the
   // webhook URL out of page source). Uses sendBeacon so the request survives
   // the page unload that happens when the browser follows the Calendly link.
-  function notifyCalRedirect(rep, location) {
+  function notifyCalRedirect(rep, location, inviteeUri) {
     try {
-      var payload = JSON.stringify({ rep: rep || 'kyle', location: location || 'unknown' });
+      var payload = JSON.stringify({
+        rep: rep || 'kyle',
+        location: location || 'unknown',
+        attribution: getAttribution(),
+        inviteeUri: inviteeUri || ''
+      });
       if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
         var blob = new Blob([payload], { type: 'application/json' });
         navigator.sendBeacon('/api/slack-notify', blob);
@@ -705,13 +739,30 @@
     return true;
   }
 
+  // Calendly stores utm_* passed on the booking URL in its own `tracking` object,
+  // which surfaces in the Calendly UI and the API. We map a Google Ads click id to
+  // google/cpc since Calendly has no gclid field of its own.
+  function calTrackingQS() {
+    try {
+      var a = getAttribution(), p = new URLSearchParams();
+      if (a.gclid) { p.set('utm_source', a.utm_source || 'google'); p.set('utm_medium', a.utm_medium || 'cpc'); }
+      else {
+        if (a.utm_source) p.set('utm_source', a.utm_source);
+        if (a.utm_medium) p.set('utm_medium', a.utm_medium);
+      }
+      if (a.utm_campaign) p.set('utm_campaign', a.utm_campaign);
+      var qs = p.toString();
+      return qs ? '&' + qs : '';
+    } catch (_) { return ''; }
+  }
+
   // Open Calendly in a popup so the visitor never leaves the page. Falls through
   // to the plain href if widget.js hasn't loaded, so the CTA always works.
   function openCal(el, location) {
     notifyCalRedirect('kyle', location);
     if (typeof trackCTA === 'function') trackCTA(location);
     if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-      window.Calendly.initPopupWidget({ url: el.href + '?hide_gdpr_banner=1' });
+      window.Calendly.initPopupWidget({ url: el.href + '?hide_gdpr_banner=1' + calTrackingQS() });
       return false;
     }
     return true;
@@ -725,7 +776,11 @@
     try { host = new URL(e.origin).hostname; } catch (_) { return; }
     if (!/(^|\.)calendly\.com$/.test(host)) return;
     if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
-    notifyCalRedirect('kyle', 'booked');
+    // The postMessage carries only URIs -- the invitee's name/email live behind
+    // payload.invitee.uri, which /api/slack-notify resolves server-side.
+    var inviteeUri = '';
+    try { inviteeUri = (e.data.payload && e.data.payload.invitee && e.data.payload.invitee.uri) || ''; } catch (_) {}
+    notifyCalRedirect('kyle', 'booked', inviteeUri);
     if (typeof gtag === 'function') {
       gtag('event', 'generate_lead', {
         event_category: 'booking',
