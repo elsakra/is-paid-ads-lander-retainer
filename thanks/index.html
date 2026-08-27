@@ -142,12 +142,26 @@
 </footer>
 
 <script>
-  // Google Ads imports this GA4 event as the conversion action.
-  gtag('event', 'generate_lead', {
-    event_category: 'booking',
-    event_label: 'retainer_lander',
-    value: 1
-  });
+  // Google Ads imports this GA4 event as the conversion action. This is the
+  // ONLY place it fires -- index.html used to fire it again on Calendly's
+  // event_scheduled, which double-counted every booking.
+  //
+  // Guarded so a refresh or a bookmarked /thanks cannot inflate the count.
+  // Google Ads' own "count: One" setting would dedupe at the Ads level, but
+  // GA4 would still show the extra events, and the guard keeps both clean.
+  (function () {
+    try {
+      var KEY = 'is_booked_fired';
+      if (sessionStorage.getItem(KEY)) return;
+      sessionStorage.setItem(KEY, '1');
+    } catch (_) { /* private mode: fall through and fire once */ }
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'generate_lead', {
+      event_category: 'booking',
+      event_label: 'retainer_lander',
+      value: 1
+    });
+  })();
 </script>
 </body>
 </html>

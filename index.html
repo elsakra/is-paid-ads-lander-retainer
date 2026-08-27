@@ -781,13 +781,12 @@
     var inviteeUri = '';
     try { inviteeUri = (e.data.payload && e.data.payload.invitee && e.data.payload.invitee.uri) || ''; } catch (_) {}
     notifyCalRedirect('kyle', 'booked', inviteeUri);
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'booking',
-        event_label: 'retainer_lander',
-        value: 1
-      });
-    }
+    // NOTE: generate_lead is deliberately NOT fired here. It fires once on
+    // /thanks instead. Firing it here too counted every booking twice, and
+    // non-deterministically: this event raced the redirect below, so it
+    // landed sometimes and was dropped others. Every booking path -- popup,
+    // inline embed, and Calendly's own redirect fallback -- ends on /thanks,
+    // so that page is the single, unraced place to record the conversion.
     window.location.href = '/thanks';
   });
 </script>
